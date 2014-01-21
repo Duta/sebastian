@@ -1,14 +1,14 @@
 package part1;
 
-import util.RobotInfo;
+import robots.RobotInfo;
 import lejos.nxt.Button;
 import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
 import lejos.robotics.navigation.DifferentialPilot;
 
 public class Part1 {
-	private Shape[] shapes = {Shape.SQUARE, Shape.TRIANGLE, Shape.PENTAGON};
-	private int shapeIndex;
+	private Shape[] shapes = {Shape.SQUARE, Shape.TRIANGLE, Shape.PENTAGON, Shape.CIRCLE};
+	private int shapeIndex = 0;
 	private DifferentialPilot pilot;
 	
 	public Part1(DifferentialPilot pilot) {

@@ -1,18 +1,16 @@
 package part2;
 
-import robots.RobotInfo;
+import util.LCDUtil;
+import util.RobotInfo;
+import util.TouchSensorListener;
 import lejos.nxt.Button;
-import lejos.nxt.ButtonListener;
-import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.nxt.SensorPortListener;
 import lejos.robotics.navigation.DifferentialPilot;
-import lejos.util.Delay;
 
 public class Part2B {
 	private DifferentialPilot pilot;
 	private SensorPort portA, portB;
-	private int a, b;
 	
 	public Part2B(DifferentialPilot pilot, SensorPort portA, SensorPort portB) {
 		this.pilot = pilot;
@@ -21,59 +19,30 @@ public class Part2B {
 	}
 	
 	public void run() {
-		Button.ESCAPE.addButtonListener(new ButtonListener() {
+		SensorPortListener listener = new TouchSensorListener() {
 			@Override
-			public void buttonPressed(Button b) {}
+			public void pressed() {
+				pilot.stop();
+				pilot.travel(-120);
+				pilot.rotate(90);
+				pilot.forward();
+			}
 
 			@Override
-			public void buttonReleased(Button b) {
-				System.exit(0);
-			}
-		});
-		
-		SensorPortListener listener = new SensorPortListener() {
-			@Override
-			public void stateChanged(SensorPort source, int oldValue, int newValue) {
-				if(newValue < oldValue) {
-					pilot.stop();
-					pilot.travel(-120);
-					pilot.rotate(90);
-					pilot.forward();
-				}
-				if(source == portA) {
-					a = newValue;
-				} else {
-					b = newValue;
-				}
-				updateDisplay();
-			}
+			public void released() {}
 		};
-		
-		updateDisplay();
 		
 		portA.addSensorPortListener(listener);
 		portB.addSensorPortListener(listener);
 		
 		pilot.forward();
 		
-		while(true) { updateDisplay(); Delay.msDelay(17); }
-	}
-
-	private void updateDisplay() {
-		LCD.clear();
-		LCD.drawString("A: ", 0, 0);
-		LCD.drawString("B: ", 0, 1);
-		LCD.drawInt(a, 3, 0);
-		LCD.drawInt(b, 3, 1);
-		
-		LCD.drawString("[SEBASTIAN       ", 0, 6, true);
-		LCD.drawString("     INTENSIFIES]", 0, 7, true);
+		Button.ESCAPE.waitForPressAndRelease();
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Press any button to activate me!");
-		LCD.drawString("[SEBASTIAN       ", 0, 6, true);
-		LCD.drawString("     INTENSIFIES]", 0, 7, true);
+		LCDUtil.intensify();
 		
 		Button.waitForAnyPress();
 		

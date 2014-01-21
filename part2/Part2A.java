@@ -1,7 +1,6 @@
 package part2;
 
-import util.LCDUtil;
-import util.RobotInfo;
+import robots.RobotInfo;
 import lejos.nxt.Button;
 import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
@@ -32,7 +31,7 @@ public class Part2A {
 			}
 		});
 		
-		pilot.forward();
+		//pilot.forward();
 		while(true) {
 			boolean bumperPressed = isBumperPressed();
 			
@@ -42,9 +41,13 @@ public class Part2A {
 				bumperPressed ? "Yup!" : "NOPE.",
 				5, 1, bumperPressed);
 			
-			LCDUtil.doge();
-
-			LCDUtil.intensify();
+			LCD.drawString("wow", 8, 2);
+			LCD.drawString("much robot", 1, 3);
+			LCD.drawString("such lejos", 5, 4);
+			LCD.drawString("wow", 4, 5);
+			
+			LCD.drawString("[SEBASTIAN       ", 0, 6, true);
+			LCD.drawString("     INTENSIFIES]", 0, 7, true);
 			
 			if(bumperPressed) {
 				pilot.stop();
@@ -63,7 +66,8 @@ public class Part2A {
 
 	public static void main(String[] args) {
 		System.out.println("Press any button to activate me!");
-		LCDUtil.intensify();
+		LCD.drawString("[SEBASTIAN       ", 0, 6, true);
+		LCD.drawString("     INTENSIFIES]", 0, 7, true);
 		
 		Button.waitForAnyPress();
 		
