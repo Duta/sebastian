@@ -16,18 +16,23 @@ import util.RobotInfo;
 public class Part3 implements Runnable {
 	private static final int
 		DIST_LIM = 25,
-		TIME_LIM = 5;
+		TIME_LIM = 5,
+		VALUES_LIM = 10;
 	
 	private DifferentialPilot pilot;
 	private UltrasonicSensor leftSensor;
-	private UltrasonicSensor rightSensor;
+	private UltrasonicSensor forwardSensor;
+	private List<Integer> leftValues;
+	private List<Integer> forwardValues;
 	private int timer;
 	
 	public Part3(DifferentialPilot pilot, UltrasonicSensor leftSensor,
 			UltrasonicSensor rightSensor) {
 		this.pilot = pilot;
 		this.leftSensor = leftSensor;
-		this.rightSensor = rightSensor;
+		this.forwardSensor = rightSensor;
+		this.leftValues = new ArrayList<Integer>();
+		this.forwardValues = new ArrayList<Integer>();
 	}
 
 	@Override
@@ -46,23 +51,31 @@ public class Part3 implements Runnable {
 		
 		while(true) {
 			int leftValue = leftSensor.getDistance();
-			int rightValue = rightSensor.getDistance();
-			if((leftValue + rightValue)/2 < DIST_LIM) {
-				timer++;
-				if(timer > TIME_LIM) {
-					chooseNewDirection2();
+			int forwardValue = forwardSensor.getDistance();
+			
+			leftValues.add(leftValue);
+			forwardValues.add(forwardValue);
+			
+			if(leftValues.size() > VALUES_LIM
+			&& forwardValues.size() > VALUES_LIM) {
+				leftValues.remove(0);
+				forwardValues.remove(0);
+				leftValue = removeAnomaliesAndGetAverage(leftValues);
+				forwardValue = removeAnomaliesAndGetAverage(forwardValues);
+				
+				if(forwardValue < DIST_LIM) {
+					pilot.rotate(-90);
 					pilot.forward();
-					timer = 0;
+				} else if(leftValue > DIST_LIM) {
+					pilot.steer(50, 90);
+					pilot.forward();
+				} else {
+					pilot.forward();
 				}
-			} else {
-				timer = 0;
 			}
+			
 			Delay.msDelay(25);
 		}
-	}
-	
-	private void chooseNewDirection3() {
-		//
 	}
 	
 	private void chooseNewDirection2() {
@@ -71,7 +84,7 @@ public class Part3 implements Runnable {
 		for(int i = 0; i < values.length; i++) {
 			pilot.rotate(i == 0 ? -90 : interval);
 			int leftVal = getSensorDistance(leftSensor, 10, 10);
-			int rightVal = getSensorDistance(rightSensor, 10, 10);
+			int rightVal = getSensorDistance(forwardSensor, 10, 10);
 			values[i] = (leftVal + rightVal)/2;
 		}
 		int diagLim = (int) Math.ceil(Math.sqrt(2*DIST_LIM*DIST_LIM));
@@ -127,7 +140,7 @@ public class Part3 implements Runnable {
 		LCD.drawString("Decision: ", 0, 3);
 		int leftDist, rightDist;
 		pilot.rotate(90);
-		rightDist = getSensorDistance(rightSensor, 10, 20);
+		rightDist = getSensorDistance(forwardSensor, 10, 20);
 		LCD.drawInt(rightDist, 12, 2);
 		pilot.rotate(-180);
 		leftDist = getSensorDistance(leftSensor, 10, 20);
