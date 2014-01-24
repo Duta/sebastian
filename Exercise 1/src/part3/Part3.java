@@ -15,7 +15,9 @@ import util.RobotInfo;
 
 public class Part3 implements Runnable {
 	private static final int
-		DIST_LIM = 25,
+		DIST_LIM = 50,
+		LEFT_LIM = 20,
+		FORWARD_LIM = 25,
 		TIME_LIM = 5,
 		VALUES_LIM = 10;
 	
@@ -63,15 +65,29 @@ public class Part3 implements Runnable {
 				leftValue = removeAnomaliesAndGetAverage(leftValues);
 				forwardValue = removeAnomaliesAndGetAverage(forwardValues);
 				
-				if(forwardValue < DIST_LIM) {
+				if(forwardValue < FORWARD_LIM) {
 					pilot.rotate(-90);
-					pilot.forward();
-				} else if(leftValue > DIST_LIM) {
-					pilot.steer(50, 90);
-					pilot.forward();
+					int rightValue = getSensorDistance(forwardSensor, 15, 15);
+					if(leftValue > rightValue) {
+						pilot.rotate(180);
+					}
 				} else {
-					pilot.forward();
+					int leftDiff = Math.abs(leftValue - LEFT_LIM);
+					if(leftDiff < LEFT_LIM / 2
+					&& leftDiff > LEFT_LIM / 5) {
+						if(leftValue < LEFT_LIM) {
+							pilot.steer(10, -10);
+						} else {
+							pilot.steer(10, 10);
+						}
+					} else {
+						if(leftValue > LEFT_LIM) {
+							pilot.steer(50, 90);
+						}
+					}
 				}
+				
+				pilot.forward();
 			}
 			
 			Delay.msDelay(25);
