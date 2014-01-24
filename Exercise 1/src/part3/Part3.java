@@ -19,12 +19,15 @@ public class Part3 implements Runnable {
 		TIME_LIM = 5;
 	
 	private DifferentialPilot pilot;
-	private UltrasonicSensor sensor;
+	private UltrasonicSensor leftSensor;
+	private UltrasonicSensor rightSensor;
 	private int timer;
 	
-	public Part3(DifferentialPilot pilot, UltrasonicSensor sensor) {
+	public Part3(DifferentialPilot pilot, UltrasonicSensor leftSensor,
+			UltrasonicSensor rightSensor) {
 		this.pilot = pilot;
-		this.sensor = sensor;
+		this.leftSensor = leftSensor;
+		this.rightSensor = rightSensor;
 	}
 
 	@Override
@@ -42,7 +45,9 @@ public class Part3 implements Runnable {
 		pilot.forward();
 		
 		while(true) {
-			if(sensor.getDistance() < DIST_LIM) {
+			int leftValue = leftSensor.getDistance();
+			int rightValue = rightSensor.getDistance();
+			if((leftValue + rightValue)/2 < DIST_LIM) {
 				timer++;
 				if(timer > TIME_LIM) {
 					chooseNewDirection2();
@@ -56,12 +61,18 @@ public class Part3 implements Runnable {
 		}
 	}
 	
+	private void chooseNewDirection3() {
+		//
+	}
+	
 	private void chooseNewDirection2() {
 		int interval = 10;
 		int[] values = new int[180/interval + 1];
 		for(int i = 0; i < values.length; i++) {
 			pilot.rotate(i == 0 ? -90 : interval);
-			values[i] = getSensorDistance(10, 10);
+			int leftVal = getSensorDistance(leftSensor, 10, 10);
+			int rightVal = getSensorDistance(rightSensor, 10, 10);
+			values[i] = (leftVal + rightVal)/2;
 		}
 		int diagLim = (int) Math.ceil(Math.sqrt(2*DIST_LIM*DIST_LIM));
 		List<Region> regions = new ArrayList<Region>();
@@ -116,10 +127,10 @@ public class Part3 implements Runnable {
 		LCD.drawString("Decision: ", 0, 3);
 		int leftDist, rightDist;
 		pilot.rotate(90);
-		rightDist = getSensorDistance(10, 20);
+		rightDist = getSensorDistance(rightSensor, 10, 20);
 		LCD.drawInt(rightDist, 12, 2);
 		pilot.rotate(-180);
-		leftDist = getSensorDistance(10, 20);
+		leftDist = getSensorDistance(leftSensor, 10, 20);
 		LCD.drawInt(leftDist, 12, 1);
 		if(leftDist < DIST_LIM && rightDist < DIST_LIM) {
 			pilot.rotate(-90);
@@ -164,7 +175,7 @@ public class Part3 implements Runnable {
 
 	}
 
-	private int getSensorDistance(int numChecks, int timeInterval) {
+	private int getSensorDistance(UltrasonicSensor sensor, int numChecks, int timeInterval) {
 		List<Integer> vals = new ArrayList<Integer>();
 		for(int i = 0; i < numChecks; i++) {
 			vals.add(sensor.getDistance());
@@ -181,6 +192,7 @@ public class Part3 implements Runnable {
 		
 		Part3 p = new Part3(
 				RobotInfo.SEBASTIAN.getDifferentialPilot(),
+				new UltrasonicSensor(SensorPort.S3),
 				new UltrasonicSensor(SensorPort.S2));
 		p.run();
 	}
