@@ -7,6 +7,7 @@ import lejos.nxt.Button;
 import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
+import lejos.nxt.TouchSensor;
 import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.util.Delay;
@@ -14,27 +15,20 @@ import util.LCDUtil;
 import util.RobotInfo;
 
 public class Part3 implements Runnable {
-	private static final int
-		DIST_LIM = 50,
-		LEFT_LIM = 20,
-		FORWARD_LIM = 25,
-		TIME_LIM = 5,
-		VALUES_LIM = 10;
+	private static final int DIST_LIM = 20;
 	
 	private DifferentialPilot pilot;
-	private UltrasonicSensor leftSensor;
-	private UltrasonicSensor forwardSensor;
-	private List<Integer> leftValues;
-	private List<Integer> forwardValues;
-	private int timer;
+	private UltrasonicSensor leftSensor, rightSensor;
+	private TouchSensor bumperA, bumperB;
 	
-	public Part3(DifferentialPilot pilot, UltrasonicSensor leftSensor,
-			UltrasonicSensor rightSensor) {
+	public Part3(DifferentialPilot pilot,
+			UltrasonicSensor leftSensor, UltrasonicSensor rightSensor,
+			TouchSensor bumperA, TouchSensor bumperB) {
 		this.pilot = pilot;
 		this.leftSensor = leftSensor;
-		this.forwardSensor = rightSensor;
-		this.leftValues = new ArrayList<Integer>();
-		this.forwardValues = new ArrayList<Integer>();
+		this.rightSensor = rightSensor;
+		this.bumperA = bumperA;
+		this.bumperB = bumperB;
 	}
 
 	@Override
@@ -52,124 +46,61 @@ public class Part3 implements Runnable {
 		pilot.forward();
 		
 		while(true) {
-			int leftValue = leftSensor.getDistance();
-			int forwardValue = forwardSensor.getDistance();
-			
-			leftValues.add(leftValue);
-			forwardValues.add(forwardValue);
-			
-			if(leftValues.size() > VALUES_LIM
-			&& forwardValues.size() > VALUES_LIM) {
-				leftValues.remove(0);
-				forwardValues.remove(0);
-				leftValue = removeAnomaliesAndGetAverage(leftValues);
-				forwardValue = removeAnomaliesAndGetAverage(forwardValues);
-				
-				if(forwardValue < FORWARD_LIM) {
-					pilot.rotate(-90);
-					int rightValue = getSensorDistance(forwardSensor, 15, 15);
-					if(leftValue > rightValue) {
-						pilot.rotate(180);
-					}
+			if(isBumperPressed()) {
+				/*if(!bumperB.isPressed()) {
+					pilot.travel(-10);
+					pilot.rotate(15);
+					pilot.forward();
+				} else if(!bumperA.isPressed()) {
+					pilot.travel(-10);
+					pilot.rotate(-15);
+					pilot.forward();
 				} else {
-					int leftDiff = Math.abs(leftValue - LEFT_LIM);
-					if(leftDiff < LEFT_LIM / 2
-					&& leftDiff > LEFT_LIM / 5) {
-						if(leftValue < LEFT_LIM) {
-							pilot.steer(10, -10);
-						} else {
-							pilot.steer(10, 10);
-						}
-					} else {
-						if(leftValue > LEFT_LIM) {
-							pilot.steer(50, 90);
-						}
-					}
-				}
-				
-				pilot.forward();
+					chooseNewDirection();
+				}*/
+				System.out.println("My jimmies are rustled");
+				pilot.stop();
+				chooseNewDirection();
 			}
 			
-			Delay.msDelay(25);
+			Delay.msDelay(20);
 		}
 	}
 	
-	private void chooseNewDirection2() {
-		int interval = 10;
-		int[] values = new int[180/interval + 1];
-		for(int i = 0; i < values.length; i++) {
-			pilot.rotate(i == 0 ? -90 : interval);
-			int leftVal = getSensorDistance(leftSensor, 10, 10);
-			int rightVal = getSensorDistance(forwardSensor, 10, 10);
-			values[i] = (leftVal + rightVal)/2;
-		}
-		int diagLim = (int) Math.ceil(Math.sqrt(2*DIST_LIM*DIST_LIM));
-		List<Region> regions = new ArrayList<Region>();
-		Region currentRegion = null;
-		for(int i = 0; i < values.length; i++) {
-			if(values[i] >= diagLim) {
-				if(currentRegion == null) {
-					currentRegion = new Region(i, i);
-					regions.add(currentRegion);
-				} else {
-					currentRegion.setEnd(i);
-				}
-			} else {
-				currentRegion = null;
-			}
-		}
-		if(regions.isEmpty()) {
-			pilot.rotate(90);
-			// Could maybe remove this:
-			chooseNewDirection2();
-		} else {
-			Region best = null;
-			for(Region region : regions) {
-				if(best == null) {
-					best = region;
-				} else {
-					int regionLength = region.getEnd() - region.getStart();
-					int bestLength = best.getEnd() - best.getStart(); 
-					if(regionLength > bestLength) {
-						best = region;
-					}
-				}
-			}
-			int mid;
-			if(best.getStart() == 0) {
-				mid = 0;
-			} else if(best.getEnd() == values.length - 1) {
-				mid = best.getEnd();
-			} else {
-				mid = (best.getStart() + best.getEnd()) / 2;
-			}
-			int theta = interval*(mid - (values.length - 1));
-			pilot.rotate(theta);
-		}
-	}
-
 	private void chooseNewDirection() {
-		LCD.clear();
-		LCD.drawString("Picking new direction...", 0, 0);
-		LCD.drawString("Left  dist: ", 0, 1);
-		LCD.drawString("Right dist: ", 0, 2);
-		LCD.drawString("Decision: ", 0, 3);
-		int leftDist, rightDist;
-		pilot.rotate(90);
-		rightDist = getSensorDistance(forwardSensor, 10, 20);
-		LCD.drawInt(rightDist, 12, 2);
-		pilot.rotate(-180);
-		leftDist = getSensorDistance(leftSensor, 10, 20);
-		LCD.drawInt(leftDist, 12, 1);
-		if(leftDist < DIST_LIM && rightDist < DIST_LIM) {
-			pilot.rotate(-90);
-			LCD.drawString("BACK", 10, 3);
-		} else if(rightDist > leftDist) {
-			pilot.rotate(180);
-			LCD.drawString("RIGHT", 10, 3);
+		int left = getSensorDistance(leftSensor, 10, 20);
+		int right = getSensorDistance(rightSensor, 10, 20);
+		System.out.println();
+		System.out.println("=CHOOSE DIR=");
+		System.out.println("left=" + left + ", right=" + right);
+		
+		if(left < DIST_LIM && right < DIST_LIM) {
+			System.out.println("DEAD END");
+			Button.waitForAnyPress();
+			// Dead end
+			pilot.backward();
+			while(left < DIST_LIM && right < DIST_LIM) {
+				Delay.msDelay(25);
+				if(left >= DIST_LIM || right >= DIST_LIM) {
+					left = getSensorDistance(leftSensor, 20, 20);
+					right = getSensorDistance(rightSensor, 20, 20);
+				}
+			}
+			pilot.stop();
+			pilot.rotate(left < DIST_LIM ? -90 : 90);
+		} else if(left >= DIST_LIM && right >= DIST_LIM) {
+			// Two options
+			System.out.println("TWO OPTIONS");
+			Button.waitForAnyPress();
+			pilot.travel(-15);
+			pilot.rotate(90);
 		} else {
-			LCD.drawString("LEFT", 10, 3);
+			System.out.println(left < DIST_LIM  ? "RIGHT" : "LEFT");
+			Button.waitForAnyPress();
+			pilot.travel(-15);
+			pilot.rotate(left < DIST_LIM ? -90 : 90);
 		}
+		pilot.forward();
 	}
 
 	private int removeAnomaliesAndGetAverage(List<Integer> list) {
@@ -212,18 +143,46 @@ public class Part3 implements Runnable {
 		}
 		return removeAnomaliesAndGetAverage(vals);
 	}
+	
+	private boolean isBumperPressed() {
+		return bumperA.isPressed() || bumperB.isPressed();
+	}
 
 	public static void main(String[] args) {
 		System.out.println("Press any button to activate me!");
 		LCDUtil.intensify();
+		LCDUtil.doge();
 		
 		Button.waitForAnyPress();
+		LCD.clear();
 		
 		Part3 p = new Part3(
 				RobotInfo.SEBASTIAN.getDifferentialPilot(),
 				new UltrasonicSensor(SensorPort.S3),
-				new UltrasonicSensor(SensorPort.S2));
-		p.run();
+				new UltrasonicSensor(SensorPort.S2),
+				new TouchSensor(SensorPort.S1),
+				new TouchSensor(SensorPort.S4));
+		p.run();/*
+		final DifferentialPilot pilot = RobotInfo.SEBASTIAN.getDifferentialPilot();
+		Button.LEFT.addButtonListener(new ButtonListener() {
+			@Override
+			public void buttonPressed(Button b) {}
+
+			@Override
+			public void buttonReleased(Button b) {
+				pilot.rotate(90);
+			}
+		});
+		Button.RIGHT.addButtonListener(new ButtonListener() {
+			@Override
+			public void buttonPressed(Button b) {}
+
+			@Override
+			public void buttonReleased(Button b) {
+				pilot.rotate(-90);
+			}
+		});
+		Button.ESCAPE.waitForPressAndRelease();*/
 	}
 
 }
