@@ -45,7 +45,7 @@ public class Part3 implements Runnable {
 			if(sensor.getDistance() < DIST_LIM) {
 				timer++;
 				if(timer > TIME_LIM) {
-					chooseNewDirection();
+					chooseNewDirection2();
 					pilot.forward();
 					timer = 0;
 				}
@@ -53,6 +53,58 @@ public class Part3 implements Runnable {
 				timer = 0;
 			}
 			Delay.msDelay(25);
+		}
+	}
+	
+	private void chooseNewDirection2() {
+		int interval = 10;
+		int[] values = new int[180/interval + 1];
+		for(int i = 0; i < values.length; i++) {
+			pilot.rotate(i == 0 ? -90 : interval);
+			values[i] = getSensorDistance(10, 10);
+		}
+		int diagLim = (int) Math.ceil(Math.sqrt(2*DIST_LIM*DIST_LIM));
+		List<Region> regions = new ArrayList<Region>();
+		Region currentRegion = null;
+		for(int i = 0; i < values.length; i++) {
+			if(values[i] >= diagLim) {
+				if(currentRegion == null) {
+					currentRegion = new Region(i, i);
+					regions.add(currentRegion);
+				} else {
+					currentRegion.setEnd(i);
+				}
+			} else {
+				currentRegion = null;
+			}
+		}
+		if(regions.isEmpty()) {
+			pilot.rotate(90);
+			// Could maybe remove this:
+			chooseNewDirection2();
+		} else {
+			Region best = null;
+			for(Region region : regions) {
+				if(best == null) {
+					best = region;
+				} else {
+					int regionLength = region.getEnd() - region.getStart();
+					int bestLength = best.getEnd() - best.getStart(); 
+					if(regionLength > bestLength) {
+						best = region;
+					}
+				}
+			}
+			int mid;
+			if(best.getStart() == 0) {
+				mid = 0;
+			} else if(best.getEnd() == values.length - 1) {
+				mid = best.getEnd();
+			} else {
+				mid = (best.getStart() + best.getEnd()) / 2;
+			}
+			int theta = interval*(mid - (values.length - 1));
+			pilot.rotate(theta);
 		}
 	}
 
@@ -118,9 +170,7 @@ public class Part3 implements Runnable {
 			vals.add(sensor.getDistance());
 			Delay.msDelay(timeInterval);
 		}
-
 		return removeAnomaliesAndGetAverage(vals);
-				
 	}
 
 	public static void main(String[] args) {
