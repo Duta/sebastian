@@ -2,7 +2,6 @@ package part3;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import lejos.nxt.Button;
 import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
@@ -15,18 +14,16 @@ import util.LCDUtil;
 import util.RobotInfo;
 
 public class Part3 implements Runnable {
-	private static final int DIST_LIM = 20;
-	
+	private static final int WALL_HUG_DIST = 5;
+
 	private DifferentialPilot pilot;
-	private UltrasonicSensor leftSensor, rightSensor;
+	private UltrasonicSensor leftSensor;
 	private TouchSensor bumperA, bumperB;
-	
-	public Part3(DifferentialPilot pilot,
-			UltrasonicSensor leftSensor, UltrasonicSensor rightSensor,
+
+	public Part3(DifferentialPilot pilot, UltrasonicSensor leftSensor,
 			TouchSensor bumperA, TouchSensor bumperB) {
 		this.pilot = pilot;
 		this.leftSensor = leftSensor;
-		this.rightSensor = rightSensor;
 		this.bumperA = bumperA;
 		this.bumperB = bumperB;
 	}
@@ -40,94 +37,81 @@ public class Part3 implements Runnable {
 			}
 
 			@Override
-			public void buttonReleased(Button b) {}
-		});
-		
-		pilot.forward();
-		
-		while(true) {
-			if(isBumperPressed()) {
-				/*if(!bumperB.isPressed()) {
-					pilot.travel(-10);
-					pilot.rotate(15);
-					pilot.forward();
-				} else if(!bumperA.isPressed()) {
-					pilot.travel(-10);
-					pilot.rotate(-15);
-					pilot.forward();
-				} else {
-					chooseNewDirection();
-				}*/
-				System.out.println("My jimmies are rustled");
-				pilot.stop();
-				chooseNewDirection();
+			public void buttonReleased(Button b) {
 			}
-			
-			Delay.msDelay(20);
-		}
-	}
-	
-	private void chooseNewDirection() {
-		int left = getSensorDistance(leftSensor, 10, 20);
-		int right = getSensorDistance(rightSensor, 10, 20);
-		System.out.println();
-		System.out.println("=CHOOSE DIR=");
-		System.out.println("left=" + left + ", right=" + right);
-		
-		if(left < DIST_LIM && right < DIST_LIM) {
-			System.out.println("DEAD END");
-			Button.waitForAnyPress();
-			// Dead end
-			pilot.backward();
-			while(left < DIST_LIM && right < DIST_LIM) {
-				Delay.msDelay(25);
-				if(left >= DIST_LIM || right >= DIST_LIM) {
-					left = getSensorDistance(leftSensor, 20, 20);
-					right = getSensorDistance(rightSensor, 20, 20);
+		});
+
+		pilot.setTravelSpeed(150);
+		pilot.forward();
+
+		List<Integer> vals = new ArrayList<Integer>();
+
+		while (true) {
+			vals.add(getSensorDistance(leftSensor, 1, 1));
+			if (vals.size() > 10) {
+				vals.remove(0);
+			}
+
+			if (isBumperPressed()) {
+				wallHit();
+			}
+
+			int lValue = removeAnomaliesAndGetAverage(new ArrayList<Integer>(
+					vals));
+
+			if (lValue > 5 * WALL_HUG_DIST || lValue == 0) {
+				turnLeft();
+			} else {
+				if (lValue < WALL_HUG_DIST) {
+					pilot.rotate(20);
+					pilot.travel(10);
+					pilot.rotate(-20);
+					pilot.forward();
 				}
 			}
-			pilot.stop();
-			pilot.rotate(left < DIST_LIM ? -90 : 90);
-		} else if(left >= DIST_LIM && right >= DIST_LIM) {
-			// Two options
-			System.out.println("TWO OPTIONS");
-			Button.waitForAnyPress();
-			pilot.travel(-15);
-			pilot.rotate(90);
-		} else {
-			System.out.println(left < DIST_LIM  ? "RIGHT" : "LEFT");
-			Button.waitForAnyPress();
-			pilot.travel(-15);
-			pilot.rotate(left < DIST_LIM ? -90 : 90);
+
+			Delay.msDelay(20);
+
 		}
+	}
+
+	private void turnLeft() {
+		pilot.rotate(-30);
+		pilot.travel(15 * WALL_HUG_DIST);
+		pilot.forward();
+	}
+
+	private void wallHit() {
+		pilot.travel(-40);
+		pilot.rotate(90);
 		pilot.forward();
 	}
 
 	private int removeAnomaliesAndGetAverage(List<Integer> list) {
 		int sum = 0;
-		for(int i = 0; i < list.size(); i++) {
-			sum += list.get(i); 
+		for (int i = 0; i < list.size(); i++) {
+			sum += list.get(i);
 		}
-		
+
 		int mean = sum / list.size();
 		int meandiffs = 0;
-		
-		for(int i = 0; i < list.size(); i++) {
+
+		for (int i = 0; i < list.size(); i++) {
 			meandiffs += ((list.get(i) - mean) * (list.get(i) - mean));
 		}
-		
+
 		double sigma = Math.sqrt(meandiffs / list.size());
-		
+
 		boolean changed = false;
-		for(int i = 0; i < list.size(); i++) {
-			if(Math.abs(list.get(i) - mean) > sigma) {
+		for (int i = 0; i < list.size(); i++) {
+			if (Math.abs(list.get(i) - mean) > sigma) {
 				list.remove(i);
 				i--;
 				changed = true;
 			}
 		}
-		
-		if(changed) {
+
+		if (changed) {
 			return removeAnomaliesAndGetAverage(list);
 		} else {
 			return mean;
@@ -135,15 +119,16 @@ public class Part3 implements Runnable {
 
 	}
 
-	private int getSensorDistance(UltrasonicSensor sensor, int numChecks, int timeInterval) {
+	private int getSensorDistance(UltrasonicSensor sensor, int numChecks,
+			int timeInterval) {
 		List<Integer> vals = new ArrayList<Integer>();
-		for(int i = 0; i < numChecks; i++) {
+		for (int i = 0; i < numChecks; i++) {
 			vals.add(sensor.getDistance());
 			Delay.msDelay(timeInterval);
 		}
 		return removeAnomaliesAndGetAverage(vals);
 	}
-	
+
 	private boolean isBumperPressed() {
 		return bumperA.isPressed() || bumperB.isPressed();
 	}
@@ -152,37 +137,14 @@ public class Part3 implements Runnable {
 		System.out.println("Press any button to activate me!");
 		LCDUtil.intensify();
 		LCDUtil.doge();
-		
+
 		Button.waitForAnyPress();
 		LCD.clear();
-		
-		Part3 p = new Part3(
-				RobotInfo.SEBASTIAN.getDifferentialPilot(),
-				new UltrasonicSensor(SensorPort.S3),
-				new UltrasonicSensor(SensorPort.S2),
-				new TouchSensor(SensorPort.S1),
-				new TouchSensor(SensorPort.S4));
-		p.run();/*
-		final DifferentialPilot pilot = RobotInfo.SEBASTIAN.getDifferentialPilot();
-		Button.LEFT.addButtonListener(new ButtonListener() {
-			@Override
-			public void buttonPressed(Button b) {}
 
-			@Override
-			public void buttonReleased(Button b) {
-				pilot.rotate(90);
-			}
-		});
-		Button.RIGHT.addButtonListener(new ButtonListener() {
-			@Override
-			public void buttonPressed(Button b) {}
-
-			@Override
-			public void buttonReleased(Button b) {
-				pilot.rotate(-90);
-			}
-		});
-		Button.ESCAPE.waitForPressAndRelease();*/
+		Part3 p = new Part3(RobotInfo.SEBASTIAN.getDifferentialPilot(),
+				new UltrasonicSensor(SensorPort.S3), new TouchSensor(
+						SensorPort.S1), new TouchSensor(SensorPort.S4));
+		p.run();
 	}
 
 }
