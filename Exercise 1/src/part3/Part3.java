@@ -37,6 +37,13 @@ public class Part3 implements Runnable {
 		pilot.setTravelSpeed(150);
 		pilot.forward();
 
+		/*
+		 * Method for escaping maze:
+		 * 
+		 * Steer to the left.
+		 * If wall hit -> rotate right.
+		 * Repeat.
+		 */
 		while (true) {
 			if (isBumperPressed()) {
 				wallHit();

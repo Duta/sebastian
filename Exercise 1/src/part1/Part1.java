@@ -53,6 +53,7 @@ public class Part1 {
 	}
 	
 	private Shape getCurrentShape() {
+		// Shapes contains the distance and angle to travel to make various shapes.
 		return shapes[shapeIndex];
 	}
 
@@ -62,6 +63,8 @@ public class Part1 {
 		
 		Button.waitForAnyPress();
 		
+		// The RobotInfo class contains the useful robot-related information and functions.
+		// (In the RobotUtils project, package util.RobotInfo)
 		Part1 p = new Part1(RobotInfo.SEBASTIAN.getDifferentialPilot());
 		p.run();
 

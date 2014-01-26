@@ -42,8 +42,8 @@ public class Part2A {
 				bumperPressed ? "Yup!" : "NOPE.",
 				5, 1, bumperPressed);
 			
+			// Methods to draw silly things to the screen.
 			LCDUtil.doge();
-
 			LCDUtil.intensify();
 			
 			if(bumperPressed) {
