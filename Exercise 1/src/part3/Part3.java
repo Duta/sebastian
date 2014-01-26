@@ -44,46 +44,21 @@ public class Part3 implements Runnable {
 		pilot.setTravelSpeed(150);
 		pilot.forward();
 
-		List<Integer> vals = new ArrayList<Integer>();
-
 		while (true) {
-			vals.add(getSensorDistance(leftSensor, 1, 1));
-			if (vals.size() > 10) {
-				vals.remove(0);
-			}
-
 			if (isBumperPressed()) {
 				wallHit();
 			}
 
-			int lValue = removeAnomaliesAndGetAverage(new ArrayList<Integer>(
-					vals));
-
-			if (lValue > 5 * WALL_HUG_DIST || lValue == 0) {
-				turnLeft();
-			} else {
-				if (lValue < WALL_HUG_DIST) {
-					pilot.rotate(20);
-					pilot.travel(10);
-					pilot.rotate(-20);
-					pilot.forward();
-				}
-			}
+			pilot.steer(-50);
 
 			Delay.msDelay(20);
 
 		}
 	}
 
-	private void turnLeft() {
-		pilot.rotate(-30);
-		pilot.travel(15 * WALL_HUG_DIST);
-		pilot.forward();
-	}
-
 	private void wallHit() {
-		pilot.travel(-40);
-		pilot.rotate(90);
+		pilot.travel(-50);
+		pilot.rotate(40);
 		pilot.forward();
 	}
 
