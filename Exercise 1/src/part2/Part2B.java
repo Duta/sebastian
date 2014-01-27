@@ -1,8 +1,8 @@
 package part2;
 
-import util.LCDUtil;
 import util.RobotInfo;
 import util.TouchSensorListener;
+import util.Util;
 import lejos.nxt.Button;
 import lejos.nxt.SensorPort;
 import lejos.nxt.SensorPortListener;
@@ -41,10 +41,7 @@ public class Part2B {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Press any button to activate me!");
-		LCDUtil.intensify();
-		
-		Button.waitForAnyPress();
+		Util.waitForStart();
 		
 		Part2B p = new Part2B(
 			RobotInfo.SEBASTIAN.getDifferentialPilot(),

@@ -14,4 +14,9 @@ public class LCDUtil {
 		LCD.drawString("such lejos", 5, 4);
 		LCD.drawString("wow", 4, 5);
 	}
+
+	public static void anyButtonActivation() {
+		LCD.drawString("Press any button", 0, 0);
+		LCD.drawString("to activate me!", 0, 1);
+	}
 }

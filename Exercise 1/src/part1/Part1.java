@@ -1,6 +1,8 @@
 package part1;
 
+import util.ButtonUtil;
 import util.RobotInfo;
+import util.Util;
 import lejos.nxt.Button;
 import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
@@ -16,7 +18,8 @@ public class Part1 {
 	}
 	
 	public void run() {
-		LCD.clear();
+		ButtonUtil.exitOnEscapePress();
+		
 		LCD.drawString("Press enter to", 0, 0);
 		LCD.drawString("change shape!", 0, 1);
 		LCD.drawString("Press back", 0, 3);
@@ -29,19 +32,8 @@ public class Part1 {
 
 			@Override
 			public void buttonReleased(Button b) {
-				shapeIndex++;
-				shapeIndex %= shapes.length;
-			}
-			
-		});
-		
-		Button.ESCAPE.addButtonListener(new ButtonListener() {
-			@Override
-			public void buttonPressed(Button b) {}
-
-			@Override
-			public void buttonReleased(Button b) {
-				System.exit(0);
+				// Move to the next shape
+				shapeIndex = (shapeIndex + 1) % shapes.length;
 			}
 		});
 		
@@ -58,9 +50,9 @@ public class Part1 {
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		System.out.println("Press any button to activate me!");
-		
+		System.out.println("(Press any button)");
 		Button.waitForAnyPress();
+		Util.waitForStart();
 		
 		Part1 p = new Part1(RobotInfo.SEBASTIAN.getDifferentialPilot());
 		p.run();

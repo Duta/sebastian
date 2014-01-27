@@ -1,14 +1,12 @@
 package part3;
 
-import lejos.nxt.Button;
-import lejos.nxt.ButtonListener;
-import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.util.Delay;
-import util.LCDUtil;
+import util.ButtonUtil;
 import util.RobotInfo;
+import util.Util;
 
 public class Part3 implements Runnable {
 	private DifferentialPilot pilot;
@@ -23,37 +21,17 @@ public class Part3 implements Runnable {
 
 	@Override
 	public void run() {
-		Button.ESCAPE.addButtonListener(new ButtonListener() {
-			@Override
-			public void buttonPressed(Button b) {
-				System.exit(0);
-			}
+		ButtonUtil.exitOnEscapePress();
 
-			@Override
-			public void buttonReleased(Button b) {
-			}
-		});
-
-		// 150
 		pilot.setTravelSpeed(250);
-		pilot.forward();
-
-		while (true) {
+		while(true) {
 			if (isBumperPressed()) {
-				wallHit();
+				pilot.travel(-50);
+				pilot.rotate(40);
 			}
-
 			pilot.steer(-50);
-
 			Delay.msDelay(20);
-
 		}
-	}
-
-	private void wallHit() {
-		pilot.travel(-50);
-		pilot.rotate(40);
-		pilot.forward();
 	}
 
 	private boolean isBumperPressed() {
@@ -61,15 +39,11 @@ public class Part3 implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Press any button to activate me!");
-		LCDUtil.intensify();
-		LCDUtil.doge();
-
-		Button.waitForAnyPress();
-		LCD.clear();
+		Util.waitForStart();
 
 		Part3 p = new Part3(RobotInfo.SEBASTIAN.getDifferentialPilot(),
-				new TouchSensor(SensorPort.S1), new TouchSensor(SensorPort.S4));
+				new TouchSensor(SensorPort.S1),
+				new TouchSensor(SensorPort.S4));
 		p.run();
 	}
 
