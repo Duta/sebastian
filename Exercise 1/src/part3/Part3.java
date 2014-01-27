@@ -34,7 +34,8 @@ public class Part3 implements Runnable {
 			}
 		});
 
-		pilot.setTravelSpeed(150);
+		// 150
+		pilot.setTravelSpeed(250);
 		pilot.forward();
 
 		while (true) {
