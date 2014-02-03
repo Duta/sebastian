@@ -4,3 +4,4 @@
 *.nxj
 .metadata
 */bin/
+.settings
