@@ -1,9 +1,8 @@
 package part2;
 
-import util.LCDUtil;
+import util.ButtonUtil;
 import util.RobotInfo;
-import lejos.nxt.Button;
-import lejos.nxt.ButtonListener;
+import util.Util;
 import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
@@ -22,15 +21,7 @@ public class Part2A {
 	}
 	
 	public void run() {
-		Button.ESCAPE.addButtonListener(new ButtonListener() {
-			@Override
-			public void buttonPressed(Button b) {}
-
-			@Override
-			public void buttonReleased(Button b) {
-				System.exit(0);
-			}
-		});
+		ButtonUtil.exitOnEscapePress();
 		
 		pilot.forward();
 		while(true) {
@@ -60,12 +51,17 @@ public class Part2A {
 	private boolean isBumperPressed() {
 		return bumperA.isPressed() || bumperB.isPressed();
 	}
+	
+	private void updateScreen(boolean bumperPressed) {
+		LCD.clear();
+		LCD.drawString("Bumper pressed: ", 0, 0);
+		LCD.drawString(
+			bumperPressed ? "Yup!" : "NOPE.",
+			5, 1, bumperPressed);
+	}
 
 	public static void main(String[] args) {
-		System.out.println("Press any button to activate me!");
-		LCDUtil.intensify();
-		
-		Button.waitForAnyPress();
+		Util.waitForStart();
 		
 		Part2A p = new Part2A(
 			RobotInfo.SEBASTIAN.getDifferentialPilot(),

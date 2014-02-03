@@ -5,7 +5,7 @@ import lejos.robotics.RegulatedMotor;
 import lejos.robotics.navigation.DifferentialPilot;
 
 public enum RobotInfo {
-	SEBASTIAN(56, 56, 126, Motor.A, Motor.B);
+	SEBASTIAN(56, 56, 126, Motor.B, Motor.A);
 	
 	public final double LEFT_WHEEL;
 	public final double RIGHT_WHEEL;
