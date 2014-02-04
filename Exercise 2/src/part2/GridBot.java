@@ -166,6 +166,5 @@ public class GridBot {
 		gridBot.run();
 
 	}
-	we've copied all your code you should have locked your laptop!!!!!
 
 }
