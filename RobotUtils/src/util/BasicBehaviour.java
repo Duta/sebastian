@@ -2,11 +2,11 @@ package util;
 
 import lejos.robotics.subsumption.Behavior;
 
-public abstract class BasicBehavior implements Behavior {
+public abstract class BasicBehaviour implements Behavior {
     protected RobotInfo robot;
     private boolean suppressed;
 
-    public BasicBehavior(RobotInfo robot) {
+    public BasicBehaviour(RobotInfo robot) {
         this.robot = robot;
     }
 
