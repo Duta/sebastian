@@ -1,4 +1,6 @@
-import lejos.robots.subsumption.Behavior;
+package util;
+
+import lejos.robotics.subsumption.Behavior;
 
 public abstract class BasicBehavior implements Behavior {
     protected RobotInfo robot;

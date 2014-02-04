@@ -1,6 +1,7 @@
 package part2;
 
 import util.ButtonUtil;
+import util.LCDUtil;
 import util.RobotInfo;
 import util.Util;
 import lejos.nxt.LCD;
