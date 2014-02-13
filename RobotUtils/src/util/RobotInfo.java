@@ -4,6 +4,9 @@ import lejos.nxt.Motor;
 import lejos.robotics.RegulatedMotor;
 import lejos.robotics.navigation.DifferentialPilot;
 
+/**
+ * Contains useful robot-related information and functions.
+ */
 public enum RobotInfo {
 	SEBASTIAN(56, 56, 126, Motor.B, Motor.A);
 	
