@@ -20,15 +20,9 @@ public enum PathAction {
 	
 	public static PathAction parse(char c) {
 		switch(c) {
-		case 'L':
-			return PathAction.LEFT;
-			
-		case 'R':
-			return PathAction.RIGHT;
-			
-		case 'S':
-			return PathAction.STRAIGHT;
-			
+		case 'L': return LEFT;
+		case 'R': return RIGHT;
+		case 'S': return STRAIGHT;
 		default:
 			throw new IllegalArgumentException("'" + c + "' is invalid");
 		}

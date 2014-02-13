@@ -34,33 +34,27 @@ public class GridBot implements Runnable {
 	public void run() {
 		ButtonUtil.exitOnEscapePress();
 		
-		SensorResult prevResult = null;
-		
 		while(true) {
-			SensorResult result = SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD);
-			if(result != prevResult) {
-				switch(result) {
-				case LEFT_BLACK:
-					pilot.setTravelSpeed(TURN_SPEED);
-					pilot.steer(TURN_RATE);
-					break;
+			switch(SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD)) {
+			case LEFT_BLACK:
+				pilot.setTravelSpeed(TURN_SPEED);
+				pilot.steer(-TURN_RATE);
+				break;
+			
+			case RIGHT_BLACK:
+				pilot.setTravelSpeed(TURN_SPEED);
+				pilot.steer(TURN_RATE);
+				break;
 				
-				case RIGHT_BLACK:
-					pilot.setTravelSpeed(TURN_SPEED);
-					pilot.steer(-TURN_RATE);
-					break;
-					
-				case NOTHING:
-					pilot.setTravelSpeed(FORWARD_SPEED);
-					pilot.forward();
-					break;
-					
-				case BOTH_BLACK:
-					junction();
-					break;
-				}
+			case NOTHING:
+				pilot.setTravelSpeed(FORWARD_SPEED);
+				pilot.forward();
+				break;
+				
+			case BOTH_BLACK:
+				junction();
+				break;
 			}
-			prevResult = result;
 		}
 	}
 	
