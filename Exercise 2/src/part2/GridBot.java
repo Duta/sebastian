@@ -5,6 +5,7 @@ import java.util.List;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
 import lejos.robotics.navigation.DifferentialPilot;
+import lejos.util.Delay;
 import shared.SensorResult;
 import util.ButtonUtil;
 import util.RobotInfo;
@@ -13,7 +14,7 @@ import util.Util;
 public class GridBot implements Runnable {
 	private static final int
 		THRESHOLD = 450,
-		FORWARD_SPEED = 80,
+		FORWARD_SPEED = 120,
 		TURN_RATE = 130,
 		TURN_SPEED = 30;
 
@@ -35,6 +36,8 @@ public class GridBot implements Runnable {
 		ButtonUtil.exitOnEscapePress();
 		
 		while(true) {
+			Delay.msDelay(20);
+			
 			switch(SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD)) {
 			case LEFT_BLACK:
 				pilot.setTravelSpeed(TURN_SPEED);
@@ -66,7 +69,7 @@ public class GridBot implements Runnable {
 		
 		PathAction action = path.remove(0);
 		
-		pilot.travel(50);
+		pilot.travel(60);
 		
 		switch(action) {
 		case LEFT:
