@@ -7,8 +7,10 @@ import search.interfaces.Frontier;
 import search.interfaces.State;
 
 public class Search {
-	public static <StateType extends State<StateType>, FrontierType extends Frontier<StateType>> Stack<StateType> search(
-			StateType start, StateType goal, FrontierType frontier) {
+	public static 
+		<StateType extends State<StateType>, 
+		 FrontierType extends Frontier<StateType>> 
+		Stack<StateType> search(StateType start, StateType goal, FrontierType frontier) {
 
 		ArrayList<StateType> explored = new ArrayList<StateType>();
 
