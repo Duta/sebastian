@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import search.interfaces.Frontier;
 import search.interfaces.State;
 
-public class BreadthFirstFrontier<StateType extends State<StateType>> implements Frontier<StateType> {
+public class BreadthFirstFrontier<StateType extends State<StateType, ActionType>, ActionType> implements Frontier<StateType, ActionType> {
 	private ArrayList<StateType> frontierList;
 	
 	public BreadthFirstFrontier() {

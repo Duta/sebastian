@@ -3,6 +3,7 @@ package search;
 import java.util.Stack;
 
 import rp13.search.problem.puzzle.EightPuzzle;
+import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 
 public class EightPuzzleBreadthFirst {
 	public static void main(String[] args) {
@@ -16,7 +17,7 @@ public class EightPuzzleBreadthFirst {
 		
 		Stack<EightPuzzleState> path = Search.search(
 				start, goal,
-				new BreadthFirstFrontier<EightPuzzleState>());
+				new BreadthFirstFrontier<EightPuzzleState, PuzzleMove>());
 		
 		System.out.println("Path (Length " + path.size() + "):");
 		while(true) {
@@ -25,7 +26,7 @@ public class EightPuzzleBreadthFirst {
 			}
 			
 			EightPuzzleState state = path.pop();
-			System.out.println(state);
+			System.out.println(state.getAction());
 		}
 	}
 }

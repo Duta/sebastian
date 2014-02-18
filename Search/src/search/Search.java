@@ -8,8 +8,9 @@ import search.interfaces.State;
 
 public class Search {
 	public static 
-		<StateType extends State<StateType>, 
-		 FrontierType extends Frontier<StateType>> 
+		<StateType extends State<StateType, ActionType>, 
+		FrontierType extends Frontier<StateType, ActionType>, 
+		ActionType> 
 		Stack<StateType> search(StateType start, StateType goal, FrontierType frontier) {
 
 		ArrayList<StateType> explored = new ArrayList<StateType>();
@@ -17,8 +18,9 @@ public class Search {
 		frontier.push(start);
 
 		while (true) {
-			System.out.println("Frontier: " + frontier.size() + ", Explored: " + explored.size());
-			
+			System.out.println("Frontier: " + frontier.size() + ", Explored: "
+					+ explored.size());
+
 			StateType node = frontier.pop();
 
 			if (node == null) {

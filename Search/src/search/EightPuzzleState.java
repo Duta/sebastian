@@ -6,16 +6,17 @@ import rp13.search.problem.puzzle.EightPuzzle;
 import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 import search.interfaces.State;
 
-public class EightPuzzleState extends State<EightPuzzleState> {
+public class EightPuzzleState extends State<EightPuzzleState, PuzzleMove> {
 	EightPuzzle puzzle;
 
 	public EightPuzzleState(EightPuzzle puzzle) {
-		this(puzzle, null);
+		this(puzzle, null, null);
 	}
 
-	public EightPuzzleState(EightPuzzle puzzle, EightPuzzleState parent) {
+	public EightPuzzleState(EightPuzzle puzzle, EightPuzzleState parent, PuzzleMove action) {
 		this.puzzle = puzzle;
 		this.parent = parent;
+		this.action = action;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class EightPuzzleState extends State<EightPuzzleState> {
 				EightPuzzle newPuzzle = new EightPuzzle(puzzle);
 				newPuzzle.makeMove(move);
 
-				successors.add(new EightPuzzleState(newPuzzle, this));
+				successors.add(new EightPuzzleState(newPuzzle, this, move));
 			}
 		}
 
