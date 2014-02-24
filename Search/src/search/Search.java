@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import search.interfaces.Frontier;
-import search.interfaces.State;
+import search.interfaces.Node;
 
 public class Search {
 	public static 
-		<StateType extends State<StateType, ActionType>, 
-		FrontierType extends Frontier<StateType, ActionType>, 
+		<NodeType extends Node<NodeType, ActionType>, 
+		FrontierType extends Frontier<NodeType, ActionType>, 
 		ActionType> 
-		Stack<StateType> search(StateType start, StateType goal, FrontierType frontier) {
+		Stack<NodeType> search(NodeType start, NodeType goal, FrontierType frontier) {
 
-		ArrayList<StateType> explored = new ArrayList<StateType>();
+		ArrayList<NodeType> explored = new ArrayList<NodeType>();
 
 		frontier.push(start);
 
@@ -21,14 +21,18 @@ public class Search {
 			System.out.println("Frontier: " + frontier.size() + ", Explored: "
 					+ explored.size());
 
-			StateType node = frontier.pop();
+			if(frontier.empty()) {
+				return null;
+			}
+			
+			NodeType node = frontier.pop();
 
 			if (node == null) {
 				return null;
 			}
 
-			if (node.equals(goal)) {
-				Stack<StateType> stack = new Stack<StateType>();
+			if (node.stateEquals(goal)) {
+				Stack<NodeType> stack = new Stack<NodeType>();
 
 				do {
 					stack.push(node);
@@ -42,9 +46,9 @@ public class Search {
 				explored.add(node);
 			}
 
-			for (StateType state : node.explore()) {
-				if (!explored.contains(state)) {
-					frontier.push(state);
+			for (NodeType newnode : node.explore()) {
+				if (!explored.contains(newnode)) {
+					frontier.push(newnode);
 				}
 			}
 		}

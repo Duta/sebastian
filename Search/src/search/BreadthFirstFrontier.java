@@ -3,22 +3,22 @@ package search;
 import java.util.ArrayList;
 
 import search.interfaces.Frontier;
-import search.interfaces.State;
+import search.interfaces.Node;
 
-public class BreadthFirstFrontier<StateType extends State<StateType, ActionType>, ActionType> implements Frontier<StateType, ActionType> {
-	private ArrayList<StateType> frontierList;
+public class BreadthFirstFrontier<NodeType extends Node<NodeType, ActionType>, ActionType> implements Frontier<NodeType, ActionType> {
+	private ArrayList<NodeType> frontierList;
 	
 	public BreadthFirstFrontier() {
-		frontierList = new ArrayList<StateType>();
+		frontierList = new ArrayList<NodeType>();
 	}
 	
-	public void push(StateType state) {
+	public void push(NodeType state) {
 		frontierList.add(state);
 	}
 
 	@Override
-	public StateType pop() {
-		StateType state = frontierList.get(0);
+	public NodeType pop() {
+		NodeType state = frontierList.get(0);
 		frontierList.remove(0);
 		return state;
 	}

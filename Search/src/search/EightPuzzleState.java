@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import rp13.search.problem.puzzle.EightPuzzle;
 import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
-import search.interfaces.State;
+import search.interfaces.Node;
 
-public class EightPuzzleState extends State<EightPuzzleState, PuzzleMove> {
+public class EightPuzzleState extends Node<EightPuzzleState, PuzzleMove> {
 	EightPuzzle puzzle;
 
 	public EightPuzzleState(EightPuzzle puzzle) {
@@ -38,14 +38,6 @@ public class EightPuzzleState extends State<EightPuzzleState, PuzzleMove> {
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof EightPuzzleState) {
-			/*if (parent == null) {
-				return puzzle.equals(((EightPuzzleState) other).puzzle)
-					&& ((EightPuzzleState) other).parent == null;
-			} else {
-				return puzzle.equals(((EightPuzzleState) other).puzzle)
-					&& parent.equals(((EightPuzzleState) other).parent);
-			}*/
-			
 			return puzzle.equals(((EightPuzzleState) other).puzzle);
 		}
 
