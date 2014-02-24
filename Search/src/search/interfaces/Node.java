@@ -18,4 +18,5 @@ public abstract class Node<NodeType, ActionType> {
 	public abstract boolean equals(Object other);
 	public abstract boolean stateEquals(Object other);
 	public abstract int heuristic(NodeType goal);
+
 }

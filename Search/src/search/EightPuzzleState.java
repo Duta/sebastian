@@ -38,6 +38,15 @@ public class EightPuzzleState extends Node<EightPuzzleState, PuzzleMove> {
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof EightPuzzleState) {
+			return puzzle.equals(((EightPuzzleState) other).puzzle) && action.equals(((EightPuzzleState)other).parent);
+		}
+
+		return false;
+	}
+	
+	@Override
+	public boolean stateEquals(Object other) {
+		if (other instanceof EightPuzzleState) {
 			return puzzle.equals(((EightPuzzleState) other).puzzle);
 		}
 

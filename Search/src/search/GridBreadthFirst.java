@@ -10,16 +10,16 @@ import grid.SearchNode;
 
 public class GridBreadthFirst {
 	public static void main(String[] args) {
-		Grid g = new Grid(6, 6);
+		Grid g = new Grid(10, 10);
 		Random r = new Random();
 
-		int x1 = r.nextInt(6);
-		int x2 = r.nextInt(6);
-		int y1 = r.nextInt(6);
-		int y2 = r.nextInt(6);
+		int x1 = r.nextInt(10);
+		int x2 = r.nextInt(10);
+		int y1 = r.nextInt(10);
+		int y2 = r.nextInt(10);
 
 		SearchNode start = new SearchNode(new GridState(g, x1, y1));
-		SearchNode goal = new SearchNode(new GridState(g, y1, y2));
+		SearchNode goal = new SearchNode(new GridState(g, x2, y2));
 
 		System.out.println("Start: (" + x1 + ", " + y1 + ")");
 		System.out.println("End: (" + x2 + ", " + y2 + ")");
