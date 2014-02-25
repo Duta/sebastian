@@ -58,6 +58,11 @@ public class EightPuzzleState extends Node<EightPuzzleState, PuzzleMove> {
 		return 0;
 	}
 
+	@Override
+	public int totalPathCost() {
+		return 0;
+	}
+	
 	public String toString() {
 		return puzzle.toString();
 	}

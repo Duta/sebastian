@@ -6,15 +6,24 @@ import search.interfaces.Node;
 
 public class SearchNode extends Node<SearchNode, GridDir> {
 	private GridState gridState;
+	
+	private int cost;
 
 	public SearchNode(GridState gridState) {
-		this(gridState, null, null);
+		this.gridState = gridState;
+		this.parent = null;
+		this.action = null;
+		
+		cost = 0;
+
 	}
 
 	public SearchNode(GridState gridState, SearchNode parent, GridDir action) {
 		this.gridState = gridState;
 		this.parent = parent;
 		this.action = action;
+		
+		cost = parent.cost + 1;
 	}
 
 	@Override
@@ -32,27 +41,36 @@ public class SearchNode extends Node<SearchNode, GridDir> {
 	}
 
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(Object other) {/*
 		if (other instanceof SearchNode) {
 			return gridState.equals(((SearchNode) other).gridState)
 					&& action.equals(((SearchNode) other).action);
 		}
 
-		return false;
+		return false;*/
+		
+		return stateEquals(other);
 	}
 
 	@Override
 	public boolean stateEquals(Object other) {
-		if (other instanceof SearchNode) {
-			return gridState.equals(((SearchNode) other).gridState);
-		}
+		return other instanceof SearchNode
+			? gridState.equals(((SearchNode) other).gridState)
+			: false;
+	}
+	
+	@Override
+	public int heuristic(SearchNode goal) {
+		Junction goalJunction = goal.gridState.getJunction();
+		Junction junction = gridState.getJunction();
+		
+		return Math.abs(goalJunction.getX() - junction.getX()) 
+			 + Math.abs(goalJunction.getY() - junction.getY());
 
-		return false;
 	}
 
 	@Override
-	public int heuristic(SearchNode goal) {
-		return 0;
+	public int totalPathCost() {
+		return cost;
 	}
-
 }
