@@ -26,7 +26,7 @@ public class Junction {
 		return ypos;
 	}
 
-	public Junction getJunction(GridDir dir) {
+	public Junction getJunction(GridDirection dir) {
 		switch (dir) {
 		case UP:
 			return up;
@@ -46,7 +46,7 @@ public class Junction {
 		}
 	}
 	
-	public void setJunction(GridDir dir, Junction junc) {
+	public void setJunction(GridDirection dir, Junction junc) {
 		switch (dir) {
 		case UP:
 			up = junc;

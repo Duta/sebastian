@@ -1,17 +1,18 @@
 package grid;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Grid {
 	private final int width, height;
 	
-	private ArrayList<ArrayList<Junction>> junctions;
+	private List<List<Junction>> junctions;
 	
 	public Grid(int width, int height) {
 		this.width = width;
 		this.height = height;
 		
-		this.junctions = new ArrayList<ArrayList<Junction>>();
+		this.junctions = new ArrayList<List<Junction>>();
 			
 		for(int x = 0; x < width; x++) {
 			junctions.add(new ArrayList<Junction>());
@@ -23,22 +24,18 @@ public class Grid {
 		
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				Junction j = junctions.get(x).get(y);
-				
+				Junction j = getJunction(x, y);
 				if(y > 0) {
-					j.setJunction(GridDir.UP, junctions.get(x).get(y-1));
+					j.setJunction(GridDirection.UP, getJunction(x, y-1));
 				}
-				
 				if(y < height - 1) {
-					j.setJunction(GridDir.DOWN, junctions.get(x).get(y+1));
+					j.setJunction(GridDirection.DOWN, getJunction(x, y+1));
 				}
-				
 				if(x > 0) {
-					j.setJunction(GridDir.LEFT, junctions.get(x-1).get(y));
+					j.setJunction(GridDirection.LEFT, getJunction(x-1, y));
 				}
-				
 				if(x < width - 1) {
-					j.setJunction(GridDir.RIGHT, junctions.get(x+1).get(y));
+					j.setJunction(GridDirection.RIGHT, getJunction(x+1, y));
 				}
 			}
 		}
@@ -57,10 +54,8 @@ public class Grid {
 	}
 	
 	public boolean equals(Object other) {
-		if(other instanceof Grid) {
-			return (width == ((Grid)other).width) && (height == ((Grid)other).height);
-		}
-		
-		return false;
+		return other instanceof Grid
+			&& width == ((Grid)other).width
+			&& height == ((Grid)other).height;
 	}
 }

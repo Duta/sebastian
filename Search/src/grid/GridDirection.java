@@ -1,6 +1,6 @@
 package grid;
 
-public enum GridDir {
+public enum GridDirection {
 	UP,
 	DOWN,
 	LEFT,

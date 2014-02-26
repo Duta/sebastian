@@ -1,22 +1,20 @@
 package search.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Node<NodeType, ActionType> {
-	protected NodeType parent;
-	protected ActionType action;
+public abstract class Node<NodeT, ActionT> {
+	protected NodeT parent;
+	protected ActionT action;
 	
-	public NodeType getParent() {
+	public NodeT getParent() {
 		return parent;
 	}
 	
-	public ActionType getAction() {
+	public ActionT getAction() {
 		return action;
 	}
 	
-	public abstract ArrayList<NodeType> explore();
+	public abstract List<NodeT> explore();
 	public abstract boolean equals(Object other);
-	public abstract boolean stateEquals(Object other);
-	public abstract int heuristic(NodeType goal);
-
+	public abstract int heuristic(NodeT goal);
 }

@@ -22,11 +22,11 @@ public class GridState {
 		return currentJunction;
 	}
 	
-	public boolean validDirection(GridDir dir) {
+	public boolean validDirection(GridDirection dir) {
 		return currentJunction.getJunction(dir) != null;
 	}
 
-	public GridState applyDir(GridDir dir) {
+	public GridState applyDir(GridDirection dir) {
 		if(!validDirection(dir)) {
 			throw new IllegalArgumentException("Direction not valid to apply");
 		}

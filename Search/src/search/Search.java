@@ -1,56 +1,44 @@
 package search;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import search.interfaces.Frontier;
 import search.interfaces.Node;
 
 public class Search {
-	public static 
-		<NodeType extends Node<NodeType, ActionType>, 
-		FrontierType extends Frontier<NodeType, ActionType>, 
-		ActionType> 
-		Stack<NodeType> search(NodeType start, NodeType goal, FrontierType frontier) {
-
-		ArrayList<NodeType> explored = new ArrayList<NodeType>();
-
+	public static
+	// Generics can get hard to format.
+	<NodeT extends Node<NodeT, ActionT>, 
+	FrontierT extends Frontier<NodeT, ActionT>,
+	ActionT>
+	Stack<NodeT> search(NodeT start, NodeT goal, FrontierT frontier) throws PathNotFoundException {
+		List<NodeT> explored = new ArrayList<NodeT>();
 		frontier.push(start);
-
-		while (true) {
-			System.out.println("Frontier: " + frontier.size() + ", Explored: "
-					+ explored.size());
-
-			if(frontier.empty()) {
-				return null;
-			}
-			
-			NodeType node = frontier.pop();
-
+		while (!frontier.empty()) {
+			// System.out.println("Frontier: " + frontier.size() + ", Explored: " + explored.size());
+			NodeT node = frontier.pop();
 			if (node == null) {
-				return null;
+				throw new IllegalArgumentException("null node encountered");
 			}
-
-			if (node.stateEquals(goal)) {
-				Stack<NodeType> stack = new Stack<NodeType>();
-
-				do {
+			if (node.equals(goal)) {
+				Stack<NodeT> stack = new Stack<NodeT>();
+				while (node != null) {
 					stack.push(node);
 					node = node.getParent();
-				} while (node != null);
-
+				}
 				return stack;
 			}
-
 			if (!explored.contains(node)) {
 				explored.add(node);
 			}
-
-			for (NodeType newnode : node.explore()) {
-				if (!explored.contains(newnode)) {
-					frontier.push(newnode);
+			for (NodeT successor : node.explore()) {
+				if (!explored.contains(successor)) {
+					frontier.push(successor);
 				}
 			}
 		}
+		throw new PathNotFoundException();
 	}
 }
