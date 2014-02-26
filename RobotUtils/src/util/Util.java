@@ -28,12 +28,15 @@ public class Util {
     }
 
     public static <T> void randomize(T[] array, int numSwaps) {
+        int len = array.length;
         for(int i = 0; i < numSwaps; i++) {
-            int a = RGEN.nextInt(array.length);
-            int b = RGEN.nextInt(array.length);
-            T temp = array[a];
-            array[a] = array[b];
-            array[b] = temp;
+            swap(array, RGEN.nextInt(len), RGEN.nextInt(len));
         }
+    }
+
+    public static <T> void swap(T[] array, int i, int j) {
+        T temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 }
