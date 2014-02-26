@@ -6,7 +6,7 @@ import lejos.nxt.Button;
 import lejos.nxt.LCD;
 
 public class Util {
-	private static final Random RGEN = new Random();
+	public static final Random RGEN = new Random();
 	
 	public static void waitForStart() {
 		LCD.clear();
@@ -27,7 +27,7 @@ public class Util {
         randomize(array, array.length * 2);
     }
 
-    private static <T> void randomize(T[] array, int numSwaps) {
+    public static <T> void randomize(T[] array, int numSwaps) {
         for(int i = 0; i < numSwaps; i++) {
             int a = RGEN.nextInt(array.length);
             int b = RGEN.nextInt(array.length);
