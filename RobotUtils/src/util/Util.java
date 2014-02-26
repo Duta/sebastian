@@ -22,4 +22,18 @@ public class Util {
 	public static <T> T randomChoice(T[] array) {
 		return array[RGEN.nextInt(array.length)];
 	}
+
+    public static <T> void randomize(T[] array) {
+        randomize(array, array.length * 2);
+    }
+
+    private static <T> void randomize(T[] array, int numSwaps) {
+        for(int i = 0; i < numSwaps; i++) {
+            int a = RGEN.nextInt(array.length);
+            int b = RGEN.nextInt(array.length);
+            T temp = array[a];
+            array[a] = array[b];
+            array[b] = temp;
+        }
+    }
 }
