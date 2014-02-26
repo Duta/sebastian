@@ -26,9 +26,10 @@ public class Main {
         System.out.println(path);
         int initialLength = path.getLength();
 
-        long startTime = System.currentTimeMillis();
         // TODO: Play with the parameters
         SimulatedAnnealing sa = new SimulatedAnnealing(15000, 1, 0.002);
+
+        long startTime = System.currentTimeMillis();
         sa.improve(path);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
