@@ -10,4 +10,5 @@ TestResults*
 *.log
 /bin
 */.idea
+*/out
 *.iml
