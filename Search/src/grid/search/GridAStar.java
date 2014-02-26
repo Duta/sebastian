@@ -1,7 +1,6 @@
 package grid.search;
 
 import grid.GridDirection;
-import grid.GridNode;
 import search.AStarFrontier;
 import search.interfaces.Frontier;
 

@@ -3,7 +3,6 @@ package grid.search;
 import grid.Grid;
 import grid.GridDirection;
 import grid.GridState;
-import grid.GridNode;
 
 import java.util.Random;
 import java.util.Stack;

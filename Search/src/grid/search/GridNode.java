@@ -1,4 +1,8 @@
-package grid;
+package grid.search;
+
+import grid.GridDirection;
+import grid.GridState;
+import grid.Junction;
 
 import java.util.ArrayList;
 import java.util.List;
