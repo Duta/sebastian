@@ -7,18 +7,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        Grid grid = new Grid(11, 7);
+    private static List<GridState> parseAsciiArt(String[] lines) {
+        int width = 0;
+        for(String line : lines) {
+            if(line.length() > width) {
+                width = line.length();
+            }
+        }
+        int height = lines.length;
+
+        Grid grid = new Grid(width, height);
+
         List<GridState> requiredGridStates = new ArrayList<GridState>();
-        requiredGridStates.add(new GridState(grid, 0, 0));
-        requiredGridStates.add(new GridState(grid, 7, 0));
-        requiredGridStates.add(new GridState(grid, 2, 1));
-        requiredGridStates.add(new GridState(grid, 6, 2));
-        requiredGridStates.add(new GridState(grid, 4, 3));
-        requiredGridStates.add(new GridState(grid, 9, 3));
-        requiredGridStates.add(new GridState(grid, 1, 4));
-        requiredGridStates.add(new GridState(grid, 7, 5));
-        requiredGridStates.add(new GridState(grid, 4, 6));
+        for(int y = 0; y < height; y++) {
+            String line = lines[y];
+            for(int x = 0; x < line.length(); x++) {
+                if(line.charAt(x) != ' ') {
+                    requiredGridStates.add(new GridState(grid, x, y));
+                }
+            }
+        }
+        return requiredGridStates;
+    }
+
+    public static void main(String[] args) {
+        String[] asciiArt = {
+            "#      #   ",
+            "  #        ",
+            "      #    ",
+            "    #    # ",
+            " #         ",
+            "       #   ",
+            "    #      "
+        };
+        List<GridState> requiredGridStates = parseAsciiArt(asciiArt);
 
         Path path = new Path(requiredGridStates);
         System.out.println("Initial path");
