@@ -9,5 +9,5 @@
 TestResults*
 *.log
 /bin
-/.idea
+*/.idea
 *.iml
