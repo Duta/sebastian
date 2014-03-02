@@ -8,6 +8,17 @@ import search.interfaces.Frontier;
 import search.interfaces.Node;
 
 public class Search {
+	/**
+	 * Performs a search algorithm, returning a path from start to goal, using
+	 * the provided frontier type.
+	 * 
+	 * @param start The start node.
+	 * @param goal The goal node.
+	 * @param frontier The frontier type. This defines what algorithm is used.
+	 * @return A stack containing the nodes in the path. The top is the start node,
+	 * the bottom is the goal.
+	 * @throws PathNotFoundException
+	 */
 	public static
 	// Generics can get hard to format.
 	<NodeT extends Node<NodeT, ActionT>, 

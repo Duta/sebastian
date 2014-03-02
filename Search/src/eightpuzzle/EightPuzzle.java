@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 import util.SebastianInternalException;
 
+/**
+ * This class implements an eight puzzle state.
+ */
 public class EightPuzzle {
 	private static final int
 		BLANK = 0,

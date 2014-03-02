@@ -6,6 +6,10 @@ import java.util.List;
 import search.interfaces.Frontier;
 import search.interfaces.Node;
 
+/**
+ * This frontier implements A* search.
+ * It inserts nodes ordered by their heuristic.
+ */
 public class AStarFrontier<NodeT extends Node<NodeT, ActionT>, ActionT>
 		implements Frontier<NodeT, ActionT> {
 	private NodeT goal;

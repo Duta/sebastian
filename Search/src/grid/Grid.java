@@ -3,6 +3,9 @@ package grid;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents an entire grid.
+ */
 public class Grid {
 	private final int width, height;
 	

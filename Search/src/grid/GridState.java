@@ -1,5 +1,8 @@
 package grid;
 
+/**
+ * This class represents a state in the grid, i.e. the current position in it.
+ */
 public class GridState {
 	private Grid grid;
 	private Junction currentJunction;

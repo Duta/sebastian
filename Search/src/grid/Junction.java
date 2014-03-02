@@ -1,5 +1,8 @@
 package grid;
 
+/**
+ * This class represents a junction in a grid.
+ */
 public class Junction {
 	private int xpos, ypos;
 	private Junction up, down, left, right;
