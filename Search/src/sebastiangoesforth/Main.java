@@ -1,7 +1,5 @@
 package sebastiangoesforth;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import lejos.nxt.LightSensor;
@@ -22,10 +20,10 @@ public class Main {
 		
 		Grid grid = Grid.defaultGrid();
 
-		int x1 = Util.RGEN.nextInt(grid.getWidth());
-		int x2 = Util.RGEN.nextInt(grid.getWidth());
-		int y1 = Util.RGEN.nextInt(grid.getHeight());
-		int y2 = Util.RGEN.nextInt(grid.getHeight());
+		int x1 = 4;
+		int y1 = 1;
+		int x2 = 7;
+		int y2 = 2;
 
 		GridNode start = new GridNode(new GridState(grid, x1, y1));
 		GridNode goal = new GridNode(new GridState(grid, x2, y2));
@@ -41,101 +39,13 @@ public class Main {
 			return;
 		}
 		
-		List<PathAction> pathActions = new ArrayList<PathAction>();
-		
-		GridDirection direction = GridDirection.UP;
-		
-		while(!path.empty()) {
-			GridNode node = path.pop();
-			GridDirection action = node.getAction();
-			switch(action) {
-			case DOWN:
-				switch(direction) {
-				case DOWN:
-					pathActions.add(PathAction.STRAIGHT);
-					break;
-					
-				case LEFT:
-					pathActions.add(PathAction.LEFT);
-					break;
-					
-				case RIGHT:
-					pathActions.add(PathAction.RIGHT);
-					break;
-					
-				case UP:
-					pathActions.add(PathAction.U_TURN);
-					break;
-				}
-				break;
-				
-			case LEFT:
-				switch(direction) {
-				case DOWN:
-					pathActions.add(PathAction.RIGHT);
-					break;
-					
-				case LEFT:
-					pathActions.add(PathAction.STRAIGHT);
-					break;
-					
-				case RIGHT:
-					pathActions.add(PathAction.U_TURN);
-					break;
-					
-				case UP:
-					pathActions.add(PathAction.LEFT);
-					break;
-				}
-				break;
-				
-			case RIGHT:
-				switch(direction) {
-				case DOWN:
-					pathActions.add(PathAction.LEFT);
-					break;
-					
-				case LEFT:
-					pathActions.add(PathAction.U_TURN);
-					break;
-					
-				case RIGHT:
-					pathActions.add(PathAction.STRAIGHT);
-					break;
-					
-				case UP:
-					pathActions.add(PathAction.RIGHT);
-					break;
-				}
-				break;
-				
-			case UP:
-				switch(direction) {
-				case DOWN:
-					pathActions.add(PathAction.U_TURN);
-					break;
-					
-				case LEFT:
-					pathActions.add(PathAction.RIGHT);
-					break;
-					
-				case RIGHT:
-					pathActions.add(PathAction.LEFT);
-					break;
-					
-				case UP:
-					pathActions.add(PathAction.STRAIGHT);
-					break;
-				}
-				break;
-			}
-		}
+		path.pop();
 		
 		Mover mover = new Mover(
 				RobotInfo.SEBASTIAN.getDifferentialPilot(),
 				new LightSensor(SensorPort.S4),
 				new LightSensor(SensorPort.S1),
-				pathActions);
+				path);
 		mover.run();
 	}
 }

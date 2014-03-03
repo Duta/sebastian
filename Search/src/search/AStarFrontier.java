@@ -43,7 +43,7 @@ public class AStarFrontier<NodeT extends Node<NodeT, ActionT>, ActionT>
 	public boolean empty() {
 		return list.isEmpty();
 	}
-	
+
 	@Override
 	public int size() {
 		return list.size();
@@ -53,7 +53,7 @@ public class AStarFrontier<NodeT extends Node<NodeT, ActionT>, ActionT>
 		return node.heuristic(goal) + totalPathCost(node);
 	}
 	
-	private int totalPathCost(NodeT node) {
+	protected int totalPathCost(NodeT node) {
 		int pathCost = 0;
 		while(node.getParent() != null) {
 			pathCost++;
