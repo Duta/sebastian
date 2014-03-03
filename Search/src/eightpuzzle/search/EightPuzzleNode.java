@@ -42,6 +42,15 @@ public class EightPuzzleNode extends Node<EightPuzzleNode, PuzzleMove> {
 	public int heuristic(EightPuzzleNode goal) {
 		return 0;
 	}
+	
+	@Override
+	public EightPuzzleNode applyAction(PuzzleMove action) {
+		if(!puzzle.isPossibleMove(action)) {
+			return new EightPuzzleNode(puzzle, parent, this.action);
+		} else {
+			return new EightPuzzleNode(puzzle.makeMove(action), this, action);
+		}
+	}
 
 	public String toString() {
 		return puzzle.toString();

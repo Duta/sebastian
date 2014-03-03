@@ -42,4 +42,9 @@ public abstract class Node<NodeT, ActionT> {
 	 * @param goal The goal node
 	 */
 	public abstract int heuristic(NodeT goal);
+	
+	/**
+	 * Returns a new node with the specified action applied
+	 */
+	public abstract NodeT applyAction(ActionT action);
 }

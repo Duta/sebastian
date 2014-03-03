@@ -58,6 +58,11 @@ public class JumbledStringNode extends Node<JumbledStringNode, CharacterSwap> {
         }
         return hammingDistance;
     }
+    
+    @Override
+    public JumbledStringNode applyAction(CharacterSwap action) {
+    	return new JumbledStringNode(jumbledString.makeSwap(action), this, action);
+    }
 
     @Override
     public String toString() {

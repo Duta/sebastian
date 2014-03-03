@@ -47,4 +47,13 @@ public class GridNode extends Node<GridNode, GridDirection> {
 		return Math.abs(goalJunction.getX() - junction.getX())
 			+ Math.abs(goalJunction.getY() - junction.getY());
 	}
+	
+	@Override
+	public GridNode applyAction(GridDirection action) {
+		if(!gridState.validDirection(action)) {
+			return new GridNode(gridState, parent, this.action);
+		} else {
+			return new GridNode(gridState.applyDir(action), this, action);
+		}
+	}
 }

@@ -52,7 +52,7 @@ public class EightPuzzle {
 	public boolean isPossibleMove(PuzzleMove move) {
 		int newBlankPosition = getNewBlankPosition(move);
 		// Check array bounds
-		if (newBlankPosition < 0 && newBlankPosition >= board.length) {
+		if (newBlankPosition < 0 || newBlankPosition >= board.length) {
 			return false;
 		}
 		// Check logical bounds
