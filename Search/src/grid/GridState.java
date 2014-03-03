@@ -36,7 +36,8 @@ public class GridState {
 		
 		return new GridState(grid, currentJunction.getJunction(dir));
 	}
-	
+
+    @Override
 	public boolean equals(Object other) {
 		if(other instanceof GridState) {
 			return (grid.equals(((GridState)other).grid)) && (currentJunction.equals(((GridState)other).currentJunction));
@@ -44,4 +45,11 @@ public class GridState {
 		
 		return false;
 	}
+
+    @Override
+    public String toString() {
+        int x = currentJunction.getX();
+        int y = currentJunction.getY();
+        return x + ", " + y;
+    }
 }
