@@ -1,9 +1,8 @@
 package travellingsebastian;
 
 import grid.GridState;
+import util.ArrayUtil;
 import util.Util;
-
-import java.util.Arrays;
 
 public class SimulatedAnnealing {
     private final double initialTemperature;
@@ -29,10 +28,16 @@ public class SimulatedAnnealing {
     private void improveOnce(Path path) {
         GridState[] states = path.getStates();
         int numStates = states.length;
-        GridState[] newStates = Arrays.copyOf(states, numStates);
-        int i = Util.RGEN.nextInt(numStates);
-        int j = Util.RGEN.nextInt(numStates);
-        Util.swap(newStates, i, j);
+        // Ugly, but leJOS only has Arrays.copyOf
+        // for primitive arrays. I assume this is
+        // because it doesn't have java.lang.reflect
+        GridState[] newStates = new GridState[numStates];
+        for(int i = 0; i < numStates; i++) {
+        	newStates[i] = states[i];
+        }
+        int i = ArrayUtil.randomIndex(newStates);
+        int j = ArrayUtil.randomIndex(newStates);
+        ArrayUtil.swap(newStates, i, j);
         int distance = path.getLength();
         path.setStates(newStates);
         int newDistance = path.getLength();

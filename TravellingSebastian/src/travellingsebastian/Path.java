@@ -6,7 +6,7 @@ import grid.search.GridNode;
 import search.AStarFrontier;
 import search.PathNotFoundException;
 import search.Search;
-import util.Util;
+import util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Path {
         }
         do {
             System.out.println("Randomizing path...");
-            Util.randomize(states);
+            ArrayUtil.randomize(states);
         } while(!isViable());
     }
 

@@ -1,6 +1,6 @@
 package eightpuzzle;
 
-import util.Util;
+import util.ArrayUtil;
 
 public enum PuzzleMove {
 	UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
@@ -16,6 +16,6 @@ public enum PuzzleMove {
 	}
 
 	public static PuzzleMove randomMove() {
-		return Util.randomChoice(values());
+		return ArrayUtil.randomChoice(values());
 	}
 }

@@ -22,7 +22,7 @@ public abstract class GridSearch {
 	public void search(int width, int height) {
 		RConsole.openUSB(0);
 		
-		Grid g = Grid.defaultGrid();
+		Grid g = Grid.unblockedGrid();
 		Random r = new Random();
 
 		int x1 = r.nextInt(width);

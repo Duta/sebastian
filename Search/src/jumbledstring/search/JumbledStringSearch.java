@@ -34,15 +34,12 @@ public abstract class JumbledStringSearch {
         System.out.println("Path (Length " + path.size() + "):");
         while(!path.empty()) {
             JumbledStringNode state = path.pop();
-            JumbledString jumbledString = state.getJumbledString();
             CharacterSwap characterSwap = state.getAction();
             if(characterSwap == null) {
                 continue;
             }
             int indexA = characterSwap.getIndexA();
             int indexB = characterSwap.getIndexB();
-            char charA = jumbledString.character(indexA);
-            char charB = jumbledString.character(indexB);
             System.out.println(
                     "Swap index " + indexA + " with index " + indexB);
         }
