@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import lejos.nxt.comm.RConsole;
 
 public class Path {
     private GridState[] states;
@@ -24,14 +23,14 @@ public class Path {
         for(int i = 0; i < requiredStates.size(); i++) {
             states[i] = requiredStates.get(i);
         }
-        RConsole.print("Randomizing path...");
+        System.out.print("Randomizing path...");
         int iterations = 1;
         do {
-            RConsole.print(iterations + "x...");
+            System.out.print(iterations + "x...");
             ArrayUtil.randomize(states);
             iterations++;
         } while(!isViable());
-        RConsole.println("Done");
+        System.out.println("Done");
     }
 
     public void setStates(GridState[] states) {

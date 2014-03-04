@@ -22,12 +22,13 @@ public abstract class EightPuzzleSearch {
 		
 		Stack<EightPuzzleNode> path = null;
 		try {
-			path = Search.search(start, goal, getFrontier(null));
+			path = Search.search(start, goal, getFrontier(goal));
 		} catch (PathNotFoundException e) {
 			System.out.println("No path found.");
 			return;
 		}
 		
+		path.pop();
 		System.out.println("Path (Length " + path.size() + "):");
 		while(!path.empty()) {
 			EightPuzzleNode state = path.pop();

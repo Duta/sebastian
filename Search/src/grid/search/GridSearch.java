@@ -36,6 +36,7 @@ public abstract class GridSearch {
 			return;
 		}
 
+		path.pop();
 		System.out.println("Path (Length " + path.size() + "):");
 		while(!path.empty()) {
 			GridNode node = path.pop();

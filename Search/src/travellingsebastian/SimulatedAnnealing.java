@@ -1,6 +1,5 @@
 package travellingsebastian;
 
-import lejos.nxt.comm.RConsole;
 import grid.GridState;
 import util.ArrayUtil;
 import util.Util;
@@ -21,7 +20,7 @@ public class SimulatedAnnealing {
     public void improve(Path path) {
         temperature = initialTemperature;
         while(temperature > coolTemperature) {
-            RConsole.println("Temp: " + temperature + ", Cool Temp: " + coolTemperature);
+        	//System.out.println("Temp: " + temperature + ", Cool Temp: " + coolTemperature);
             improveOnce(path);
             temperature *= 1 - coolingRate;
         }

@@ -25,10 +25,11 @@ public class Search {
 	FrontierT extends Frontier<NodeT, ActionT>,
 	ActionT>
 	Stack<NodeT> search(NodeT start, NodeT goal, FrontierT frontier) throws PathNotFoundException {
+		// TODO CHECK FRONTIER IS EMPTY 
+		
 		List<NodeT> explored = new ArrayList<NodeT>();
 		frontier.push(start);
 		while (!frontier.empty()) {
-			// System.out.println("Frontier: " + frontier.size() + ", Explored: " + explored.size());
 			NodeT node = frontier.pop();
 			if (node == null) {
 				throw new IllegalArgumentException("null node encountered");

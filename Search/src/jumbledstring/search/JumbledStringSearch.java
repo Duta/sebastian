@@ -31,13 +31,11 @@ public abstract class JumbledStringSearch {
             return;
         }
 
+        path.pop();
         System.out.println("Path (Length " + path.size() + "):");
         while(!path.empty()) {
             JumbledStringNode state = path.pop();
             CharacterSwap characterSwap = state.getAction();
-            if(characterSwap == null) {
-                continue;
-            }
             int indexA = characterSwap.getIndexA();
             int indexB = characterSwap.getIndexB();
             System.out.println(

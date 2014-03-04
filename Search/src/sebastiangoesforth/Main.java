@@ -20,10 +20,10 @@ public class Main {
 		
 		Grid grid = Grid.defaultGrid();
 
-		int x1 = 4;
-		int y1 = 1;
-		int x2 = 7;
-		int y2 = 2;
+		int x1 = 9;
+		int y1 = 0;
+		int x2 = 0;
+		int y2 = 6;
 
 		GridNode start = new GridNode(new GridState(grid, x1, y1));
 		GridNode goal = new GridNode(new GridState(grid, x2, y2));
