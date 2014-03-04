@@ -8,11 +8,11 @@ import util.SebastianInternalException;
  * This class implements an eight puzzle state.
  */
 public class EightPuzzle {
-	private static final int
+	public static final int
 		BLANK = 0,
 		SIZE = 3;
-	
-	private final int[] board;
+
+    private final int[] board;
 	private final int blankPosition;
 
 	private EightPuzzle() {
@@ -70,6 +70,14 @@ public class EightPuzzle {
 		newBoard[blankPosition] = temp;
 		return new EightPuzzle(newBoard, newBlankPosition);
 	}
+
+    public int getValue(int x, int y) {
+        return board[x + y*SIZE];
+    }
+
+    public boolean isBlank(int x, int y) {
+        return getValue(x, y) == BLANK;
+    }
 
 	@Override
 	public String toString() {

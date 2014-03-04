@@ -40,8 +40,16 @@ public class EightPuzzleNode extends Node<EightPuzzleNode, PuzzleMove> {
 
 	@Override
 	public int heuristic(EightPuzzleNode goal) {
-		return 0;
-	}
+        int numDifferent = 0;
+        for(int x = 0; x < EightPuzzle.SIZE; x++) {
+            for(int y = 0; y < EightPuzzle.SIZE; y++) {
+                if(puzzle.getValue(x, y) != goal.puzzle.getValue(x, y)) {
+                    numDifferent++;
+                }
+            }
+        }
+        return numDifferent;
+    }
 	
 	@Override
 	public EightPuzzleNode applyAction(PuzzleMove action) {
