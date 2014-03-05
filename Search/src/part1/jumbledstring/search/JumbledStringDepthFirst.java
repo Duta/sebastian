@@ -1,6 +1,7 @@
 package part1.jumbledstring.search;
 
 import part1.jumbledstring.CharacterSwap;
+import part1.jumbledstring.JumbledString;
 import search.DepthFirstFrontier;
 import search.interfaces.Frontier;
 
@@ -13,7 +14,7 @@ public class JumbledStringDepthFirst extends JumbledStringSearch {
     }
 
     @Override
-    protected Frontier<JumbledStringNode, CharacterSwap> createFrontier(JumbledStringNode goal) {
-        return new DepthFirstFrontier<JumbledStringNode, CharacterSwap>();
+    protected Frontier<JumbledString, JumbledStringNode, CharacterSwap> createFrontier(JumbledStringNode goal) {
+        return new DepthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>();
     }
 }

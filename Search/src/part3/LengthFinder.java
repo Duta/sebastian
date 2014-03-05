@@ -1,6 +1,7 @@
 package part3;
 
 import part1.grid.GridDirection;
+import part1.grid.GridState;
 import part1.grid.search.GridNode;
 import search.AStarFrontier;
 import search.SearchRunner;
@@ -12,7 +13,7 @@ import java.util.Stack;
  * Calculates the length of the
  * path between two grid states.
  */
-public class LengthFinder extends SearchRunner<GridNode, GridDirection> {
+public class LengthFinder extends SearchRunner<GridState, GridNode, GridDirection> {
     private final GridStatePair pair;
 
     public LengthFinder(GridStatePair pair) {
@@ -37,8 +38,8 @@ public class LengthFinder extends SearchRunner<GridNode, GridDirection> {
     }
 
     @Override
-    protected Frontier<GridNode, GridDirection> createFrontier(GridNode goal) {
-        return new AStarFrontier<GridNode, GridDirection>(goal);
+    protected Frontier<GridState, GridNode, GridDirection> createFrontier(GridNode goal) {
+        return new AStarFrontier<GridState, GridNode, GridDirection>(goal);
     }
 
     @Override

@@ -7,7 +7,7 @@ package search.interfaces;
  * @param <NodeT> The type of node we are searching over (implements Node)
  * @param <ActionT> The type of actions for the node.
  */
-public interface Frontier<NodeT extends Node<NodeT, ActionT>, ActionT> {
+public interface Frontier<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT> {
 	/**
 	 * Insert a node into the frontier.
 	 */

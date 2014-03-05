@@ -1,6 +1,7 @@
 package part1.grid.search;
 
 import part1.grid.GridDirection;
+import part1.grid.GridState;
 import search.BreadthFirstFrontier;
 import search.interfaces.Frontier;
 
@@ -13,7 +14,7 @@ public class GridBreadthFirst extends GridSearch {
 	}
 
 	@Override
-	protected Frontier<GridNode, GridDirection> createFrontier(GridNode goal) {
-		return new BreadthFirstFrontier<GridNode, GridDirection>();
+	protected Frontier<GridState, GridNode, GridDirection> createFrontier(GridNode goal) {
+		return new BreadthFirstFrontier<GridState, GridNode, GridDirection>();
 	}
 }

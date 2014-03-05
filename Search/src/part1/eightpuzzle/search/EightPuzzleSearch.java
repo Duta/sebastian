@@ -9,7 +9,7 @@ import search.SearchRunner;
  * Performs search on the 8-puzzle problem.
  * Can be extended to provide a frontier (search type).
  */
-public abstract class EightPuzzleSearch extends Part1SearchRunner<EightPuzzleNode, PuzzleMove> {
+public abstract class EightPuzzleSearch extends Part1SearchRunner<EightPuzzle, EightPuzzleNode, PuzzleMove> {
     @Override
     protected EightPuzzleNode createStart() {
         return new EightPuzzleNode(EightPuzzle.randomEightPuzzle());

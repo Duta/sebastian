@@ -9,44 +9,50 @@ import search.interfaces.Node;
 
 public class Search {
 	/**
-	 * Performs a search algorithm, returning a path from start to goal, using
-	 * the provided frontier type.
+	 * Performs a search algorithm, returning a path from
+     * start to goal, using the provided frontier type.
 	 * 
-	 * @param start The start node.
-	 * @param goal The goal node.
-	 * @param frontier The frontier type. This defines what algorithm is used.
-	 * @return A stack containing the nodes in the path. The top is the start node,
-	 * the bottom is the goal.
-	 * @throws PathNotFoundException
+	 * @param start the start node.
+	 * @param goal the goal node.
+	 * @param frontier the frontier type, which
+     *                 defines the algorithm used
+	 * @return a stack containing the nodes in
+     *         the path - the top is the start
+	 *         node, the bottom is the goal
+	 * @throws PathNotFoundException if a path cannot be found
 	 */
 	public static
-	// Generics can get hard to format.
-	<NodeT extends Node<NodeT, ActionT>, 
-	FrontierT extends Frontier<NodeT, ActionT>,
-	ActionT>
+	<
+        StateT,
+        NodeT extends Node<StateT, NodeT, ActionT>,
+	    FrontierT extends Frontier<StateT, NodeT, ActionT>,
+	    ActionT
+    >
 	Stack<NodeT> search(NodeT start, NodeT goal, FrontierT frontier) throws PathNotFoundException {
-		// TODO CHECK FRONTIER IS EMPTY 
+        if(!frontier.empty()) {
+            throw new IllegalArgumentException("frontier must be empty");
+        }
 		
 		List<NodeT> explored = new ArrayList<NodeT>();
 		frontier.push(start);
-		while (!frontier.empty()) {
+		while(!frontier.empty()) {
 			NodeT node = frontier.pop();
-			if (node == null) {
+			if(node == null) {
 				throw new IllegalArgumentException("null node encountered");
 			}
-			if (node.equals(goal)) {
+			if(node.equals(goal)) {
 				Stack<NodeT> stack = new Stack<NodeT>();
-				while (node != null) {
+				while(node != null) {
 					stack.push(node);
 					node = node.getParent();
 				}
 				return stack;
 			}
-			if (!explored.contains(node)) {
+			if(!explored.contains(node)) {
 				explored.add(node);
 			}
-			for (NodeT successor : node.explore()) {
-				if (!explored.contains(successor)) {
+			for(NodeT successor : node.explore()) {
+				if(!explored.contains(successor)) {
 					frontier.push(successor);
 				}
 			}

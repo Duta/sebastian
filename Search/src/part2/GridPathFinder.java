@@ -9,8 +9,6 @@ import part1.grid.GridDirection;
 import part1.grid.GridState;
 import part1.grid.search.GridNode;
 import search.AStarFrontier;
-import search.PathNotFoundException;
-import search.Search;
 import search.SearchRunner;
 import search.interfaces.Frontier;
 import util.RobotInfo;
@@ -20,13 +18,14 @@ import util.Util;
  * Finds a path between two points on a grid,
  * then makes sebastian follow the path.
  */
-public class Main extends SearchRunner<GridNode, GridDirection> implements Runnable {
+public class GridPathFinder extends SearchRunner<GridState, GridNode, GridDirection> implements Runnable {
     private final Grid grid;
     private final int x1, y1;
     private final int x2, y2;
     private final GridDirection initialDirection;
 
-    public Main(Grid grid, int x1, int y1, int x2, int y2, GridDirection initialDirection) {
+    public GridPathFinder(Grid grid, int x1, int y1,
+            int x2, int y2, GridDirection initialDirection) {
         this.grid = grid;
         this.x1 = x1;
         this.y1 = y1;
@@ -36,8 +35,12 @@ public class Main extends SearchRunner<GridNode, GridDirection> implements Runna
     }
 
     public static void main(String[] args) {
-        Main main = new Main(Grid.defaultGrid(), 9, 0, 0, 6, GridDirection.DOWN);
-        main.run();
+        GridPathFinder gridPathFinder = new GridPathFinder(
+                Grid.defaultGrid(),
+                9, 0,
+                0, 6,
+                GridDirection.DOWN);
+        gridPathFinder.run();
     }
 
     @Override
@@ -57,8 +60,8 @@ public class Main extends SearchRunner<GridNode, GridDirection> implements Runna
     }
 
     @Override
-    protected Frontier<GridNode, GridDirection> createFrontier(GridNode goal) {
-        return new AStarFrontier<GridNode, GridDirection>(goal);
+    protected Frontier<GridState, GridNode, GridDirection> createFrontier(GridNode goal) {
+        return new AStarFrontier<GridState, GridNode, GridDirection>(goal);
     }
 
     @Override

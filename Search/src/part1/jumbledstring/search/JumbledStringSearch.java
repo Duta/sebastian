@@ -9,7 +9,7 @@ import search.SearchRunner;
  * Performs search on the jumbled string problem.
  * Can be extended to provide a frontier (search type).
  */
-public abstract class JumbledStringSearch extends Part1SearchRunner<JumbledStringNode, CharacterSwap> {
+public abstract class JumbledStringSearch extends Part1SearchRunner<JumbledString, JumbledStringNode, CharacterSwap> {
     @Override
     protected JumbledStringNode createStart() {
         return new JumbledStringNode(new JumbledString("avja"));

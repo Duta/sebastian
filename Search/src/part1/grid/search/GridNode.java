@@ -13,58 +13,38 @@ import search.interfaces.Node;
  * Represents a node in the grid problem.
  * Used for searching the grid problem.
  */
-public class GridNode extends Node<GridNode, GridDirection> {
-	private GridState gridState;
-
+public class GridNode extends Node<GridState, GridNode, GridDirection> {
 	public GridNode(GridState gridState) {
-		this(gridState, null, null);
+        super(gridState);
 	}
 
 	public GridNode(GridState gridState, GridNode parent, GridDirection action) {
-		this.gridState = gridState;
-		this.parent = parent;
-		this.action = action;
+        super(gridState, parent, action);
 	}
 
-	@Override
-	public List<GridNode> explore() {
-		List<GridNode> successors = new ArrayList<GridNode>();
-		for (GridDirection direction : GridDirection.values()) {
-			if (gridState.validDirection(direction)) {
-				GridState successorState = gridState.applyDir(direction);
-				successors.add(new GridNode(successorState, this, direction));
-			}
-		}
-		return successors;
-	}
+    @Override
+    public GridDirection[] allActions() {
+        return GridDirection.values();
+    }
 
 	@Override
 	public boolean equals(Object other) {
 		return other instanceof GridNode
-			&& gridState.equals(((GridNode) other).gridState);
+			&& state.equals(((GridNode) other).state);
 	}
 
 	@Override
 	public int heuristic(GridNode goal) {
-		Junction junction = gridState.getJunction();
-		Junction goalJunction = goal.gridState.getJunction();
+		Junction junction = state.getJunction();
+		Junction goalJunction = goal.state.getJunction();
 		return Math.abs(goalJunction.getX() - junction.getX())
 			+ Math.abs(goalJunction.getY() - junction.getY());
 	}
 	
 	@Override
 	public GridNode applyAction(GridDirection action) {
-		if(!gridState.validDirection(action)) {
-			return new GridNode(gridState, parent, this.action);
-		} else {
-			return new GridNode(gridState.applyDir(action), this, action);
-		}
-	}
-
-    @Override
-    public String toString() {
-        int x = gridState.getJunction().getX();
-        int y = gridState.getJunction().getY();
-        return x + ", " + y;
+        return state.validDirection(action)
+            ? new GridNode(state.applyDir(action), this, action)
+            : this;
     }
 }

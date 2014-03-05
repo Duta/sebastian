@@ -9,20 +9,21 @@ import search.interfaces.Node;
  * This frontier implements Depth First Search.
  * It acts like a LIFO stack.
  */
-public class DepthFirstFrontier<NodeType extends Node<NodeType, ActionType>, ActionType> implements Frontier<NodeType, ActionType> {
-	private Stack<NodeType> frontierList;
+public class DepthFirstFrontier<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
+        implements Frontier<StateT, NodeT, ActionT> {
+	private Stack<NodeT> frontierList;
 
 	public DepthFirstFrontier() {
-		frontierList = new Stack<NodeType>();
+		frontierList = new Stack<NodeT>();
 	}
 
-	public void push(NodeType state) {
+	public void push(NodeT state) {
 		frontierList.push(state);
 	}
 
 	@Override
-	public NodeType pop() {
-		NodeType state = frontierList.peek();
+	public NodeT pop() {
+		NodeT state = frontierList.peek();
 		frontierList.pop();
 		return state;
 	}

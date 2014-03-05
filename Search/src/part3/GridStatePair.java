@@ -31,23 +31,23 @@ public class GridStatePair {
         return stateB;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof GridStatePair)) {
-            return false;
-        }
-        GridStatePair that = (GridStatePair) obj;
-        return (stateA.equals(that.stateA)
-            && stateB.equals(that.stateB))
-            || (stateA.equals(that.stateB)
-            && stateB.equals(that.stateA));
-    }
-
     public int getLength() {
         return lengthFinder.calculate();
     }
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof GridStatePair)) {
+            return false;
+        }
+        GridStatePair that = (GridStatePair) obj;
+        return stateA.equals(that.stateA)
+            && stateB.equals(that.stateB)
+            || stateA.equals(that.stateB)
+            && stateB.equals(that.stateA);
     }
 }

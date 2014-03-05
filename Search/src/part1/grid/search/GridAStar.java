@@ -1,6 +1,7 @@
 package part1.grid.search;
 
 import part1.grid.GridDirection;
+import part1.grid.GridState;
 import search.AStarFrontier;
 import search.interfaces.Frontier;
 
@@ -13,8 +14,8 @@ public class GridAStar extends GridSearch {
 	}
 
 	@Override
-	protected Frontier<GridNode, GridDirection> createFrontier(GridNode goal) {
-		return new AStarFrontier<GridNode, GridDirection>(goal) {
+	protected Frontier<GridState, GridNode, GridDirection> createFrontier(GridNode goal) {
+		return new AStarFrontier<GridState, GridNode, GridDirection>(goal) {
 			@Override
 			protected int totalPathCost(GridNode node) {
 				int pathCost = 0;

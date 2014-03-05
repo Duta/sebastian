@@ -8,7 +8,8 @@ import java.util.Stack;
 /**
  * Extends SearchRunner with some default on-event actions.
  */
-public abstract class Part1SearchRunner<NodeT extends Node<NodeT, ActionT>, ActionT> extends SearchRunner<NodeT, ActionT> {
+public abstract class Part1SearchRunner<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
+        extends SearchRunner<StateT, NodeT, ActionT> {
     @Override
     protected void preSearchAction(NodeT start, NodeT goal) {
         System.out.println("Start State:");

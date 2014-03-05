@@ -11,13 +11,13 @@ import java.util.Stack;
  *
  * The search type is parameterized by the frontier.
  */
-public abstract class SearchRunner<NodeT extends Node<NodeT, ActionT>, ActionT> {
+public abstract class SearchRunner<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT> {
     protected SearchRunner() {}
 
     public void search() {
         NodeT start = createStart();
         NodeT goal = createGoal();
-        Frontier<NodeT, ActionT> frontier = createFrontier(goal);
+        Frontier<StateT, NodeT, ActionT> frontier = createFrontier(goal);
 
         preSearchAction(start, goal);
 
@@ -34,7 +34,7 @@ public abstract class SearchRunner<NodeT extends Node<NodeT, ActionT>, ActionT> 
 
     protected abstract NodeT createStart();
     protected abstract NodeT createGoal();
-    protected abstract Frontier<NodeT, ActionT> createFrontier(NodeT goal);
+    protected abstract Frontier<StateT, NodeT, ActionT> createFrontier(NodeT goal);
 
     protected abstract void preSearchAction(NodeT start, NodeT goal);
     protected abstract void pathNotFoundAction(NodeT start, NodeT goal);

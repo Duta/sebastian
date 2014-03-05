@@ -4,80 +4,66 @@ package part1.grid;
  * Represents a junction in a grid.
  */
 public class Junction {
-	private int xpos, ypos;
+	private int x, y;
 	private Junction up, down, left, right;
 
-	public Junction(int xpos, int ypos, Junction up, Junction down, Junction left, Junction right) {
-		this.xpos = xpos;
-		this.ypos = ypos;
-		
+	public Junction(int x, int y, Junction up, Junction down, Junction left, Junction right) {
+		this.x = x;
+		this.y = y;
 		this.up = up;
 		this.down = down;
 		this.left = left;
 		this.right = right;
 	}
 
-	public Junction(int xpos, int ypos) {
-		this(xpos, ypos, null, null, null, null);
+	public Junction(int x, int y) {
+		this(x, y, null, null, null, null);
 	}
 	
 	public int getX() {
-		return xpos;
+		return x;
 	}
 	
 	public int getY() {
-		return ypos;
+		return y;
 	}
 
 	public Junction getJunction(GridDirection dir) {
 		switch (dir) {
-		case UP:
-			return up;
-
-		case DOWN:
-			return down;
-
-		case LEFT:
-			return left;
-
-		case RIGHT:
-			return right;
-
-		default:
-			throw new IllegalArgumentException("Invalid part1.grid direction passed D:");
-
+		case UP:    return up;
+        case DOWN:  return down;
+		case LEFT:  return left;
+		case RIGHT: return right;
+        default:    return null;
 		}
-	}
+    }
 	
-	public void setJunction(GridDirection dir, Junction junc) {
+	public void setJunction(GridDirection dir, Junction junction) {
 		switch (dir) {
 		case UP:
-			up = junc;
+			up = junction;
 			break;
 
 		case DOWN:
-			down = junc;
+			down = junction;
 			break;
 			
 		case LEFT:
-			left = junc;
+			left = junction;
 			break;
 
 		case RIGHT:
-			right = junc;
+			right = junction;
 			break;
-
-		default:
-			throw new IllegalArgumentException("Invalid part1.grid direction passed D:");
-
 		}
 	}
 	
 	public boolean equals(Object other) {
-		if(other instanceof Junction) {
-			return (xpos == ((Junction)other).xpos) && (ypos == ((Junction)other).ypos);
+		if(!(other instanceof Junction)) {
+            return false;
 		}
-		
-		return false;
+        Junction that = (Junction)other;
+        return x == that.x
+            && y == that.y;
 	}
 }
