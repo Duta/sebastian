@@ -26,7 +26,7 @@ public class JumbledStringTest {
         Stack<JumbledStringNode> path = null;
 
         try {
-            path = Search.search(start, goal, new BreadthFirstFrontier<JumbledStringNode, CharacterSwap>());
+            path = Search.search(start, goal, new BreadthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
         } catch (PathNotFoundException e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class JumbledStringTest {
         Stack<JumbledStringNode> path = null;
 
         try {
-            path = Search.search(start, goal, new DepthFirstFrontier<JumbledStringNode, CharacterSwap>());
+            path = Search.search(start, goal, new DepthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
         } catch (PathNotFoundException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class JumbledStringTest {
         Stack<JumbledStringNode> path = null;
 
         try {
-            path = Search.search(start, goal, new AStarFrontier<JumbledStringNode, CharacterSwap>(goal));
+            path = Search.search(start, goal, new AStarFrontier<JumbledString, JumbledStringNode, CharacterSwap>(goal));
         } catch (PathNotFoundException e) {
             e.printStackTrace();
         }

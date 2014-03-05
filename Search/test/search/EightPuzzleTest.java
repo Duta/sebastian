@@ -25,7 +25,7 @@ public class EightPuzzleTest {
         Stack<EightPuzzleNode> path = null;
 
         try {
-            path = Search.search(start, goal, new BreadthFirstFrontier<EightPuzzleNode, PuzzleMove>());
+            path = Search.search(start, goal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
         } catch (PathNotFoundException e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class EightPuzzleTest {
         Stack<EightPuzzleNode> path = null;
 
         try {
-            path = Search.search(start, goal, new DepthFirstFrontier<EightPuzzleNode, PuzzleMove>());
+            path = Search.search(start, goal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
         } catch (PathNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class EightPuzzleTest {
         Stack<EightPuzzleNode> path = null;
 
         try {
-            path = Search.search(start, goal, new AStarFrontier<EightPuzzleNode, PuzzleMove>(goal));
+            path = Search.search(start, goal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(goal));
         } catch (PathNotFoundException e) {
             e.printStackTrace();
         }
