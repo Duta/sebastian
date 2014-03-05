@@ -14,35 +14,35 @@ import search.interfaces.Node;
  * Used for searching the grid problem.
  */
 public class GridNode extends Node<GridState, GridNode, GridDirection> {
-	public GridNode(GridState gridState) {
+    public GridNode(GridState gridState) {
         super(gridState);
-	}
+    }
 
-	public GridNode(GridState gridState, GridNode parent, GridDirection action) {
+    public GridNode(GridState gridState, GridNode parent, GridDirection action) {
         super(gridState, parent, action);
-	}
+    }
 
     @Override
     public GridDirection[] allActions() {
         return GridDirection.values();
     }
 
-	@Override
-	public boolean equals(Object other) {
-		return other instanceof GridNode
-			&& state.equals(((GridNode) other).state);
-	}
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof GridNode
+            && state.equals(((GridNode) other).state);
+    }
 
-	@Override
-	public int heuristic(GridNode goal) {
-		Junction junction = state.getJunction();
-		Junction goalJunction = goal.state.getJunction();
-		return Math.abs(goalJunction.getX() - junction.getX())
-			+ Math.abs(goalJunction.getY() - junction.getY());
-	}
-	
-	@Override
-	public GridNode applyAction(GridDirection action) {
+    @Override
+    public int heuristic(GridNode goal) {
+        Junction junction = state.getJunction();
+        Junction goalJunction = goal.state.getJunction();
+        return Math.abs(goalJunction.getX() - junction.getX())
+            + Math.abs(goalJunction.getY() - junction.getY());
+    }
+
+    @Override
+    public GridNode applyAction(GridDirection action) {
         return state.validDirection(action)
             ? new GridNode(state.applyDir(action), this, action)
             : this;

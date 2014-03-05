@@ -37,7 +37,7 @@ public class SimulatedAnnealing {
         // because it doesn't have java.lang.reflect
         GridState[] newStates = new GridState[numStates];
         for(int i = 0; i < numStates; i++) {
-        	newStates[i] = states[i];
+            newStates[i] = states[i];
         }
         int i = ArrayUtil.randomIndex(newStates);
         int j = ArrayUtil.randomIndex(newStates);

@@ -11,25 +11,25 @@ import search.interfaces.Node;
 public class EightPuzzleNode extends Node<EightPuzzle, EightPuzzleNode, PuzzleMove> {
     public EightPuzzleNode(EightPuzzle puzzle) {
         super(puzzle);
-	}
+    }
 
     public EightPuzzleNode(EightPuzzle puzzle, EightPuzzleNode parent, PuzzleMove action) {
         super(puzzle, parent, action);
-	}
-
-	@Override
-	public PuzzleMove[] allActions() {
-        return PuzzleMove.values();
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		return other instanceof EightPuzzleNode
-            && state.equals(((EightPuzzleNode) other).state);
-	}
+    }
 
     @Override
-	public int heuristic(EightPuzzleNode goal) {
+    public PuzzleMove[] allActions() {
+        return PuzzleMove.values();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof EightPuzzleNode
+            && state.equals(((EightPuzzleNode) other).state);
+    }
+
+    @Override
+    public int heuristic(EightPuzzleNode goal) {
         int numDifferent = 0;
         for(int x = 0; x < EightPuzzle.SIZE; x++) {
             for(int y = 0; y < EightPuzzle.SIZE; y++) {
@@ -41,8 +41,8 @@ public class EightPuzzleNode extends Node<EightPuzzle, EightPuzzleNode, PuzzleMo
         return numDifferent;
     }
 
-	@Override
-	public EightPuzzleNode applyAction(PuzzleMove action) {
+    @Override
+    public EightPuzzleNode applyAction(PuzzleMove action) {
         return state.isPossibleMove(action)
             ? new EightPuzzleNode(state.makeMove(action), this, action)
             : this;

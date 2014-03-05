@@ -7,24 +7,24 @@ import java.util.List;
  * Represents an entire grid.
  */
 public class Grid {
-	private final int width, height;
-	
-	private List<List<Junction>> junctions;
-	
-	private Grid(int width, int height) {
-		this.width = width;
-		this.height = height;
-		
-		this.junctions = new ArrayList<List<Junction>>();
-			
-		for(int x = 0; x < width; x++) {
-			junctions.add(new ArrayList<Junction>());
-			
-			for(int y = 0; y < height; y++) {
-				junctions.get(x).add(new Junction(x, y));
-			}
-		}
-	}
+    private final int width, height;
+
+    private List<List<Junction>> junctions;
+
+    private Grid(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        this.junctions = new ArrayList<List<Junction>>();
+
+        for(int x = 0; x < width; x++) {
+            junctions.add(new ArrayList<Junction>());
+
+            for(int y = 0; y < height; y++) {
+                junctions.get(x).add(new Junction(x, y));
+            }
+        }
+    }
 
     public static Grid fromAsciiArt(String[] lines) {
         int width = 0;
@@ -96,26 +96,26 @@ public class Grid {
             "+-+-+-+-+-+ +-+-+-+",
         });
     }
-	
-	public int getWidth() {
-		return width;
-	}
-	
-	public int getHeight() {
-		return height;
-	}
-	
-	public Junction getJunction(int x, int y) {
-		return junctions.get(x).get(y);
-	}
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Junction getJunction(int x, int y) {
+        return junctions.get(x).get(y);
+    }
 
     @Override
-	public boolean equals(Object other) {
+    public boolean equals(Object other) {
         // TODO: Improve
-		return other instanceof Grid
-			&& width == ((Grid)other).width
-			&& height == ((Grid)other).height;
-	}
+        return other instanceof Grid
+            && width == ((Grid)other).width
+            && height == ((Grid)other).height;
+    }
 
     @Override
     public String toString() {

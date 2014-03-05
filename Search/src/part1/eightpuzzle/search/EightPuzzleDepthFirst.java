@@ -15,8 +15,8 @@ public class EightPuzzleDepthFirst extends EightPuzzleSearch {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-		new EightPuzzleDepthFirst().search();
-	}
+        new EightPuzzleDepthFirst().search();
+    }
 
     /**
      * Creates and returns a frontier
@@ -26,7 +26,7 @@ public class EightPuzzleDepthFirst extends EightPuzzleSearch {
      * @return a new frontier which implements DFS
      */
     @Override
-	protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
-		return new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>();
-	}
+    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
+        return new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>();
+    }
 }

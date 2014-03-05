@@ -15,8 +15,8 @@ public class EightPuzzleBreadthFirst extends EightPuzzleSearch {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-		new EightPuzzleBreadthFirst().search();
-	}
+        new EightPuzzleBreadthFirst().search();
+    }
 
     /**
      * Creates and returns a frontier
@@ -25,8 +25,8 @@ public class EightPuzzleBreadthFirst extends EightPuzzleSearch {
      * @param goal the goal node
      * @return a new frontier which implements BFS
      */
-	@Override
-	protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
-		return new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>();
-	}
+    @Override
+    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
+        return new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>();
+    }
 }

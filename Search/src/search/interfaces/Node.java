@@ -12,8 +12,8 @@ import java.util.List;
  */
 public abstract class Node<StateT, NodeT, ActionT> {
     protected final StateT state;
-	protected final NodeT parent;
-	protected final ActionT action;
+    protected final NodeT parent;
+    protected final ActionT action;
 
     /**
      * Creates a node for the given state,
@@ -70,25 +70,25 @@ public abstract class Node<StateT, NodeT, ActionT> {
     public StateT getState() {
         return state;
     }
-	
-	/**
-	 * Returns the parent node (null if no parent).
+
+    /**
+     * Returns the parent node (null if no parent).
      *
      * @return the parent if it exists, null otherwise
-	 */
-	public NodeT getParent() {
-		return parent;
-	}
-	
-	/**
-	 * Returns the action performed on the parent
+     */
+    public NodeT getParent() {
+        return parent;
+    }
+
+    /**
+     * Returns the action performed on the parent
      * to get to this node (null if no parent).
      *
      * @return the action if it exists, null otherwise
-	 */
-	public ActionT getAction() {
-		return action;
-	}
+     */
+    public ActionT getAction() {
+        return action;
+    }
 
     /**
      * Returns all actions
@@ -116,15 +116,15 @@ public abstract class Node<StateT, NodeT, ActionT> {
      * @return the estimated cost between this and the goal
      */
     public abstract int heuristic(NodeT goal);
-	
-	/**
-	 * Returns a new node with the given
+
+    /**
+     * Returns a new node with the given
      * action applied, or this if the
      * action is not applicable.
      *
      * @param action the action to apply
      * @return a new node with the action applied if
      *         the action is applicable, this otherwise
-	 */
-	public abstract NodeT applyAction(ActionT action);
+     */
+    public abstract NodeT applyAction(ActionT action);
 }

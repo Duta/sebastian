@@ -14,9 +14,9 @@ public class EightPuzzleAStar extends EightPuzzleSearch {
      *
      * @param args the command-line arguments
      */
-	public static void main(String[] args) {
-		new EightPuzzleAStar().search();
-	}
+    public static void main(String[] args) {
+        new EightPuzzleAStar().search();
+    }
 
     /**
      * Creates and returns a frontier
@@ -25,8 +25,8 @@ public class EightPuzzleAStar extends EightPuzzleSearch {
      * @param goal the goal node
      * @return a new frontier which implements A*
      */
-	@Override
-	protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
-		return new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(goal);
-	}
+    @Override
+    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
+        return new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(goal);
+    }
 }

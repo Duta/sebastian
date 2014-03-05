@@ -11,31 +11,31 @@ import search.interfaces.Node;
  */
 public class DepthFirstFrontier<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
         implements Frontier<StateT, NodeT, ActionT> {
-	private Stack<NodeT> frontierList;
+    private Stack<NodeT> frontierList;
 
-	public DepthFirstFrontier() {
-		frontierList = new Stack<NodeT>();
-	}
+    public DepthFirstFrontier() {
+        frontierList = new Stack<NodeT>();
+    }
 
-	public void push(NodeT state) {
-		frontierList.push(state);
-	}
+    public void push(NodeT state) {
+        frontierList.push(state);
+    }
 
-	@Override
-	public NodeT pop() {
-		NodeT state = frontierList.peek();
-		frontierList.pop();
-		return state;
-	}
+    @Override
+    public NodeT pop() {
+        NodeT state = frontierList.peek();
+        frontierList.pop();
+        return state;
+    }
 
-	@Override
-	public boolean empty() {
-		return frontierList.isEmpty();
-	}
+    @Override
+    public boolean empty() {
+        return frontierList.isEmpty();
+    }
 
-	@Override
-	public int size() {
-		return frontierList.size();
-	}
+    @Override
+    public int size() {
+        return frontierList.size();
+    }
 
 }
