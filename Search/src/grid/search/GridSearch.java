@@ -9,9 +9,18 @@ import search.SearchRunner;
 import util.Util;
 
 public abstract class GridSearch extends SearchRunner<GridNode, GridDirection> {
+    protected Grid grid;
+
+    protected GridSearch() {
+        grid = createGrid();
+    }
+
+    protected Grid createGrid() {
+        return Grid.unblockedGrid();
+    }
+
     @Override
     protected GridNode createStart() {
-        Grid grid = Grid.unblockedGrid();
         int x = Util.RGEN.nextInt(grid.getWidth());
         int y = Util.RGEN.nextInt(grid.getHeight());
         return new GridNode(new GridState(grid, x, y));
@@ -19,7 +28,6 @@ public abstract class GridSearch extends SearchRunner<GridNode, GridDirection> {
 
     @Override
     protected GridNode createGoal() {
-        Grid grid = Grid.unblockedGrid();
         int x = Util.RGEN.nextInt(grid.getWidth());
         int y = Util.RGEN.nextInt(grid.getHeight());
         return new GridNode(new GridState(grid, x, y));
