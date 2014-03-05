@@ -9,8 +9,7 @@ import part1.jumbledstring.search.JumbledStringNode;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.testng.AssertJUnit.assertEquals;
-
+import static org.testng.Assert.assertEquals;
 
 public class JumbledStringTest {
 	private JumbledStringNode start, goal;

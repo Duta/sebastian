@@ -4,7 +4,7 @@ import java.util.Stack;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import part1.eightpuzzle.EightPuzzle;
 import part1.eightpuzzle.PuzzleMove;
