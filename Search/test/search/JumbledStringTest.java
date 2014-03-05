@@ -2,9 +2,9 @@ package search;
 
 import java.util.Stack;
 
-import jumbledstring.CharacterSwap;
-import jumbledstring.JumbledString;
-import jumbledstring.search.JumbledStringNode;
+import part1.jumbledstring.CharacterSwap;
+import part1.jumbledstring.JumbledString;
+import part1.jumbledstring.search.JumbledStringNode;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

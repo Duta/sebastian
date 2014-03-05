@@ -6,9 +6,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 
-import eightpuzzle.EightPuzzle;
-import eightpuzzle.PuzzleMove;
-import eightpuzzle.search.EightPuzzleNode;
+import part1.eightpuzzle.EightPuzzle;
+import part1.eightpuzzle.PuzzleMove;
+import part1.eightpuzzle.search.EightPuzzleNode;
 
 public class EightPuzzleTest {
 	private EightPuzzleNode start, goal;
