@@ -4,6 +4,10 @@ import part1.grid.GridState;
 import util.ArrayUtil;
 import util.Util;
 
+/**
+ * Improves a tour of points on a
+ * grid using simulated annealing.
+ */
 public class SimulatedAnnealing {
     private final double initialTemperature;
     private final double coolTemperature;
@@ -17,17 +21,16 @@ public class SimulatedAnnealing {
         this.coolingRate = coolingRate;
     }
 
-    public void improve(Path path) {
+    public void improve(Tour tour) {
         temperature = initialTemperature;
         while(temperature > coolTemperature) {
-        	//System.out.println("Temp: " + temperature + ", Cool Temp: " + coolTemperature);
-            improveOnce(path);
+            improveOnce(tour);
             temperature *= 1 - coolingRate;
         }
     }
 
-    private void improveOnce(Path path) {
-        GridState[] states = path.getStates();
+    private void improveOnce(Tour tour) {
+        GridState[] states = tour.getStates();
         int numStates = states.length;
         // Ugly, but leJOS only has Arrays.copyOf
         // for primitive arrays. I assume this is
@@ -39,11 +42,11 @@ public class SimulatedAnnealing {
         int i = ArrayUtil.randomIndex(newStates);
         int j = ArrayUtil.randomIndex(newStates);
         ArrayUtil.swap(newStates, i, j);
-        int distance = path.getLength();
-        path.setStates(newStates);
-        int newDistance = path.getLength();
+        int distance = tour.getLength();
+        tour.setStates(newStates);
+        int newDistance = tour.getLength();
         if(!shouldAcceptChange(distance, newDistance)) {
-            path.setStates(states);
+            tour.setStates(states);
         }
     }
 

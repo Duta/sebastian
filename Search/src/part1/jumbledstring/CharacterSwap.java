@@ -1,5 +1,8 @@
 package part1.jumbledstring;
 
+/**
+ * Represents an action in the jumbled string problem.
+ */
 public class CharacterSwap {
     private final int indexA, indexB;
 

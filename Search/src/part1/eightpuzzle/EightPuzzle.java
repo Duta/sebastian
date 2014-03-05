@@ -5,7 +5,7 @@ import java.util.Arrays;
 import util.SebastianInternalException;
 
 /**
- * This class implements an eight puzzle state.
+ * Represents an immutable state of an 8-puzzle.
  */
 public class EightPuzzle {
 	public static final int

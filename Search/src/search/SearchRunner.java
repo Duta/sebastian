@@ -5,6 +5,12 @@ import search.interfaces.Node;
 
 import java.util.Stack;
 
+/**
+ * Runs a search algorithm between two nodes,
+ * and provides mechanisms for handling the result.
+ *
+ * The search type is parameterized by the frontier.
+ */
 public abstract class SearchRunner<NodeT extends Node<NodeT, ActionT>, ActionT> {
     protected SearchRunner() {}
 
@@ -13,28 +19,24 @@ public abstract class SearchRunner<NodeT extends Node<NodeT, ActionT>, ActionT> 
         NodeT goal = createGoal();
         Frontier<NodeT, ActionT> frontier = createFrontier(goal);
 
-        System.out.println("Start State:");
-        System.out.println(start);
-        System.out.println("Goal State:");
-        System.out.println(goal);
+        preSearchAction(start, goal);
 
         Stack<NodeT> path;
         try {
             path = Search.search(start, goal, frontier);
         } catch (PathNotFoundException e) {
-            System.out.println("No path found.");
+            pathNotFoundAction(start, goal);
             return;
         }
 
-        path.pop();
-        System.out.println("Path (Length " + path.size() + "):");
-        while(!path.empty()) {
-            NodeT node = path.pop();
-            System.out.println(node.getAction());
-        }
+        processPathAction(start, goal, path);
     }
 
     protected abstract NodeT createStart();
     protected abstract NodeT createGoal();
     protected abstract Frontier<NodeT, ActionT> createFrontier(NodeT goal);
+
+    protected abstract void preSearchAction(NodeT start, NodeT goal);
+    protected abstract void pathNotFoundAction(NodeT start, NodeT goal);
+    protected abstract void processPathAction(NodeT start, NodeT goal, Stack<NodeT> path);
 }

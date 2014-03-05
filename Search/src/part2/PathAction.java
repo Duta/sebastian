@@ -3,6 +3,10 @@ package part2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents an action to take
+ * upon encountering a junction.
+ */
 public enum PathAction {
 	LEFT,
 	RIGHT,

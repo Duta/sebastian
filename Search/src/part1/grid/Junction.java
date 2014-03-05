@@ -1,7 +1,7 @@
 package part1.grid;
 
 /**
- * This class represents a junction in a part1.grid.
+ * Represents a junction in a grid.
  */
 public class Junction {
 	private int xpos, ypos;

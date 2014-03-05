@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents an entire part1.grid.
+ * Represents an entire grid.
  */
 public class Grid {
 	private final int width, height;

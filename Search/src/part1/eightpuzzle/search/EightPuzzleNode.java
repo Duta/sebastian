@@ -7,6 +7,10 @@ import part1.eightpuzzle.EightPuzzle;
 import part1.eightpuzzle.PuzzleMove;
 import search.interfaces.Node;
 
+/**
+ * Represents a node in the 8-puzzle problem.
+ * Used for searching the 8-puzzle problem.
+ */
 public class EightPuzzleNode extends Node<EightPuzzleNode, PuzzleMove> {
 	private EightPuzzle puzzle;
 

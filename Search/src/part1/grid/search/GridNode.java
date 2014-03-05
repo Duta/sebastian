@@ -9,6 +9,10 @@ import java.util.List;
 
 import search.interfaces.Node;
 
+/**
+ * Represents a node in the grid problem.
+ * Used for searching the grid problem.
+ */
 public class GridNode extends Node<GridNode, GridDirection> {
 	private GridState gridState;
 

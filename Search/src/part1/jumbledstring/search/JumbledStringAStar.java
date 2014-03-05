@@ -4,6 +4,9 @@ import part1.jumbledstring.CharacterSwap;
 import search.AStarFrontier;
 import search.interfaces.Frontier;
 
+/**
+ * Performs A* search on the jumbled string problem.
+ */
 public class JumbledStringAStar extends JumbledStringSearch {
     public static void main(String[] args) {
         new JumbledStringAStar().search();

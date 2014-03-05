@@ -2,6 +2,9 @@ package part1.eightpuzzle;
 
 import util.ArrayUtil;
 
+/**
+ * Represents an action in the 8-puzzle problem.
+ */
 public enum PuzzleMove {
 	UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
 

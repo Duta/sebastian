@@ -2,18 +2,25 @@ package part3;
 
 import part1.grid.GridState;
 
+/**
+ * Represents a pair of grid states
+ * and the length between them.
+ * The length may be unknown.
+ */
 public class GridStatePair {
     private final GridState stateA, stateB;
-    private final int length;
+    private int length;
+    private LengthFinder lengthFinder;
 
     public GridStatePair(GridState stateA, GridState stateB) {
-        this(stateA, stateB, -1);
-    }
-
-    public GridStatePair(GridState stateA, GridState stateB, int distance) {
         this.stateA = stateA;
         this.stateB = stateB;
-        this.length = distance;
+        this.length = -1;
+        this.lengthFinder = new LengthFinder(this);
+    }
+
+    public boolean isLengthKnown() {
+        return length != -1;
     }
 
     public GridState getStateA() {
@@ -37,6 +44,10 @@ public class GridStatePair {
     }
 
     public int getLength() {
-        return length;
+        return lengthFinder.calculate();
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 }

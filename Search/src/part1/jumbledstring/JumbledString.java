@@ -1,5 +1,8 @@
 package part1.jumbledstring;
 
+/**
+ * Represents an immutable state of a jumbled string.
+ */
 public class JumbledString {
     private final String string;
 

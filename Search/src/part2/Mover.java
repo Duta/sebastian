@@ -11,28 +11,31 @@ import lejos.util.Delay;
 import util.ButtonUtil;
 import util.SebastianInternalException;
 
+/**
+ * Makes the robot follow the given path of grid nodes.
+ */
 public class Mover implements Runnable {
 	private static final int
 		THRESHOLD = 450,
 		FORWARD_SPEED = 120,
 		TURN_RATE = 130,
 		TURN_SPEED = 30;
-	private static final GridDirection
-		INITIAL_DIRECTION = GridDirection.DOWN;
 	
 	private final DifferentialPilot pilot;
 	private final LightSensor leftSensor;
 	private final LightSensor rightSensor;
 	private final Stack<GridNode> path;
 	
-	private GridDirection direction = INITIAL_DIRECTION;
+	private GridDirection direction;
 	
 	public Mover(DifferentialPilot differentialPilot,
-			LightSensor leftSensor, LightSensor rightSensor, Stack<GridNode> path) {
+			LightSensor leftSensor, LightSensor rightSensor,
+            Stack<GridNode> path, GridDirection initialDirection) {
 		this.pilot = differentialPilot;
 		this.leftSensor = leftSensor;
 		this.rightSensor = rightSensor;
 		this.path = path;
+        this.direction = initialDirection;
 	}
 
 	@Override
@@ -65,8 +68,7 @@ public class Mover implements Runnable {
 			}
 		}
 	}
-		
-	@SuppressWarnings("incomplete-switch")
+
 	private boolean junction() {
 		if(path.empty()) {
 			return false;

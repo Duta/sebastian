@@ -7,6 +7,10 @@ import search.interfaces.Node;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a node in the jumbled string problem.
+ * Used for searching the jumbled string problem.
+ */
 public class JumbledStringNode extends Node<JumbledStringNode, CharacterSwap> {
     private final JumbledString jumbledString;
 

@@ -6,7 +6,7 @@ import search.interfaces.Frontier;
 import search.interfaces.Node;
 
 /**
- * This frontier implements Depth First Search
+ * This frontier implements Depth First Search.
  * It acts like a LIFO stack.
  */
 public class DepthFirstFrontier<NodeType extends Node<NodeType, ActionType>, ActionType> implements Frontier<NodeType, ActionType> {

@@ -1,11 +1,11 @@
 package part1.grid;
 
 /**
- * This class represents a state in the part1.grid, i.e. the current position in it.
+ * Represents an immutable state of an grid.
  */
 public class GridState {
-	private Grid grid;
-	private Junction currentJunction;
+	private final Grid grid;
+	private final Junction currentJunction;
 	
 	public GridState(Grid grid, int x, int y) {
 		this.grid = grid;

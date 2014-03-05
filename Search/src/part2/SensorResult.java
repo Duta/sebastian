@@ -3,6 +3,9 @@ package part2;
 import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
 
+/**
+ * Represents a state of two light sensors.
+ */
 public enum SensorResult {
 	LEFT_BLACK,
 	RIGHT_BLACK,
