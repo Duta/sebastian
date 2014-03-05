@@ -10,7 +10,7 @@ public class EightPuzzleBreadthFirst extends EightPuzzleSearch {
 	}
 
 	@Override
-	protected Frontier<EightPuzzleNode, PuzzleMove> getFrontier(EightPuzzleNode goal) {
+	protected Frontier<EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
 		return new BreadthFirstFrontier<EightPuzzleNode, PuzzleMove>();
 	}
 }

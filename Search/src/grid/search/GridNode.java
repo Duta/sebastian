@@ -56,4 +56,11 @@ public class GridNode extends Node<GridNode, GridDirection> {
 			return new GridNode(gridState.applyDir(action), this, action);
 		}
 	}
+
+    @Override
+    public String toString() {
+        int x = gridState.getJunction().getX();
+        int y = gridState.getJunction().getY();
+        return x + ", " + y;
+    }
 }

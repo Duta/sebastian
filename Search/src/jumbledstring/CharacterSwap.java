@@ -15,4 +15,9 @@ public class CharacterSwap {
     public int getIndexB() {
         return indexB;
     }
+
+    @Override
+    public String toString() {
+        return "Swap index " + indexA + " with index " + indexB;
+    }
 }

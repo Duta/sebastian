@@ -10,7 +10,7 @@ public class JumbledStringAStar extends JumbledStringSearch {
     }
 
     @Override
-    protected Frontier<JumbledStringNode, CharacterSwap> getFrontier(JumbledStringNode goal) {
+    protected Frontier<JumbledStringNode, CharacterSwap> createFrontier(JumbledStringNode goal) {
         return new AStarFrontier<JumbledStringNode, CharacterSwap>(goal);
     }
 }

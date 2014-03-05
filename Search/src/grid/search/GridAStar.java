@@ -10,7 +10,7 @@ public class GridAStar extends GridSearch {
 	}
 
 	@Override
-	protected Frontier<GridNode, GridDirection> getFrontier(GridNode goal) {
+	protected Frontier<GridNode, GridDirection> createFrontier(GridNode goal) {
 		return new AStarFrontier<GridNode, GridDirection>(goal) {
 			@Override
 			protected int totalPathCost(GridNode node) {

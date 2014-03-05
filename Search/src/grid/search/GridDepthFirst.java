@@ -10,7 +10,7 @@ public class GridDepthFirst extends GridSearch {
 	}
 
 	@Override
-	protected Frontier<GridNode, GridDirection> getFrontier(GridNode goal) {
+	protected Frontier<GridNode, GridDirection> createFrontier(GridNode goal) {
 		return new DepthFirstFrontier<GridNode, GridDirection>();
 	}
 }
