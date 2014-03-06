@@ -13,12 +13,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class JumbledStringTest {
-    private JumbledStringNode start, goal;
+    private JumbledStringNode start, goal, badgoal;
 
     @BeforeClass
     public void initStates() {
         start = new JumbledStringNode(new JumbledString("ortbo"));
         goal = new JumbledStringNode(new JumbledString("robot"));
+        
+        badgoal = new JumbledStringNode(new JumbledString("robo"));
 
     }
 
@@ -81,4 +83,5 @@ public class JumbledStringTest {
 
         assertEquals(node, goal);
     }
+ 
 }
