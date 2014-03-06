@@ -1,5 +1,7 @@
 package part1.jumbledstring;
 
+import util.ArrayUtil;
+
 /**
  * Represents an immutable state of a jumbled string.
  */
@@ -20,11 +22,7 @@ public class JumbledString {
 
     public JumbledString makeSwap(CharacterSwap swap) {
         char[] characters = string.toCharArray();
-        int indexA = swap.getIndexA();
-        int indexB = swap.getIndexB();
-        char temp = characters[indexA];
-        characters[indexA] = characters[indexB];
-        characters[indexB] = temp;
+        ArrayUtil.swap(characters, swap.getIndexA(), swap.getIndexB());
         return new JumbledString(new String(characters));
     }
 
