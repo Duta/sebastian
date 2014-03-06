@@ -86,17 +86,17 @@ public class JumbledStringTest {
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testBreadthFirstFail() throws PathNotFoundException {
-    	Search.search(start, badgoal, new BreadthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
+        Search.search(start, badgoal, new BreadthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testDepthFirstFail() throws PathNotFoundException {
-    	Search.search(start, badgoal, new DepthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
+        Search.search(start, badgoal, new DepthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testAStarFail() throws PathNotFoundException {
-    	Search.search(start, badgoal, new AStarFrontier<JumbledString, JumbledStringNode, CharacterSwap>(badgoal));
+        Search.search(start, badgoal, new AStarFrontier<JumbledString, JumbledStringNode, CharacterSwap>(badgoal));
     }
  
 }

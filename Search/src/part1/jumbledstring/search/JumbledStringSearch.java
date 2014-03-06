@@ -9,7 +9,7 @@ import part1.jumbledstring.JumbledString;
  * Can be extended to provide a frontier (search type).
  */
 public abstract class JumbledStringSearch
-		extends Part1SearchRunner<JumbledString, JumbledStringNode, CharacterSwap> {
+        extends Part1SearchRunner<JumbledString, JumbledStringNode, CharacterSwap> {
     @Override
     protected JumbledStringNode createStart() {
         return new JumbledStringNode(new JumbledString("avja"));

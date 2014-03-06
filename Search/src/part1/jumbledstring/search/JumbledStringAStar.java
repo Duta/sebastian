@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs A* search on the jumbled string problem.
  */
 public class JumbledStringAStar
-		extends JumbledStringSearch {
+        extends JumbledStringSearch {
     /**
      * Runs A* search on the jumbled string problem.
      *

@@ -9,46 +9,46 @@ import lejos.nxt.SensorPortListener;
 import lejos.robotics.navigation.DifferentialPilot;
 
 public class Part2B {
-	private DifferentialPilot pilot;
-	private SensorPort portA, portB;
-	
-	public Part2B(DifferentialPilot pilot, SensorPort portA, SensorPort portB) {
-		this.pilot = pilot;
-		this.portA = portA;
-		this.portB = portB;
-	}
-	
-	public void run() {
-		// TouchSensorListener from project RobotUtils, in package util.TouchSensorListeners
-		SensorPortListener listener = new TouchSensorListener() {
-			@Override
-			public void pressed() {
-				pilot.stop();
-				pilot.travel(-120);
-				pilot.rotate(90);
-				pilot.forward();
-			}
+    private DifferentialPilot pilot;
+    private SensorPort portA, portB;
+    
+    public Part2B(DifferentialPilot pilot, SensorPort portA, SensorPort portB) {
+        this.pilot = pilot;
+        this.portA = portA;
+        this.portB = portB;
+    }
+    
+    public void run() {
+        // TouchSensorListener from project RobotUtils, in package util.TouchSensorListeners
+        SensorPortListener listener = new TouchSensorListener() {
+            @Override
+            public void pressed() {
+                pilot.stop();
+                pilot.travel(-120);
+                pilot.rotate(90);
+                pilot.forward();
+            }
 
-			@Override
-			public void released() {}
-		};
-		
-		portA.addSensorPortListener(listener);
-		portB.addSensorPortListener(listener);
-		
-		pilot.forward();
-		
-		Button.ESCAPE.waitForPressAndRelease();
-	}
+            @Override
+            public void released() {}
+        };
+        
+        portA.addSensorPortListener(listener);
+        portB.addSensorPortListener(listener);
+        
+        pilot.forward();
+        
+        Button.ESCAPE.waitForPressAndRelease();
+    }
 
-	public static void main(String[] args) {
-		Util.waitForStart();
-		
-		Part2B p = new Part2B(
-			RobotInfo.SEBASTIAN.getDifferentialPilot(),
-			SensorPort.S1,
-			SensorPort.S4);
-		p.run();
-	}
+    public static void main(String[] args) {
+        Util.waitForStart();
+        
+        Part2B p = new Part2B(
+            RobotInfo.SEBASTIAN.getDifferentialPilot(),
+            SensorPort.S1,
+            SensorPort.S4);
+        p.run();
+    }
 
 }

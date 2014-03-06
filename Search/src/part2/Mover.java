@@ -15,7 +15,7 @@ import util.SebastianInternalException;
  * Makes the robot follow the given path of grid nodes.
  */
 public class Mover
-		implements Runnable {
+        implements Runnable {
     private static final int
         THRESHOLD = 450,
         FORWARD_SPEED = 120,
@@ -71,10 +71,10 @@ public class Mover
     }
 
     private SensorResult checkSensors() {
-    	return SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD);
-	}
+        return SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD);
+    }
 
-	private boolean junction() {
+    private boolean junction() {
         if(path.empty()) {
             return false;
         }

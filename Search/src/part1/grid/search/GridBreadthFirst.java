@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs BFS on the grid problem.
  */
 public class GridBreadthFirst
-		extends GridSearch {
+        extends GridSearch {
     public static void main(String[] args) {
         new GridAStar().search();
     }

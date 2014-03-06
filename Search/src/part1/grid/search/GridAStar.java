@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs A* search on the grid problem.
  */
 public class GridAStar
-		extends GridSearch {
+        extends GridSearch {
     public static void main(String[] args) {
         new GridAStar().search();
     }

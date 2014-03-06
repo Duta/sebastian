@@ -29,7 +29,7 @@ public class Search {
         ActionT
     >
     Stack<NodeT> search(NodeT start, NodeT goal, FrontierT frontier)
-    		throws PathNotFoundException {
+            throws PathNotFoundException {
         if(!frontier.empty()) {
             throw new IllegalArgumentException("frontier must be empty");
         }

@@ -45,24 +45,24 @@ public class Grid {
                 int mapY = y*2;
                 if(y > 0 && lines[mapY-1].charAt(mapX) == '|') {
                     junction.setJunction(
-                    		GridDirection.UP,
-                    		grid.getJunction(x, y-1));
+                            GridDirection.UP,
+                            grid.getJunction(x, y-1));
                 }
                 if(y < height - 1 && lines[mapY+1].charAt(mapX) == '|') {
                     junction.setJunction(
-                    		GridDirection.DOWN,
-                    		grid.getJunction(x, y+1));
+                            GridDirection.DOWN,
+                            grid.getJunction(x, y+1));
                 }
                 if(x > 0 && lines[mapY].charAt(mapX-1) == '-') {
                     
                     junction.setJunction(
-                    		GridDirection.LEFT,
-                    		grid.getJunction(x-1, y));
+                            GridDirection.LEFT,
+                            grid.getJunction(x-1, y));
                 }
                 if(x < width - 1 && lines[mapY].charAt(mapX+1) == '-') {
                     junction.setJunction(
-                    		GridDirection.RIGHT,
-                    		grid.getJunction(x+1, y));
+                            GridDirection.RIGHT,
+                            grid.getJunction(x+1, y));
                 }
             }
         }

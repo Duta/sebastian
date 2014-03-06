@@ -9,7 +9,7 @@ import util.Util;
  * grid using simulated annealing.
  */
 public class SimulatedAnnealing
-		implements TourImprover {
+        implements TourImprover {
     private final double initialTemperature;
     private final double coolTemperature;
     private final double coolingRate;

@@ -11,13 +11,13 @@ import search.interfaces.Node;
  * Used for searching the grid problem.
  */
 public class GridNode
-		extends Node<GridState, GridNode, GridDirection> {
+        extends Node<GridState, GridNode, GridDirection> {
     public GridNode(GridState gridState) {
         super(gridState);
     }
 
     public GridNode(GridState gridState, GridNode parent,
-    		GridDirection action) {
+            GridDirection action) {
         super(gridState, parent, action);
     }
 

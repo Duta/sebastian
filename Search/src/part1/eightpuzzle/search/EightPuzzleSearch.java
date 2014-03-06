@@ -9,7 +9,7 @@ import part1.eightpuzzle.PuzzleMove;
  * Can be extended to provide a frontier (search type).
  */
 public abstract class EightPuzzleSearch
-		extends Part1SearchRunner<EightPuzzle, EightPuzzleNode, PuzzleMove> {
+        extends Part1SearchRunner<EightPuzzle, EightPuzzleNode, PuzzleMove> {
     @Override
     protected EightPuzzleNode createStart() {
         return new EightPuzzleNode(EightPuzzle.randomEightPuzzle());

@@ -9,51 +9,51 @@ import util.RobotInfo;
 import util.Util;
 
 public class Part3 implements Runnable {
-	private DifferentialPilot pilot;
-	private TouchSensor bumperA, bumperB;
+    private DifferentialPilot pilot;
+    private TouchSensor bumperA, bumperB;
 
-	public Part3(DifferentialPilot pilot,
-			TouchSensor bumperA, TouchSensor bumperB) {
-		this.pilot = pilot;
-		this.bumperA = bumperA;
-		this.bumperB = bumperB;
-	}
+    public Part3(DifferentialPilot pilot,
+            TouchSensor bumperA, TouchSensor bumperB) {
+        this.pilot = pilot;
+        this.bumperA = bumperA;
+        this.bumperB = bumperB;
+    }
 
-	@Override
-	public void run() {
-		ButtonUtil.exitOnEscapePress();
+    @Override
+    public void run() {
+        ButtonUtil.exitOnEscapePress();
 
-		pilot.setTravelSpeed(150);
-		pilot.forward();
+        pilot.setTravelSpeed(150);
+        pilot.forward();
 
-		/*
-		 * Method for escaping maze:
-		 * 
-		 * Steer to the left.
-		 * If wall hit -> rotate right.
-		 * Repeat.
-		 */
-		while (true) {
-			if (isBumperPressed()) {
-				pilot.travel(-50);
-				pilot.rotate(40);
-			}
-			pilot.steer(-50);
-			Delay.msDelay(20);
-		}
-	}
+        /*
+         * Method for escaping maze:
+         * 
+         * Steer to the left.
+         * If wall hit -> rotate right.
+         * Repeat.
+         */
+        while (true) {
+            if (isBumperPressed()) {
+                pilot.travel(-50);
+                pilot.rotate(40);
+            }
+            pilot.steer(-50);
+            Delay.msDelay(20);
+        }
+    }
 
-	private boolean isBumperPressed() {
-		return bumperA.isPressed() || bumperB.isPressed();
-	}
+    private boolean isBumperPressed() {
+        return bumperA.isPressed() || bumperB.isPressed();
+    }
 
-	public static void main(String[] args) {
-		Util.waitForStart();
+    public static void main(String[] args) {
+        Util.waitForStart();
 
-		Part3 p = new Part3(RobotInfo.SEBASTIAN.getDifferentialPilot(),
-				new TouchSensor(SensorPort.S1),
-				new TouchSensor(SensorPort.S4));
-		p.run();
-	}
+        Part3 p = new Part3(RobotInfo.SEBASTIAN.getDifferentialPilot(),
+                new TouchSensor(SensorPort.S1),
+                new TouchSensor(SensorPort.S4));
+        p.run();
+    }
 
 }

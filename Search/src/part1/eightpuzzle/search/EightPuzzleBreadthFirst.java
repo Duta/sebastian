@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs BFS on the 8-puzzle problem.
  */
 public class EightPuzzleBreadthFirst
-		extends EightPuzzleSearch {
+        extends EightPuzzleSearch {
     /**
      * Runs BFS on the 8-puzzle.
      *

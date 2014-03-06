@@ -24,7 +24,7 @@ public class DepthFirstFrontier
 
     @Override
     public NodeT pop() {
-    	return frontierList.pop();
+        return frontierList.pop();
     }
 
     @Override

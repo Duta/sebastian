@@ -1,13 +1,13 @@
 package util;
 
 public class ArrayUtil {
-	public static <T> int randomIndex(T[] array) {
-		return Util.RGEN.nextInt(array.length);
-	}
-	
-	public static <T> T randomChoice(T[] array) {
-		return array[randomIndex(array)];
-	}
+    public static <T> int randomIndex(T[] array) {
+        return Util.RGEN.nextInt(array.length);
+    }
+    
+    public static <T> T randomChoice(T[] array) {
+        return array[randomIndex(array)];
+    }
 
     public static <T> void randomize(T[] array) {
         randomize(array, array.length * 2);

@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs A* search on the 8-puzzle problem.
  */
 public class EightPuzzleAStar
-		extends EightPuzzleSearch {
+        extends EightPuzzleSearch {
     /**
      * Runs A* search on the 8-puzzle problem.
      *

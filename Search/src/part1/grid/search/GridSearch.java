@@ -12,7 +12,7 @@ import util.Util;
  * Can be extended to provide a frontier (search type).
  */
 public abstract class GridSearch
-		extends Part1SearchRunner<GridState, GridNode, GridDirection> {
+        extends Part1SearchRunner<GridState, GridNode, GridDirection> {
     protected Grid grid;
 
     protected GridSearch() {

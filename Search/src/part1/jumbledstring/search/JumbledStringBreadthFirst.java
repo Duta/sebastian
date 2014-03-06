@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs BFS on the jumbled string problem.
  */
 public class JumbledStringBreadthFirst
-		extends JumbledStringSearch {
+        extends JumbledStringSearch {
     public static void main(String[] args) {
         new JumbledStringBreadthFirst().search();
     }

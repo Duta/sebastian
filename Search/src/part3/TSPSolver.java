@@ -11,13 +11,13 @@ import java.util.List;
  * then uses simulated annealing to improve the path.
  */
 public class TSPSolver
-		implements Runnable {
+        implements Runnable {
     private String[] gridAscii;
     private String[] pointsAscii;
     private final TourImprover tourImprover;
 
     public TSPSolver(String[] gridAscii, String[] pointsAscii,
-    		TourImprover tourImprover) {
+            TourImprover tourImprover) {
         this.gridAscii = gridAscii;
         this.pointsAscii = pointsAscii;
         this.tourImprover = tourImprover;
@@ -84,7 +84,7 @@ public class TSPSolver
     }
 
     private List<GridState> parseAsciiArt(String[] gridAscii,
-    		String[] pointsAscii) {
+            String[] pointsAscii) {
         Grid grid = Grid.fromAsciiArt(gridAscii);
 
         int width = 0;

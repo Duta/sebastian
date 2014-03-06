@@ -16,14 +16,14 @@ public enum PathAction {
     private final int theta;
     
     private PathAction(int theta) {
-    	this.theta = theta;
+        this.theta = theta;
     }
 
     public int getTheta() {
-		return theta;
-	}
+        return theta;
+    }
 
-	public static List<PathAction> parse(String string) {
+    public static List<PathAction> parse(String string) {
         List<PathAction> path = new ArrayList<PathAction>();
 
         for(char c : string.toCharArray()) {

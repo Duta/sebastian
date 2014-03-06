@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs DFS on the jumbled string problem.
  */
 public class JumbledStringDepthFirst
-		extends JumbledStringSearch {
+        extends JumbledStringSearch {
     public static void main(String[] args) {
         new JumbledStringDepthFirst().search();
     }

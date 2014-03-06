@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs DFS on the 8-puzzle problem.
  */
 public class EightPuzzleDepthFirst
-		extends EightPuzzleSearch {
+        extends EightPuzzleSearch {
     /**
      * Runs DFS on the 8-puzzle.
      *

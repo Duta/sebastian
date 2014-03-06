@@ -12,7 +12,7 @@ import java.util.List;
  * Used for searching the jumbled string problem.
  */
 public class JumbledStringNode
-		extends Node<JumbledString, JumbledStringNode, CharacterSwap> {
+        extends Node<JumbledString, JumbledStringNode, CharacterSwap> {
     public JumbledStringNode(JumbledString jumbledString) {
         super(jumbledString);
     }

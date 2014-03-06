@@ -14,7 +14,7 @@ import java.util.Stack;
  * path between two grid states.
  */
 public class LengthFinder
-		extends SearchRunner<GridState, GridNode, GridDirection> {
+        extends SearchRunner<GridState, GridNode, GridDirection> {
     private final GridStatePair pair;
 
     public LengthFinder(GridStatePair pair) {
@@ -54,7 +54,7 @@ public class LengthFinder
 
     @Override
     protected void processPathAction(GridNode start,
-    		GridNode goal, Stack<GridNode> path) {
+            GridNode goal, Stack<GridNode> path) {
         pair.setLength(path.size() - 1);
     }
 }

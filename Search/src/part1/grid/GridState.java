@@ -40,11 +40,11 @@ public class GridState {
     @Override
     public boolean equals(Object other) {
         if(!(other instanceof GridState)) {
-        	return false;
+            return false;
         }
-    	GridState that = (GridState)other;
+        GridState that = (GridState)other;
         return grid.equals(that.grid)
-        	&& currentJunction.equals(that.currentJunction);
+            && currentJunction.equals(that.currentJunction);
     }
 
     @Override

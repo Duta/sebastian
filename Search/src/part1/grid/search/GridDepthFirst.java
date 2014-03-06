@@ -9,7 +9,7 @@ import search.interfaces.Frontier;
  * Performs DFS on the grid problem.
  */
 public class GridDepthFirst
-		extends GridSearch {
+        extends GridSearch {
     public static void main(String[] args) {
         new GridAStar().search();
     }

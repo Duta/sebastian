@@ -87,17 +87,17 @@ public class EightPuzzleTest {
     /*
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testBreadthFirstFail() throws PathNotFoundException {
-    	Search.search(start, badgoal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
+        Search.search(start, badgoal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testDepthFirstFail() throws PathNotFoundException {
-    	Search.search(start, badgoal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
+        Search.search(start, badgoal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testAStarFail() throws PathNotFoundException {
-    	Search.search(start, badgoal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(badgoal));
+        Search.search(start, badgoal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(badgoal));
     }
     */
 }

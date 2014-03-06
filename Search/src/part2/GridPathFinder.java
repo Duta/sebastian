@@ -19,28 +19,28 @@ import util.Util;
  * then makes a robot follow the path.
  */
 public class GridPathFinder
-		extends SearchRunner<GridState, GridNode, GridDirection>
-		implements Runnable {
+        extends SearchRunner<GridState, GridNode, GridDirection>
+        implements Runnable {
     private final Grid grid;
     private final int x1, y1;
     private final int x2, y2;
     private final GridDirection initialDirection;
-	private RobotInfo robot;
-	private SensorPort leftSensorPort;
-	private SensorPort rightSensorPort;
+    private RobotInfo robot;
+    private SensorPort leftSensorPort;
+    private SensorPort rightSensorPort;
 
     public GridPathFinder(Grid grid, int x1, int y1, int x2, int y2,
-    		GridDirection initialDirection, RobotInfo robot,
-    		SensorPort leftSensorPort, SensorPort rightSensorPort) {
+            GridDirection initialDirection, RobotInfo robot,
+            SensorPort leftSensorPort, SensorPort rightSensorPort) {
         this.grid = grid;
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
         this.initialDirection = initialDirection;
-		this.robot = robot;
-		this.leftSensorPort = leftSensorPort;
-		this.rightSensorPort = rightSensorPort;
+        this.robot = robot;
+        this.leftSensorPort = leftSensorPort;
+        this.rightSensorPort = rightSensorPort;
     }
 
     public static void main(String[] args) {
