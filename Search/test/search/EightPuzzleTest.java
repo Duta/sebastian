@@ -5,6 +5,7 @@ import java.util.Stack;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 import part1.eightpuzzle.EightPuzzle;
 import part1.eightpuzzle.PuzzleMove;
@@ -27,7 +28,7 @@ public class EightPuzzleTest {
         try {
             path = Search.search(start, goal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
         } catch (PathNotFoundException e) {
-            e.printStackTrace();
+            fail();
         }
 
         EightPuzzleNode node = path.pop();
@@ -47,7 +48,7 @@ public class EightPuzzleTest {
         try {
             path = Search.search(start, goal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
         } catch (PathNotFoundException e) {
-            e.printStackTrace();
+            fail();
         }
 
         EightPuzzleNode node = path.pop();
@@ -67,7 +68,7 @@ public class EightPuzzleTest {
         try {
             path = Search.search(start, goal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(goal));
         } catch (PathNotFoundException e) {
-            e.printStackTrace();
+            fail();
         }
 
         EightPuzzleNode node = path.pop();

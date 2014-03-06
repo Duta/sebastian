@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class JumbledStringTest {
     private JumbledStringNode start, goal;
@@ -27,8 +28,8 @@ public class JumbledStringTest {
 
         try {
             path = Search.search(start, goal, new BreadthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
-        } catch (PathNotFoundException e) {
-            e.printStackTrace();
+        } catch(PathNotFoundException e) {
+            fail();
         }
 
         JumbledStringNode node = path.pop();
@@ -47,8 +48,8 @@ public class JumbledStringTest {
 
         try {
             path = Search.search(start, goal, new DepthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>());
-        } catch (PathNotFoundException e) {
-            e.printStackTrace();
+        } catch(PathNotFoundException e) {
+            fail();
         }
 
         JumbledStringNode node = path.pop();
@@ -67,8 +68,8 @@ public class JumbledStringTest {
 
         try {
             path = Search.search(start, goal, new AStarFrontier<JumbledString, JumbledStringNode, CharacterSwap>(goal));
-        } catch (PathNotFoundException e) {
-            e.printStackTrace();
+        } catch(PathNotFoundException e) {
+            fail();
         }
 
         JumbledStringNode node = path.pop();
