@@ -12,13 +12,13 @@ import part1.eightpuzzle.PuzzleMove;
 import part1.eightpuzzle.search.EightPuzzleNode;
 
 public class EightPuzzleTest {
-    private EightPuzzleNode start, goal, badgoal;
+    private EightPuzzleNode start, goal, badGoal;
 
     @BeforeClass
     public void initStates() {
         start = new EightPuzzleNode(EightPuzzle.randomEightPuzzle());
         goal = new EightPuzzleNode(EightPuzzle.orderedEightPuzzle());
-        badgoal = new EightPuzzleNode(EightPuzzle.impossibleEightPuzzle());
+        badGoal = new EightPuzzleNode(EightPuzzle.impossibleEightPuzzle());
 
     }
 
@@ -87,17 +87,17 @@ public class EightPuzzleTest {
     /*
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testBreadthFirstFail() throws PathNotFoundException {
-        Search.search(start, badgoal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
+        Search.search(start, badGoal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testDepthFirstFail() throws PathNotFoundException {
-        Search.search(start, badgoal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
+        Search.search(start, badGoal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testAStarFail() throws PathNotFoundException {
-        Search.search(start, badgoal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(badgoal));
+        Search.search(start, badGoal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(badGoal));
     }
     */
 }
