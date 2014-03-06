@@ -1,6 +1,5 @@
 package part2;
 
-import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
 
 /**
@@ -15,10 +14,6 @@ public enum SensorResult {
     public static SensorResult checkSensors(LightSensor left, LightSensor right, int threshold) {
         int leftVal = left.getNormalizedLightValue();
         int rightVal = right.getNormalizedLightValue();
-
-        LCD.clear();
-        LCD.drawInt(leftVal, 2, 2);
-        LCD.drawInt(rightVal, 2, 4);
 
         if(leftVal < threshold && rightVal < threshold) {
             return SensorResult.BOTH_BLACK;

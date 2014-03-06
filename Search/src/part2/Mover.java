@@ -81,20 +81,7 @@ public class Mover implements Runnable {
         direction = node.getAction();
 
         pilot.travel(60);
-
-        switch(action) {
-        case LEFT:
-            pilot.rotate(-90);
-            break;
-
-        case RIGHT:
-            pilot.rotate(90);
-            break;
-
-        case U_TURN:
-            pilot.rotate(180);
-            break;
-        }
+        pilot.rotate(action.getTheta());
 
         return true;
     }

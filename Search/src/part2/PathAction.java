@@ -8,12 +8,22 @@ import java.util.List;
  * upon encountering a junction.
  */
 public enum PathAction {
-    LEFT,
-    RIGHT,
-    STRAIGHT,
-    U_TURN;
+    LEFT(-90),
+    RIGHT(90),
+    STRAIGHT(0),
+    U_TURN(180);
+    
+    private final int theta;
+    
+    private PathAction(int theta) {
+    	this.theta = theta;
+    }
 
-    public static List<PathAction> parse(String string) {
+    public int getTheta() {
+		return theta;
+	}
+
+	public static List<PathAction> parse(String string) {
         List<PathAction> path = new ArrayList<PathAction>();
 
         for(char c : string.toCharArray()) {
