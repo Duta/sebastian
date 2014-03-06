@@ -11,7 +11,8 @@ public enum SensorResult {
     BOTH_BLACK,
     NOTHING;
 
-    public static SensorResult checkSensors(LightSensor left, LightSensor right, int threshold) {
+    public static SensorResult checkSensors(LightSensor left,
+    		LightSensor right, int threshold) {
         int leftVal = left.getNormalizedLightValue();
         int rightVal = right.getNormalizedLightValue();
 

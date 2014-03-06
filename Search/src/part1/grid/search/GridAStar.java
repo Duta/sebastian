@@ -8,13 +8,15 @@ import search.interfaces.Frontier;
 /**
  * Performs A* search on the grid problem.
  */
-public class GridAStar extends GridSearch {
+public class GridAStar
+		extends GridSearch {
     public static void main(String[] args) {
         new GridAStar().search();
     }
 
     @Override
-    protected Frontier<GridState, GridNode, GridDirection> createFrontier(GridNode goal) {
+    protected Frontier<GridState, GridNode, GridDirection>
+    createFrontier(GridNode goal) {
         return new AStarFrontier<GridState, GridNode, GridDirection>(goal) {
             @Override
             protected int totalPathCost(GridNode node) {

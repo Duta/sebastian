@@ -8,7 +8,8 @@ import search.interfaces.Frontier;
 /**
  * Performs A* search on the jumbled string problem.
  */
-public class JumbledStringAStar extends JumbledStringSearch {
+public class JumbledStringAStar
+		extends JumbledStringSearch {
     /**
      * Runs A* search on the jumbled string problem.
      *
@@ -26,7 +27,8 @@ public class JumbledStringAStar extends JumbledStringSearch {
      * @return a new frontier which implements A*
      */
     @Override
-    protected Frontier<JumbledString, JumbledStringNode, CharacterSwap> createFrontier(JumbledStringNode goal) {
+    protected Frontier<JumbledString, JumbledStringNode, CharacterSwap>
+    createFrontier(JumbledStringNode goal) {
         return new AStarFrontier<JumbledString, JumbledStringNode, CharacterSwap>(goal);
     }
 }

@@ -8,7 +8,8 @@ import util.Util;
  * Improves a tour of points on a
  * grid using simulated annealing.
  */
-public class SimulatedAnnealing {
+public class SimulatedAnnealing
+		implements TourImprover {
     private final double initialTemperature;
     private final double coolTemperature;
     private final double coolingRate;
@@ -21,6 +22,7 @@ public class SimulatedAnnealing {
         this.coolingRate = coolingRate;
     }
 
+    @Override
     public void improve(Tour tour) {
         temperature = initialTemperature;
         while(temperature > coolTemperature) {

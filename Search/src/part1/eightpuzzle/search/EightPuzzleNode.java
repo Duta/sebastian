@@ -8,12 +8,14 @@ import search.interfaces.Node;
  * Represents a node in the 8-puzzle problem.
  * Used for searching the 8-puzzle problem.
  */
-public class EightPuzzleNode extends Node<EightPuzzle, EightPuzzleNode, PuzzleMove> {
+public class EightPuzzleNode
+		extends Node<EightPuzzle, EightPuzzleNode, PuzzleMove> {
     public EightPuzzleNode(EightPuzzle puzzle) {
         super(puzzle);
     }
 
-    public EightPuzzleNode(EightPuzzle puzzle, EightPuzzleNode parent, PuzzleMove action) {
+    public EightPuzzleNode(EightPuzzle puzzle,
+    		EightPuzzleNode parent, PuzzleMove action) {
         super(puzzle, parent, action);
     }
 

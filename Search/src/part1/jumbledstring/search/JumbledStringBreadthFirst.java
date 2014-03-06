@@ -8,13 +8,15 @@ import search.interfaces.Frontier;
 /**
  * Performs BFS on the jumbled string problem.
  */
-public class JumbledStringBreadthFirst extends JumbledStringSearch {
+public class JumbledStringBreadthFirst
+		extends JumbledStringSearch {
     public static void main(String[] args) {
         new JumbledStringBreadthFirst().search();
     }
 
     @Override
-    protected Frontier<JumbledString, JumbledStringNode, CharacterSwap> createFrontier(JumbledStringNode goal) {
+    protected Frontier<JumbledString, JumbledStringNode, CharacterSwap>
+    createFrontier(JumbledStringNode goal) {
         return new BreadthFirstFrontier<JumbledString, JumbledStringNode, CharacterSwap>();
     }
 }

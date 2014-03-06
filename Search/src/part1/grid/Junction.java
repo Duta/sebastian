@@ -7,7 +7,8 @@ public class Junction {
     private int x, y;
     private Junction up, down, left, right;
 
-    public Junction(int x, int y, Junction up, Junction down, Junction left, Junction right) {
+    public Junction(int x, int y, Junction up, Junction down,
+    		Junction left, Junction right) {
         this.x = x;
         this.y = y;
         this.up = up;

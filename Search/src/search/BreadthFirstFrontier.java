@@ -9,7 +9,8 @@ import search.interfaces.Node;
  * This frontier implements Breadth First Search.
  * It acts like a FIFO queue.
  */
-public class BreadthFirstFrontier<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
+public class BreadthFirstFrontier
+<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
         implements Frontier<StateT, NodeT, ActionT> {
     private ArrayList<NodeT> frontierList;
 

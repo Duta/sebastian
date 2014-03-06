@@ -10,7 +10,8 @@ import search.interfaces.Node;
  * This frontier implements A* search.
  * It inserts nodes ordered by their heuristic.
  */
-public class AStarFrontier<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
+public class AStarFrontier
+<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT>
         implements Frontier<StateT, NodeT, ActionT> {
     private NodeT goal;
     private List<NodeT> list;

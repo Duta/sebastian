@@ -28,7 +28,8 @@ public class Search {
         FrontierT extends Frontier<StateT, NodeT, ActionT>,
         ActionT
     >
-    Stack<NodeT> search(NodeT start, NodeT goal, FrontierT frontier) throws PathNotFoundException {
+    Stack<NodeT> search(NodeT start, NodeT goal, FrontierT frontier)
+    		throws PathNotFoundException {
         if(!frontier.empty()) {
             throw new IllegalArgumentException("frontier must be empty");
         }

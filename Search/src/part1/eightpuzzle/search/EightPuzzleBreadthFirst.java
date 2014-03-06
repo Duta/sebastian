@@ -8,7 +8,8 @@ import search.interfaces.Frontier;
 /**
  * Performs BFS on the 8-puzzle problem.
  */
-public class EightPuzzleBreadthFirst extends EightPuzzleSearch {
+public class EightPuzzleBreadthFirst
+		extends EightPuzzleSearch {
     /**
      * Runs BFS on the 8-puzzle.
      *
@@ -26,7 +27,8 @@ public class EightPuzzleBreadthFirst extends EightPuzzleSearch {
      * @return a new frontier which implements BFS
      */
     @Override
-    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
+    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove>
+    createFrontier(EightPuzzleNode goal) {
         return new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>();
     }
 }

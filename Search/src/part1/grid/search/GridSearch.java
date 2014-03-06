@@ -5,15 +5,14 @@ import part1.grid.Grid;
 import part1.grid.GridDirection;
 import part1.grid.GridState;
 
-import search.SearchRunner;
-
 import util.Util;
 
 /**
  * Performs search on the grid problem.
  * Can be extended to provide a frontier (search type).
  */
-public abstract class GridSearch extends Part1SearchRunner<GridState, GridNode, GridDirection> {
+public abstract class GridSearch
+		extends Part1SearchRunner<GridState, GridNode, GridDirection> {
     protected Grid grid;
 
     protected GridSearch() {

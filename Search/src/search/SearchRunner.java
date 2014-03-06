@@ -11,7 +11,8 @@ import java.util.Stack;
  *
  * The search type is parameterized by the frontier.
  */
-public abstract class SearchRunner<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT> {
+public abstract class SearchRunner
+<StateT, NodeT extends Node<StateT, NodeT, ActionT>, ActionT> {
     protected SearchRunner() {}
 
     public void search() {

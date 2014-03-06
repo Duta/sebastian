@@ -4,21 +4,20 @@ import part1.grid.GridDirection;
 import part1.grid.GridState;
 import part1.grid.Junction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import search.interfaces.Node;
 
 /**
  * Represents a node in the grid problem.
  * Used for searching the grid problem.
  */
-public class GridNode extends Node<GridState, GridNode, GridDirection> {
+public class GridNode
+		extends Node<GridState, GridNode, GridDirection> {
     public GridNode(GridState gridState) {
         super(gridState);
     }
 
-    public GridNode(GridState gridState, GridNode parent, GridDirection action) {
+    public GridNode(GridState gridState, GridNode parent,
+    		GridDirection action) {
         super(gridState, parent, action);
     }
 

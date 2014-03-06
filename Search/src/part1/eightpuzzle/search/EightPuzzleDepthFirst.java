@@ -8,7 +8,8 @@ import search.interfaces.Frontier;
 /**
  * Performs DFS on the 8-puzzle problem.
  */
-public class EightPuzzleDepthFirst extends EightPuzzleSearch {
+public class EightPuzzleDepthFirst
+		extends EightPuzzleSearch {
     /**
      * Runs DFS on the 8-puzzle.
      *
@@ -26,7 +27,8 @@ public class EightPuzzleDepthFirst extends EightPuzzleSearch {
      * @return a new frontier which implements DFS
      */
     @Override
-    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove> createFrontier(EightPuzzleNode goal) {
+    protected Frontier<EightPuzzle, EightPuzzleNode, PuzzleMove>
+    createFrontier(EightPuzzleNode goal) {
         return new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>();
     }
 }

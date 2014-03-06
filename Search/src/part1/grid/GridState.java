@@ -31,7 +31,7 @@ public class GridState {
 
     public GridState applyDir(GridDirection dir) {
         if(!validDirection(dir)) {
-            throw new IllegalArgumentException("Direction not valid to apply");
+            throw new IllegalArgumentException("Unapplicable direction");
         }
 
         return new GridState(grid, currentJunction.getJunction(dir));
@@ -39,11 +39,12 @@ public class GridState {
 
     @Override
     public boolean equals(Object other) {
-        if(other instanceof GridState) {
-            return (grid.equals(((GridState)other).grid)) && (currentJunction.equals(((GridState)other).currentJunction));
+        if(!(other instanceof GridState)) {
+        	return false;
         }
-
-        return false;
+    	GridState that = (GridState)other;
+        return grid.equals(that.grid)
+        	&& currentJunction.equals(that.currentJunction);
     }
 
     @Override

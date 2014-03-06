@@ -11,7 +11,8 @@ import java.util.List;
  * Represents a node in the jumbled string problem.
  * Used for searching the jumbled string problem.
  */
-public class JumbledStringNode extends Node<JumbledString, JumbledStringNode, CharacterSwap> {
+public class JumbledStringNode
+		extends Node<JumbledString, JumbledStringNode, CharacterSwap> {
     public JumbledStringNode(JumbledString jumbledString) {
         super(jumbledString);
     }

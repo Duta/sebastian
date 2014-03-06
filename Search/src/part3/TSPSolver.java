@@ -10,15 +10,17 @@ import java.util.List;
  * Creates a random tour of some given points on a grid,
  * then uses simulated annealing to improve the path.
  */
-public class TSPSolver implements Runnable {
+public class TSPSolver
+		implements Runnable {
     private String[] gridAscii;
     private String[] pointsAscii;
-    private final SimulatedAnnealing simAnneal;
+    private final TourImprover tourImprover;
 
-    public TSPSolver(String[] gridAscii, String[] pointsAscii, SimulatedAnnealing simAnneal) {
+    public TSPSolver(String[] gridAscii, String[] pointsAscii,
+    		TourImprover tourImprover) {
         this.gridAscii = gridAscii;
         this.pointsAscii = pointsAscii;
-        this.simAnneal = simAnneal;
+        this.tourImprover = tourImprover;
     }
 
     public static void main(String[] args) {
@@ -68,7 +70,7 @@ public class TSPSolver implements Runnable {
         System.out.println("Created initial path in " + elapsedTime + "ms\n");
 
         startTime = System.currentTimeMillis();
-        simAnneal.improve(tour);
+        tourImprover.improve(tour);
         endTime = System.currentTimeMillis();
         elapsedTime = endTime - startTime;
 
@@ -81,7 +83,8 @@ public class TSPSolver implements Runnable {
                 " to " + improvedLength + " in " + elapsedTime + "ms.");
     }
 
-    private List<GridState> parseAsciiArt(String[] gridAscii, String[] pointsAscii) {
+    private List<GridState> parseAsciiArt(String[] gridAscii,
+    		String[] pointsAscii) {
         Grid grid = Grid.fromAsciiArt(gridAscii);
 
         int width = 0;

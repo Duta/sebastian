@@ -8,13 +8,15 @@ import search.interfaces.Frontier;
 /**
  * Performs BFS on the grid problem.
  */
-public class GridBreadthFirst extends GridSearch {
+public class GridBreadthFirst
+		extends GridSearch {
     public static void main(String[] args) {
         new GridAStar().search();
     }
 
     @Override
-    protected Frontier<GridState, GridNode, GridDirection> createFrontier(GridNode goal) {
+    protected Frontier<GridState, GridNode, GridDirection>
+    createFrontier(GridNode goal) {
         return new BreadthFirstFrontier<GridState, GridNode, GridDirection>();
     }
 }
