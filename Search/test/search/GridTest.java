@@ -9,19 +9,30 @@ import part1.grid.Grid;
 import part1.grid.GridDirection;
 import part1.grid.GridState;
 import part1.grid.search.GridNode;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class GridTest {
-	private Grid grid;
-    private GridNode start, goal;
+	private Grid grid, sillygrid;
+    private GridNode start, goal, sillystart, sillygoal;
 
     @BeforeClass
     public void initStates() {
     	grid = Grid.unblockedGrid();
     	start = new GridNode(new GridState(grid, 2, 3));
     	goal = new GridNode(new GridState(grid, 6, 2));
+    	
+    	sillygrid = Grid.fromAsciiArt(new String[] {
+    			"+-+-+-+ +-+",
+    			"| | |   | |",
+                "+-+-+ + +-+",
+                "| | |   | |",
+                "+-+-+-+-+-+",
+        });
+    	
+    	sillystart = new GridNode(new GridState(sillygrid, 1, 1));
+    	sillygoal = new GridNode(new GridState(sillygrid, 3, 1));
+
 
     }
 
@@ -83,5 +94,20 @@ public class GridTest {
         }
 
         assertEquals(node, goal);
+    }
+    
+    @Test(expectedExceptions=PathNotFoundException.class)
+    public void testBreadthFirstFail() throws PathNotFoundException {
+    	Search.search(sillystart, sillygoal, new BreadthFirstFrontier<GridState, GridNode, GridDirection>());
+    }
+    
+    @Test(expectedExceptions=PathNotFoundException.class)
+    public void testDepthFirstFail() throws PathNotFoundException {
+    	Search.search(sillystart, sillygoal, new DepthFirstFrontier<GridState, GridNode, GridDirection>());
+    }
+    
+    @Test(expectedExceptions=PathNotFoundException.class)
+    public void testAStarFail() throws PathNotFoundException {
+    	Search.search(sillystart, sillygoal, new AStarFrontier<GridState, GridNode, GridDirection>(sillygoal));
     }
 }

@@ -110,6 +110,15 @@ public class EightPuzzle {
     public static EightPuzzle randomEightPuzzle() {
         return randomEightPuzzle(SIZE * SIZE * SIZE);
     }
+    
+    /* For testing purposes */
+    public static EightPuzzle impossibleEightPuzzle() {
+    	EightPuzzle ret = orderedEightPuzzle();
+    	int tmp = ret.board[1];
+    	ret.board[1] = ret.board[0];
+    	ret.board[0] = tmp;
+    	return ret;
+    }
 
     public static EightPuzzle randomEightPuzzle(int moves) {
         EightPuzzle puzzle = orderedEightPuzzle();

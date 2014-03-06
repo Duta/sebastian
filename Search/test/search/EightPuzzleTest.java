@@ -4,20 +4,21 @@ import java.util.Stack;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
-
 import part1.eightpuzzle.EightPuzzle;
 import part1.eightpuzzle.PuzzleMove;
 import part1.eightpuzzle.search.EightPuzzleNode;
 
 public class EightPuzzleTest {
-    private EightPuzzleNode start, goal;
+    private EightPuzzleNode start, goal, badgoal;
 
     @BeforeClass
     public void initStates() {
         start = new EightPuzzleNode(EightPuzzle.randomEightPuzzle());
         goal = new EightPuzzleNode(EightPuzzle.orderedEightPuzzle());
+        badgoal = new EightPuzzleNode(EightPuzzle.impossibleEightPuzzle());
 
     }
 
@@ -41,6 +42,7 @@ public class EightPuzzleTest {
         assertEquals(node, goal);
     }
 
+    /* Comment this test out to run in a reasonable time D: */
     @Test
     public void testDepthFirst() {
         Stack<EightPuzzleNode> path = null;
@@ -80,4 +82,22 @@ public class EightPuzzleTest {
 
         assertEquals(node, goal);
     }
+    
+    /* Uncomment for unreasonably long tests */
+    /*
+    @Test(expectedExceptions=PathNotFoundException.class)
+    public void testBreadthFirstFail() throws PathNotFoundException {
+    	Search.search(start, badgoal, new BreadthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
+    }
+    
+    @Test(expectedExceptions=PathNotFoundException.class)
+    public void testDepthFirstFail() throws PathNotFoundException {
+    	Search.search(start, badgoal, new DepthFirstFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>());
+    }
+    
+    @Test(expectedExceptions=PathNotFoundException.class)
+    public void testAStarFail() throws PathNotFoundException {
+    	Search.search(start, badgoal, new AStarFrontier<EightPuzzle, EightPuzzleNode, PuzzleMove>(badgoal));
+    }
+    */
 }
