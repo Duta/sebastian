@@ -13,8 +13,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class GridTest {
-    private Grid grid, sillygrid;
-    private GridNode start, goal, sillystart, sillygoal;
+    private Grid grid, sillyGrid;
+    private GridNode start, goal, sillyStart, sillyGoal;
 
     @BeforeClass
     public void initStates() {
@@ -22,16 +22,15 @@ public class GridTest {
         start = new GridNode(new GridState(grid, 2, 3));
         goal = new GridNode(new GridState(grid, 6, 2));
         
-        sillygrid = Grid.fromAsciiArt(new String[] {
+        sillyGrid = Grid.fromAsciiArt(new String[] {
                 "+-+-+-+ +-+",
                 "| | |   | |",
                 "+-+-+ + +-+",
                 "| | |   | |",
                 "+-+-+-+-+-+",
         });
-        
-        sillystart = new GridNode(new GridState(sillygrid, 1, 1));
-        sillygoal = new GridNode(new GridState(sillygrid, 3, 1));
+        sillyStart = new GridNode(new GridState(sillyGrid, 1, 1));
+        sillyGoal = new GridNode(new GridState(sillyGrid, 3, 1));
 
 
     }
@@ -98,16 +97,16 @@ public class GridTest {
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testBreadthFirstFail() throws PathNotFoundException {
-        Search.search(sillystart, sillygoal, new BreadthFirstFrontier<GridState, GridNode, GridDirection>());
+        Search.search(sillyStart, sillyGoal, new BreadthFirstFrontier<GridState, GridNode, GridDirection>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testDepthFirstFail() throws PathNotFoundException {
-        Search.search(sillystart, sillygoal, new DepthFirstFrontier<GridState, GridNode, GridDirection>());
+        Search.search(sillyStart, sillyGoal, new DepthFirstFrontier<GridState, GridNode, GridDirection>());
     }
     
     @Test(expectedExceptions=PathNotFoundException.class)
     public void testAStarFail() throws PathNotFoundException {
-        Search.search(sillystart, sillygoal, new AStarFrontier<GridState, GridNode, GridDirection>(sillygoal));
+        Search.search(sillyStart, sillyGoal, new AStarFrontier<GridState, GridNode, GridDirection>(sillyGoal));
     }
 }
