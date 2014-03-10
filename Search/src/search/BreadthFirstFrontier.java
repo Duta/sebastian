@@ -18,6 +18,7 @@ public class BreadthFirstFrontier
         frontierList = new ArrayList<NodeT>();
     }
 
+    @Override
     public void push(NodeT state) {
         frontierList.add(state);
     }

@@ -18,6 +18,7 @@ public class DepthFirstFrontier
         frontierList = new Stack<NodeT>();
     }
 
+    @Override
     public void push(NodeT state) {
         frontierList.push(state);
     }
