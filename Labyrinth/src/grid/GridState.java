@@ -29,4 +29,20 @@ public class GridState {
     public GridState applyDir(GridDirection action) {
         return new GridState(grid, x + action.dx, y + action.dy);
     }
+    
+    @Override
+    public String toString() {
+        return x + ", " + y;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof GridState)) {
+            return false;
+        }
+        GridState that = (GridState)obj;
+        return this.x == that.x
+            && this.y == that.y
+            && this.grid ==that.grid;
+    }
 }

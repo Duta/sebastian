@@ -1,11 +1,6 @@
 package grid;
 
 public class Grid {
-    public static final int
-        UP = 0,
-        DOWN = 1,
-        LEFT = 2,
-        RIGHT = 3;
     private final boolean[][][] grid;
     private final int width;
     private final int height;
@@ -27,6 +22,10 @@ public class Grid {
     }
     
     public boolean canGo(int x, int y, GridDirection direction) {
+        if(x < 0 || x >= width
+        || y < 0 || y >= height) {
+            return false;
+        }
         return grid[x][y][direction.index];
     }
 

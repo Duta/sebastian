@@ -2,13 +2,15 @@ package grid;
 
 import java.util.Stack;
 
+import search.AStarFrontier;
 import search.SearchRunner;
+import search.interfaces.Frontier;
 
 /**
  * Performs search on the grid problem.
  * Can be extended to provide a frontier (search type).
  */
-public abstract class GridSearcher
+public class GridSearcher
         extends SearchRunner<GridState, GridNode, GridDirection> {
     protected Grid grid;
     private final int startX, startY;
@@ -58,5 +60,25 @@ public abstract class GridSearcher
         while(!path.empty()) {
             System.out.println(path.pop().getAction());
         }
+    }
+
+    @Override
+    protected Frontier<GridState, GridNode, GridDirection> createFrontier(
+            GridNode goal) {
+        return new AStarFrontier<GridState, GridNode, GridDirection>(goal) {
+            @Override
+            protected int totalPathCost(GridNode node) {
+                int pathCost = 0;
+                while(node.getParent() != null) {
+                    if(node.getAction() == node.getParent().getAction()) {
+                        pathCost++;
+                    } else {
+                        pathCost += 3;
+                    }
+                    node = node.getParent();
+                }
+                return pathCost;
+            }
+        };
     }
 }
