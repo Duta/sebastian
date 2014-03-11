@@ -43,6 +43,6 @@ public class GridState {
         GridState that = (GridState)obj;
         return this.x == that.x
             && this.y == that.y
-            && this.grid ==that.grid;
+            && this.grid == that.grid;
     }
 }

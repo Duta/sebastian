@@ -31,7 +31,7 @@ public class GridNode
     @Override
     public int heuristic(GridNode goal) {
         return Math.abs(goal.state.getX() - state.getX())
-            + Math.abs(goal.state.getY() - state.getY());
+            +  Math.abs(goal.state.getY() - state.getY());
     }
 
     @Override
