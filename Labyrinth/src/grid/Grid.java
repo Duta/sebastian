@@ -10,10 +10,11 @@ public class Grid {
         this.height = height;
         this.grid = new boolean[width][height][4];
         
-        for(int x = 0; x < width; x++) //:
-            for(int y = 0; y < height; y++) //:
-                for(int i = 0; i < 4; i++) //:
-                    this.grid[x][y][i] = true;
+        for(int x = 0; x < width; x++)
+        for(int y = 0; y < height; y++)
+        for(int i = 0; i < 4; i++) {
+            this.grid[x][y][i] = true;
+        }
     }
     
     public void setBlocked(int x, int y, GridDirection direction) {
