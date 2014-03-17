@@ -18,4 +18,8 @@ public class Util {
         
         LCD.clear();
     }
+    
+    public static int round(double n) {
+        return (int)(n + (n < 0 ? -0.5 : 0.5));
+    }
 }

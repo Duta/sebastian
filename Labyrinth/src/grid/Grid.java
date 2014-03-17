@@ -1,5 +1,8 @@
 package grid;
 
+import util.Util;
+import lejos.robotics.mapping.LineMap;
+
 public class Grid {
     private final boolean[][][] grid;
     private final int width;
@@ -15,6 +18,12 @@ public class Grid {
         for(int i = 0; i < 4; i++) {
             this.grid[x][y][i] = true;
         }
+    }
+    
+    public Grid(LineMap lineMap) {
+        this(Util.round(lineMap.getBoundingRect().getWidth()),
+             Util.round(lineMap.getBoundingRect().getHeight()));
+        // TODO: add blockages
     }
     
     public void setBlocked(int x, int y, GridDirection direction) {
