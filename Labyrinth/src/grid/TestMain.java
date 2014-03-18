@@ -1,8 +1,10 @@
 package grid;
 
+import rp.robotics.mapping.LocalisationUtils;
+
 public class TestMain {
     public static void main(String[] args) {
-        Grid grid = new Grid(10, 5);
+        Grid grid = new Grid(LocalisationUtils.create2014Map1());
         int startX = 0;
         int startY = 0;
         int goalX = 9;

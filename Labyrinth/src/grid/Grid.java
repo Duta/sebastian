@@ -51,8 +51,15 @@ public class Grid {
     }
 
     public void setBlocked(int x, int y, GridDirection dir) {
+    	try {
         grid[x][y][dir.index] = false;
+    	}
+    	catch(IndexOutOfBoundsException e) {}
+    	
+    	try {
         grid[x + dir.dx][y + dir.dy][dir.opposite] = false;
+    	}
+    	catch(IndexOutOfBoundsException e) {}
     }
     
     public boolean canGo(int x, int y, GridDirection dir) {

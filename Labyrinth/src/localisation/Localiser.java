@@ -16,10 +16,10 @@ public class Localiser {
 			// TODO ALL THINGS:
 			
 			// Get sensor input.
-			//sensorModel.sense(); // TODO DOES NOTHING YET
+			sensorModel.sense(); // TODO DOES NOTHING YET
 			
 			// Adjust probabilities based on sensors.
-			//probs.adjustAfterSense(sensorModel); // TODO DOES NOTHING YET
+			sensorModel.adjustProbabilities(probs); // TODO DOES NOTHING YET
 			
 			// Move in a random direction (except walls / places been already (unless necessary))
 			actionModel.takeAction(sensorModel); // TODO DOES NOTHING YET
