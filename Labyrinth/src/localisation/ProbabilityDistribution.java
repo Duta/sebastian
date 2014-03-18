@@ -1,10 +1,6 @@
 package localisation;
 
-import util.SebastianInternalException;
-import localisation.interfaces.ActionModel;
-import localisation.interfaces.SensorModel;
 import grid.Grid;
-import grid.GridDirection;
 
 public class ProbabilityDistribution {
 	private final double[][] probabilities;
@@ -45,62 +41,25 @@ public class ProbabilityDistribution {
 		return maxProb > THRESHOLD;
 	}
 	
-	public void adjustAfterSense(SensorModel sensorModel) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void adjustAfterMove(ActionModel actionModel) {
-		GridDirection dir = actionModel.lastAction();
-		
-		switch(dir) {
-		case DOWN:
-			for(int x = 0; x < probabilities.length; x++)
-			for(int y = probabilities[0].length - 1; y >= 0; y--)
-				changeProbability(dir, x, y);
-			
-			break;
-
-		case LEFT:
-			for(int x = 0; x < probabilities.length; x++)
-			for(int y = 0; y < probabilities[0].length; y++)
-				changeProbability(dir, x, y);
-				
-			break;
-			
-		case RIGHT:
-			for(int x = probabilities.length - 1; x >= 0; x--)
-			for(int y = 0; y < probabilities[0].length; y++)
-				changeProbability(dir, x, y);
-				
-			break;
-			
-		case UP:
-			for(int x = 0; x < probabilities.length; x++)
-			for(int y = 0; y < probabilities[0].length; y++)
-				changeProbability(dir, x, y);
-				
-			break;
-			
-		default:
-			throw new SebastianInternalException("Fuck You");
-		}
-		
-		normalise();
-		
-	}
-
-	private void changeProbability(GridDirection dir, int x, int y) {
-		double prob = 0;
-		
-		if(grid.canGo(x - dir.dx, y - dir.dy, dir)) {
-			prob += probabilities[x + dir.dy][y - dir.dy];
-		}
-		
-		if(!grid.canGo(x, y, dir)) {
-			prob += probabilities[x][y];
-		}
-		
+	public void setProbability(int x, int y, double prob) {
 		probabilities[x][y] = prob;
 	}
+
+	public double getProbability(int x, int y) {
+		return probabilities[x][y];
+	}
+
+	public int getWidth() {
+		return grid.getWidth();
+	}
+
+	public int getHeight() {
+		return grid.getHeight();
+	}
+
+	public Grid getGrid() {
+		return grid;
+	}
+
+	
 }

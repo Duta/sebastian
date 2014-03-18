@@ -18,6 +18,25 @@ public class Grid {
         for(int i = 0; i < 4; i++) {
             this.grid[x][y][i] = true;
         }
+        
+        for(int x = 0; x < width; x++)
+        for(int y = 0; y < height; y++) {
+        	if(x == 0) {
+        		this.grid[x][y][GridDirection.LEFT.index] = false;
+        	}
+        	
+        	if(x == width - 1) {
+        		this.grid[x][y][GridDirection.RIGHT.index] = false;
+        	}
+        	
+        	if(y == 0) {
+        		this.grid[x][y][GridDirection.UP.index] = false;
+        	}
+        	
+        	if(y == height - 1) {
+        		this.grid[x][y][GridDirection.DOWN.index] = false;
+        	}
+        }
     }
     
     public Grid(LineMap lineMap) {
@@ -36,6 +55,7 @@ public class Grid {
         || y < 0 || y >= height) {
             return false;
         }
+        
         return grid[x][y][direction.index];
     }
 
