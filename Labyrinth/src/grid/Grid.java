@@ -1,9 +1,6 @@
 package grid;
 
 import rp.robotics.mapping.GridMap;
-import util.Util;
-import lejos.geom.Line;
-import lejos.geom.Rectangle;
 
 public class Grid {
     private final boolean[][][] grid;
@@ -47,8 +44,7 @@ public class Grid {
         for(int x = 0; x < width; x++)
         for(int y = 0; y < height; y++)
         for(GridDirection dir : GridDirection.values()) {
-            float range = gridMap.rangeToObstacleFromGridPoint(x, y, dir.degrees);
-            if(range < gridMap.getCellSize() * 0.8f) {
+            if(!gridMap.isValidTransition(x, y, x + dir.dx, y + dir.dy)) {
                 setBlocked(x, y, dir);
             }
         }
@@ -74,5 +70,35 @@ public class Grid {
     
     public int getHeight() {
         return height;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(int y = 0; y < height; y++) {
+            for(int i = 0; i < 3; i++) {
+                for(int x = 0; x < width; x++) {
+                    switch(i) {
+                    case 0:
+                        sb.append(' ');
+                        sb.append(canGo(x, y, GridDirection.UP) ? '^' : ' ');
+                        sb.append(' ');
+                        break;
+                    case 1:
+                        sb.append(canGo(x, y, GridDirection.LEFT) ? '<' : ' ');
+                        sb.append(' ');
+                        sb.append(canGo(x, y, GridDirection.RIGHT) ? '>' : ' ');
+                        break;
+                    case 2:
+                        sb.append(' ');
+                        sb.append(canGo(x, y, GridDirection.DOWN) ? 'v' : ' ');
+                        sb.append(' ');
+                        break;
+                    }
+                }
+                sb.append('\n');
+            }
+        }
+        return sb.toString();
     }
 }
