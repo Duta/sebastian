@@ -1,7 +1,7 @@
 package localisation;
 
+import util.ArrayUtil;
 import util.SebastianInternalException;
-import util.Util;
 import grid.GridDirection;
 import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
@@ -10,7 +10,7 @@ public class RandomActionModel implements ActionModel {
 	GridDirection lastAction; 
 	@Override
 	public void takeAction(SensorModel sensorModel) {
-		lastAction = GridDirection.values()[Util.RGEN.nextInt(GridDirection.values().length)];
+	    lastAction = ArrayUtil.randomChoice(GridDirection.values());
 	}
 
 	@Override

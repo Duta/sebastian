@@ -46,7 +46,7 @@ public class Localiser {
 	private static void printProbabilities(Grid grid, ProbabilityDistribution probs) {
 		for(int y = 0; y < grid.getHeight(); y++) {
 			for(int x = 0; x < grid.getWidth(); x++) {
-				System.out.printf("%.3f ", probs.getProbability(x, y));
+				System.out.print(probs.getProbability(x, y) + '\t');
 			}
 			System.out.println();
 		}
