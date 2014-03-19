@@ -42,7 +42,7 @@ public class ProbabilityDistribution {
 	}
 	
 	public void setProbability(int x, int y, double prob) {
-		probabilities[x][y] = prob;
+		probabilities[x][y] = Math.max(0, prob);
 	}
 
 	public double getProbability(int x, int y) {

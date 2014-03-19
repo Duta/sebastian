@@ -1,10 +1,10 @@
 package grid;
 
 public enum GridDirection {
-    UP(0, 0, -1, 1, 0f),
-    DOWN(1, 0, 1, 0, 180f),
-    LEFT(2, -1, 0, 3, 270f),
-    RIGHT(3, 1, 0, 2, 90f); // TODO: Check LEFT and RIGHT degrees values
+    UP(0, 0, -1, 1, 90f),
+    DOWN(1, 0, 1, 0, -900f),
+    LEFT(2, -1, 0, 3, 180f),
+    RIGHT(3, 1, 0, 2, 0f);  // See Heading.java for angles. 
     
     public final int index, opposite; 
     public final int dx, dy;

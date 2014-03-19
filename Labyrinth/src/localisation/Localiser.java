@@ -8,9 +8,13 @@ public class Localiser {
 	public static Coordinate localise(Grid grid, SensorModel sensorModel, ActionModel actionModel, boolean debug) {
 		ProbabilityDistribution probs = new ProbabilityDistribution(grid);
 		
+		int step = 1;
 		while(!probs.locationFound()) {
 			if(debug) {
 				printProbabilities(grid, probs);
+				
+				System.out.println();
+				System.out.println("Step: " + step);
 			}
 
 			// Get sensor input.
@@ -28,6 +32,8 @@ public class Localiser {
 			
 			// Adjust probabilities based on movement. 
 			actionModel.adjustProbabilities(probs);
+			
+			step++;
 		}
 		
 		if(debug) {

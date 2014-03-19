@@ -1,10 +1,11 @@
 package grid;
 
-import localisation.Coordinate;
 import rp.robotics.mapping.GridMap;
 
 public class Grid {
     private final boolean[][][] grid;
+    private final double[][][] distances;
+    
     private final int width;
     private final int height;
     
@@ -12,6 +13,7 @@ public class Grid {
         this.width = width;
         this.height = height;
         this.grid = new boolean[width][height][4];
+        this.distances = new double[width][height][4];
         
         for(int x = 0; x < width; x++)
         for(int y = 0; y < height; y++)
@@ -48,6 +50,8 @@ public class Grid {
             if(!gridMap.isValidTransition(x, y, x + dir.dx, y + dir.dy)) {
                 setBlocked(x, y, dir);
             }
+            
+            distances[x][y][dir.index] = gridMap.rangeToObstacleFromGridPoint(x, y, dir.degrees);
         }
     }
 
@@ -70,6 +74,15 @@ public class Grid {
         }
 
         return grid[x][y][dir.index];
+    }
+    
+    public double distanceFromPoint(int x, int y, GridDirection dir) {
+    	if(x < 0 || x >= width
+    	|| y < 0 || y >= height) {
+    		return -1;
+    	}
+    	
+    	return distances[x][y][dir.index];
     }
 
     public int getWidth() {

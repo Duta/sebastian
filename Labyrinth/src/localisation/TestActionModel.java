@@ -7,8 +7,8 @@ import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
 
 public class TestActionModel implements ActionModel {
-	TestGrid grid;
-	GridDirection lastAction;
+	private TestGrid grid;
+	private GridDirection lastAction;
 	
 	TestActionModel(TestGrid grid) {
 		this.grid = grid;

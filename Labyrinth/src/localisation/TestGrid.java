@@ -25,4 +25,8 @@ public class TestGrid extends Grid {
 	public Coordinate getLocation() {
 		return new Coordinate(xPos, yPos);
 	}
+	
+	public double sense(GridDirection dir) {
+		return distanceFromPoint(xPos, yPos, dir);
+	}
 }
