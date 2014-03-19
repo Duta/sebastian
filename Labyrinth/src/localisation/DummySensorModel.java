@@ -14,4 +14,9 @@ public class DummySensorModel implements SensorModel {
 		return 0;
 	}
 
+	@Override
+	public void adjustProbabilities(ProbabilityDistribution probs) {
+		
+	}
+
 }

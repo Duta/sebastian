@@ -5,24 +5,22 @@ import localisation.interfaces.SensorModel;
 import grid.Grid;
 
 public class Localiser {
-	public static void localise(Grid grid, SensorModel sensorModel, ActionModel actionModel, boolean debug) {
+	public static Coordinate localise(Grid grid, SensorModel sensorModel, ActionModel actionModel, boolean debug) {
 		ProbabilityDistribution probs = new ProbabilityDistribution(grid);
 		
 		while(!probs.locationFound()) {
 			if(debug) {
 				printProbabilities(grid, probs);
 			}
-			
-			// TODO ALL THINGS:
-			
+
 			// Get sensor input.
-			sensorModel.sense(); // TODO DOES NOTHING YET
+			sensorModel.sense();
 			
 			// Adjust probabilities based on sensors.
-			sensorModel.adjustProbabilities(probs); // TODO DOES NOTHING YET
+			sensorModel.adjustProbabilities(probs);
 			
 			// Move in a random direction (except walls / places been already (unless necessary))
-			actionModel.takeAction(sensorModel); // TODO DOES NOTHING YET
+			actionModel.takeAction(sensorModel);
 			
 			if(debug) {
 				System.out.println("Action Taken: " + actionModel.lastAction());
@@ -35,6 +33,8 @@ public class Localiser {
 		if(debug) {
 			printProbabilities(grid, probs);
 		}
+		
+		return probs.getProbableLocation();
 	}
 
 	private static void printProbabilities(Grid grid, ProbabilityDistribution probs) {
@@ -46,7 +46,7 @@ public class Localiser {
 		}
 	}
 	
-	public static void localise(Grid grid, SensorModel sensorModel, ActionModel actionModel) {
-		localise(grid, sensorModel, actionModel, false);
+	public static Coordinate localise(Grid grid, SensorModel sensorModel, ActionModel actionModel) {
+		return localise(grid, sensorModel, actionModel, false);
 	}
 }

@@ -1,5 +1,6 @@
 package grid;
 
+import localisation.Coordinate;
 import rp.robotics.mapping.GridMap;
 
 public class Grid {

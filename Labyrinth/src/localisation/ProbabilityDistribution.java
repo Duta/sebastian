@@ -61,5 +61,17 @@ public class ProbabilityDistribution {
 		return grid;
 	}
 
+	public Coordinate getProbableLocation() {
+		for(int x = 0; x < probabilities.length; x++) {
+			for(int y = 0; y < probabilities[0].length; y++) {
+				if(probabilities[x][y] == maxProb) {
+					return new Coordinate(x, y);
+				}
+			}
+		}
+		
+		return null;
+	}
+
 	
 }
