@@ -1,24 +1,28 @@
 package localisation;
 
 import util.ArrayUtil;
+import util.RobotInfo;
 import util.SebastianInternalException;
 import util.Util;
+import grid.Grid;
 import grid.GridDirection;
 import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
 
-public class TestActionModel implements ActionModel {
-	private TestGrid grid;
+public class RobotActionModel implements ActionModel {
 	private GridDirection lastAction;
+	private Grid grid;
+	private LocalisationMover robot;
 	
-	TestActionModel(TestGrid grid) {
+	public RobotActionModel(Grid grid, LocalisationMover robot) {
 		this.grid = grid;
+		this.robot = robot;
 	}
 	
 	@Override
 	public void takeAction(SensorModel sensorModel) {
 		lastAction = ArrayUtil.randomChoice(GridDirection.values());
-		grid.applyAction(lastAction);
+		robot.attemptMove(lastAction);
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class TestActionModel implements ActionModel {
 		
 		probs.normalise();
 	}
-	
+
 	private void changeProbability(ProbabilityDistribution probs, int x, int y) {
 		double prob = 0;
 		

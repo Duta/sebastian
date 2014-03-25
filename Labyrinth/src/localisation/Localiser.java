@@ -11,10 +11,10 @@ public class Localiser {
 		int step = 1;
 		while(!probs.locationFound()) {
 			if(debug) {
-				printProbabilities(grid, probs);
-				
-				System.out.println();
 				System.out.println("Step: " + step);
+				System.out.println("Prob: " + probs.getMaxProbability() + " / " + probs.getThreshold());
+				System.out.println("Loc:  " + probs.getProbableLocation());
+				System.out.println("---------");
 			}
 
 			// Get sensor input.
@@ -36,17 +36,13 @@ public class Localiser {
 			step++;
 		}
 		
-		if(debug) {
-			printProbabilities(grid, probs);
-		}
-		
 		return probs.getProbableLocation();
 	}
 
-	private static void printProbabilities(Grid grid, ProbabilityDistribution probs) {
-		for(int y = 0; y < grid.getHeight(); y++) {
-			for(int x = 0; x < grid.getWidth(); x++) {
-				System.out.print(probs.getProbability(x, y) + '\t');
+	private static void printProbabilities(ProbabilityDistribution probs) {
+		for(int y = 0; y < probs.getHeight(); y++) {
+			for(int x = 0; x < probs.getWidth(); x++) {
+				System.out.print(probs.getProbability(x, y) + ";  ");
 			}
 			System.out.println();
 		}

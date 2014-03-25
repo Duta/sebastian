@@ -1,10 +1,10 @@
-package part2;
+package localisation;
 
-import java.util.Stack;
-
-import part1.grid.GridDirection;
-import part1.grid.search.GridNode;
+import part2.PathAction;
+import part2.SensorResult;
+import grid.GridDirection;
 import lejos.nxt.LightSensor;
+import lejos.nxt.TouchSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.util.Delay;
 import util.ButtonUtil;
@@ -13,57 +13,87 @@ import util.SebastianInternalException;
 /**
  * Makes the robot follow the given path of grid nodes.
  */
-public class Mover
-        implements Runnable {
+public class LocalisationMover {
     private static final int
         THRESHOLD = 450,
         FORWARD_SPEED = 120,
         TURN_RATE = 130,
-        TURN_SPEED = 30;
+        TURN_SPEED = 30,
+        MOVE_DIST = 50;
 
     private final DifferentialPilot pilot;
     private final LightSensor leftSensor;
     private final LightSensor rightSensor;
-    private final Stack<GridNode> path;
+    private final TouchSensor touchSensor;
 
     private GridDirection direction;
 
-    public Mover(DifferentialPilot differentialPilot,
+    public LocalisationMover(DifferentialPilot differentialPilot,
             LightSensor leftSensor, LightSensor rightSensor,
-            Stack<GridNode> path, GridDirection initialDirection) {
+            TouchSensor touchSensor, GridDirection initialDirection) {
         this.pilot = differentialPilot;
         this.leftSensor = leftSensor;
         this.rightSensor = rightSensor;
-        this.path = path;
+        this.touchSensor = touchSensor;
         this.direction = initialDirection;
     }
 
-    @Override
-    public void run() {
-        ButtonUtil.exitOnEscapePress();
-
-        boolean running = true;
+    public void attemptMove(GridDirection dir) {
+    	pilot.travel(MOVE_DIST);
+    	pilot.rotate(convert(dir).getTheta());
+    	
+    	boolean reverse = false;
+    	boolean running = true;
+    	boolean onPath = false;
+        
         while(running) {
             Delay.msDelay(20);
+            
+            if(touchSensor.isPressed()) {
+            	reverse = true;
+            }
 
             switch(checkSensors()) {
             case LEFT_BLACK:
+            	onPath = true;
+            	
                 pilot.setTravelSpeed(TURN_SPEED);
-                pilot.steer(-TURN_RATE);
+                if(reverse) {
+                	pilot.steer(TURN_RATE);
+                } else {
+                	pilot.steer(-TURN_RATE);
+                }
                 break;
 
             case RIGHT_BLACK:
+            	onPath = true;
+            	
                 pilot.setTravelSpeed(TURN_SPEED);
-                pilot.steer(TURN_RATE);
+                if(reverse) {
+                	pilot.steer(-TURN_RATE);
+                } else {
+                	pilot.steer(TURN_RATE);
+                }
                 break;
 
             case NOTHING:
+            	onPath = true;
+
                 pilot.setTravelSpeed(FORWARD_SPEED);
-                pilot.forward();
+                if(reverse) {
+                	pilot.backward();
+                } else {
+                	pilot.forward();
+                }
                 break;
 
             case BOTH_BLACK:
-                running = junction();
+            	if(onPath) {
+            		pilot.stop();
+            		running = false;
+            	} else {
+            		pilot.forward();
+            	}
                 break;
             }
         }
@@ -71,23 +101,6 @@ public class Mover
 
     private SensorResult checkSensors() {
         return SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD);
-    }
-
-    private boolean junction() {
-        if(path.empty()) {
-            return false;
-        }
-
-        GridNode node = path.pop();
-
-        System.out.println("Direction: " + direction + ", Action: " + node.getAction());
-        PathAction action = convert(node.getAction());
-        direction = node.getAction();
-
-        pilot.travel(60);
-        pilot.rotate(action.getTheta());
-
-        return true;
     }
 
     private PathAction convert(GridDirection action) {
@@ -127,4 +140,8 @@ public class Mover
         default: throw new SebastianInternalException();
         }
     }
+
+	public GridDirection getCurrentDir() {
+		return direction;
+	}
 }

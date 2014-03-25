@@ -1,0 +1,40 @@
+package localisation;
+
+import lejos.nxt.addon.OpticalDistanceSensor;
+import lejos.robotics.RegulatedMotor;
+import grid.GridDirection;
+
+public class SensorReader {
+	private static final GridDirection[] dirs = {
+		GridDirection.UP,
+		GridDirection.RIGHT,
+		GridDirection.DOWN,
+		GridDirection.LEFT
+	};
+	
+	private LocalisationMover mover;
+	private RegulatedMotor sensorMotor;
+	private OpticalDistanceSensor sensor;
+	
+	public SensorReader(LocalisationMover mover, RegulatedMotor sensorMotor, OpticalDistanceSensor sensor) {
+		this.mover = mover;
+		this.sensorMotor = sensorMotor;
+		this.sensor = sensor;
+	}
+
+	public void read(double[] readings) {
+		GridDirection robotDir = mover.getCurrentDir();
+		int dirIndex = 0;
+		for(; dirIndex < dirs.length; dirIndex++) {
+			if(dirs[dirIndex].equals(robotDir)) {
+				break;
+			}
+		}
+		
+		for(int i = 0; i < dirs.length; i++) {
+			int index = (i + dirIndex) % dirs.length;
+			readings[dirs[index].index] = sensor.getDistance();
+			sensorMotor.rotate(i < dirs.length - 1 ? 90 : -270);
+		}
+	}
+}

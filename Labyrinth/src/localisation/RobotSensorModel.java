@@ -1,24 +1,25 @@
 package localisation;
 
+import grid.Grid;
 import grid.GridDirection;
 import localisation.interfaces.SensorModel;
 
-public class TestSensorModel implements SensorModel {
-	private TestGrid grid;
-	private double[] readings;
-	
-	private final double threshold = 5;
+public class RobotSensorModel implements SensorModel {
+	private final double threshold = 50;
 
-	public TestSensorModel(TestGrid grid) {
+	private Grid grid;
+	private double[] readings;
+	private SensorReader sensor;
+		
+	public RobotSensorModel(Grid grid, SensorReader sensor) {
 		this.grid = grid;
 		this.readings = new double[4];
+		this.sensor = sensor;
 	}
 
 	@Override
 	public void sense() {
-		for(GridDirection dir : GridDirection.values()) {
-			readings[dir.index] = grid.sense(dir);
-		}
+		sensor.read(readings);
 	}
 
 	@Override
@@ -39,9 +40,9 @@ public class TestSensorModel implements SensorModel {
 				}
 				
 				if(couldBeHere) {
-					probs.setProbability(x, y, probs.getProbability(x, y) + 0.05);
+					probs.setProbability(x, y, probs.getProbability(x, y) + 0.5);
 				} else {
-					probs.setProbability(x, y, probs.getProbability(x, y) - 0.05);
+					probs.setProbability(x, y, probs.getProbability(x, y) - 0.5);
 				}				
 			}
 		}
