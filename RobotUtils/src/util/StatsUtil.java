@@ -3,7 +3,7 @@ package util;
 import java.util.List;
 
 public class StatsUtil {
-    public static int removeAnomaliesAndGetAverage(List<Integer> list) {
+    public static int removeAnomaliesAndGetAverage(List<Float> list) {
         int sum = 0;
         for(int i = 0; i < list.size(); i++) {
             sum += list.get(i); 

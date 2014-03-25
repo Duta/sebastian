@@ -39,9 +39,9 @@ public class TestSensorModel implements SensorModel {
 				}
 				
 				if(couldBeHere) {
-					probs.setProbability(x, y, probs.getProbability(x, y) + 0.05);
+					probs.setProbability(x, y, probs.getProbability(x, y) + 0.005);
 				} else {
-					probs.setProbability(x, y, probs.getProbability(x, y) - 0.05);
+					probs.setProbability(x, y, probs.getProbability(x, y) - 0.005);
 				}				
 			}
 		}

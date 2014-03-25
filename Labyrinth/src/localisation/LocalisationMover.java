@@ -41,6 +41,7 @@ public class LocalisationMover {
     public void attemptMove(GridDirection dir) {
     	pilot.travel(MOVE_DIST);
     	pilot.rotate(convert(dir).getTheta());
+    	direction = dir;
     	
     	boolean reverse = false;
     	boolean running = true;
@@ -97,6 +98,13 @@ public class LocalisationMover {
                 break;
             }
         }
+        
+        if(reverse) {
+        	pilot.travel(10);
+        } else {
+        	pilot.travel(-10);
+        }
+        
     }
 
     private SensorResult checkSensors() {

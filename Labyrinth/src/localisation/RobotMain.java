@@ -35,6 +35,8 @@ public class RobotMain {
 		);
 		
 		Grid g = new Grid(LocalisationUtils.create2014Map1());
+		
+		try {
 		Coordinate loc = Localiser.localise(
 			g, 
 			new RobotSensorModel(g, sensorReader),
@@ -44,6 +46,11 @@ public class RobotMain {
 		);
 		
 		System.out.println("Location Found: " + loc);
+
+		} catch(ArithmeticException e) {
+			System.out.println(e.getMessage());
+		}
+		
 		
 		while(true) {
 			Delay.msDelay(20);

@@ -1,7 +1,9 @@
 package localisation;
 
+import util.SensorsUtil;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.RegulatedMotor;
+import lejos.util.Delay;
 import grid.GridDirection;
 
 public class SensorReader {
@@ -33,8 +35,9 @@ public class SensorReader {
 		
 		for(int i = 0; i < dirs.length; i++) {
 			int index = (i + dirIndex) % dirs.length;
-			readings[dirs[index].index] = sensor.getDistance();
+			readings[dirs[index].index] = sensor.getRange();
 			sensorMotor.rotate(i < dirs.length - 1 ? 90 : -270);
+			Delay.msDelay(500);
 		}
 	}
 }

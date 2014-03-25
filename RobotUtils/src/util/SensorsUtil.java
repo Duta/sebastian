@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lejos.nxt.UltrasonicSensor;
+import lejos.robotics.RangeFinder;
 import lejos.util.Delay;
 
 public class SensorsUtil {
-    public static int getSensorDistance(UltrasonicSensor sensor, int numChecks, int timeInterval) {
-        List<Integer> vals = new ArrayList<Integer>();
+    public static int getSensorDistance(RangeFinder sensor, int numChecks, int timeInterval) {
+        List<Float> vals = new ArrayList<Float>();
         for(int i = 0; i < numChecks; i++) {
-            vals.add(sensor.getDistance());
+            vals.add(sensor.getRange());
             Delay.msDelay(timeInterval);
         }
         return StatsUtil.removeAnomaliesAndGetAverage(vals);
