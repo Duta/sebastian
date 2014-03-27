@@ -6,8 +6,8 @@ import lejos.nxt.SensorPort;
 
 public class LightSensorTest {
 	public static void main(String[] args) {
-		LightSensor left = new LightSensor(SensorPort.S4);
-		LightSensor right = new LightSensor(SensorPort.S3);
+		LightSensor left = new LightSensor(SensorPort.S1);
+		LightSensor right = new LightSensor(SensorPort.S4);
 		ButtonUtil.exitOnEscapePress();
 		
 		while(true) {

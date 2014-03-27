@@ -10,7 +10,7 @@ import search.interfaces.Frontier;
  * Performs search on the grid to find
  * a path from one point to another.
  */
-public class GridSearcher
+public abstract class GridSearcher
         extends SearchRunner<GridState, GridNode, GridDirection> {
     private Grid grid;
     private final int startX, startY;
@@ -27,7 +27,7 @@ public class GridSearcher
      * @param goalX the goal point's x co-ordinate
      * @param goalY the goal point's y co-ordinate
      */
-    protected GridSearcher(Grid grid, int startX,
+    public GridSearcher(Grid grid, int startX,
             int startY, int goalX, int goalY) {
         this.grid = grid;
         this.startX = startX;
@@ -57,20 +57,6 @@ public class GridSearcher
     @Override
     protected void pathNotFoundAction(GridNode start, GridNode goal) {
         System.out.println("No path found.");
-    }
-
-    @Override
-    protected void processPathAction(GridNode start, GridNode goal, Stack<GridNode> path) {
-        // Pop the start node, since we're
-        // printing actions, which the start
-        // node doesn't have
-        path.pop();
-
-        // Print the path
-        System.out.println("Path (Length " + path.size() + "):");
-        while(!path.empty()) {
-            System.out.println(path.pop().getAction());
-        }
     }
 
     @Override

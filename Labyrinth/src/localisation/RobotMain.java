@@ -2,6 +2,7 @@ package localisation;
 
 import grid.Grid;
 import grid.GridDirection;
+import grid.GridState;
 import lejos.nxt.LightSensor;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
@@ -18,13 +19,13 @@ public class RobotMain {
 		Util.waitForStart();
 		ButtonUtil.exitOnEscapePress();
 		
-		RobotInfo robot = RobotInfo.SEB_V2;
+		RobotInfo robot = RobotInfo.SEB_V3;
 		
 		LocalisationMover lMover = new LocalisationMover(
 			robot.getDifferentialPilot(), 
+			new LightSensor(SensorPort.S1), 
 			new LightSensor(SensorPort.S4), 
-			new LightSensor(SensorPort.S3), 
-			new TouchSensor(SensorPort.S1),
+			new TouchSensor(SensorPort.S3),
 			GridDirection.UP
 		);
 		
@@ -37,7 +38,7 @@ public class RobotMain {
 		Grid g = new Grid(LocalisationUtils.create2014Map1());
 		
 		try {
-		Coordinate loc = Localiser.localise(
+		GridState loc = Localiser.localise(
 			g, 
 			//new RobotSensorModel(g, sensorReader),
 			new DummySensorModel(),

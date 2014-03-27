@@ -23,11 +23,10 @@ public class RobotActionModel implements ActionModel {
 	
 	@Override
 	public void takeAction(SensorModel sensorModel) {
-		/*
 		if(robot.bumped() || Util.RGEN.nextDouble() < 0.15) {
 			lastAction = ArrayUtil.randomChoice(GridDirection.values());
 		}
-		*/
+		
 		robot.attemptMove(lastAction);
 	}
 

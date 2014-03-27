@@ -2,22 +2,24 @@ package localisation;
 
 import util.Util;
 import grid.Grid;
+import grid.GridState;
 
 public class ProbabilityDistribution {
 	private final double[][] probabilities;
 	private final Grid grid;
 	
-	private static final double THRESHOLD = 0.8;
+	private static final double THRESHOLD = 0.5;
 	private double maxProb;
 	
 	public ProbabilityDistribution(Grid grid) {
 		this.grid = grid;
 		this.probabilities = new double[getWidth()][getHeight()];
 		
-		// Thanks Bertie for these beautifully horrific for loop designs ;)
-		for(int x = 0; x < getWidth(); x++)
-			for(int y = 0; y < getHeight(); y++)
+		for(int x = 0; x < getWidth(); x++) {
+			for(int y = 0; y < getHeight(); y++) {
 				probabilities[x][y] = 1.0;
+			}
+		}
 		
 		normalise();
 	}
@@ -26,15 +28,18 @@ public class ProbabilityDistribution {
 		double total = 0;
 		maxProb = 0;
 		
-		for(int x = 0; x < getWidth(); x++)
-			for(int y = 0; y < getHeight(); y++)
+		for(int x = 0; x < getWidth(); x++) {
+			for(int y = 0; y < getHeight(); y++) {
 				total += probabilities[x][y];
+			}
+		}
 		
-		for(int x = 0; x < getWidth(); x++)
+		for(int x = 0; x < getWidth(); x++) {
 			for(int y = 0; y < getHeight(); y++) {
 				probabilities[x][y] *= 1.0 / total;
 				maxProb = Math.max(maxProb, probabilities[x][y]);
 			}
+		}
 	}
 	
 	public boolean locationFound() {
@@ -61,11 +66,11 @@ public class ProbabilityDistribution {
 		return grid;
 	}
 
-	public Coordinate getProbableLocation() {
+	public GridState getProbableLocation() {
 		for(int x = 0; x < getWidth(); x++) {
 			for(int y = 0; y < getHeight(); y++) {
 				if(Util.equal(probabilities[x][y], maxProb)) {
-					return new Coordinate(x, y);
+					return new GridState(grid, x, y);
 				}
 			}
 		}

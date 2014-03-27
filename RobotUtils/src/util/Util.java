@@ -1,5 +1,7 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import lejos.nxt.Button;
@@ -31,4 +33,12 @@ public class Util {
     	return Math.abs(d1 - d2) < epsilon;
     	// or  -epsilon < d1 - d2 && d1 - d2 < epsilon
     }
+
+	public static <T> List<T> asList(T... items) {
+		List<T> list = new ArrayList<T>();
+		for(T t : items) {
+			list.add(t);
+		}
+		return list;
+	}
 }

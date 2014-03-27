@@ -3,9 +3,10 @@ package localisation;
 import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
 import grid.Grid;
+import grid.GridState;
 
 public class Localiser {
-	public static Coordinate localise(Grid grid, SensorModel sensorModel, ActionModel actionModel, boolean debug) {
+	public static GridState localise(Grid grid, SensorModel sensorModel, ActionModel actionModel, boolean debug) {
 		ProbabilityDistribution probs = new ProbabilityDistribution(grid);
 		
 		int step = 1;
@@ -48,7 +49,7 @@ public class Localiser {
 		}
 	}
 	
-	public static Coordinate localise(Grid grid, SensorModel sensorModel, ActionModel actionModel) {
+	public static GridState localise(Grid grid, SensorModel sensorModel, ActionModel actionModel) {
 		return localise(grid, sensorModel, actionModel, false);
 	}
 }

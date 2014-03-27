@@ -11,7 +11,7 @@ public class TestActionModel implements ActionModel {
 	private TestGrid grid;
 	private GridDirection lastAction;
 	
-	TestActionModel(TestGrid grid) {
+	public TestActionModel(TestGrid grid) {
 		this.grid = grid;
 	}
 	

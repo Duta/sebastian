@@ -1,5 +1,7 @@
 package grid;
 
+import java.util.Stack;
+
 import rp.robotics.mapping.LocalisationUtils;
 
 public class TestMain {
@@ -9,7 +11,13 @@ public class TestMain {
         int startY = 0;
         int goalX = 9;
         int goalY = 4;
-        GridSearcher searcher = new GridSearcher(grid, startX, startY, goalX, goalY);
+        GridSearcher searcher = new GridSearcher(grid, startX, startY, goalX, goalY) {
+			@Override
+			protected void processPathAction(GridNode start, GridNode goal,
+					Stack<GridNode> path) {
+				// FUCK :>
+			}
+        };
         searcher.search();
     }
 }
