@@ -7,15 +7,26 @@ import search.SearchRunner;
 import search.interfaces.Frontier;
 
 /**
- * Performs search on the grid problem.
- * Can be extended to provide a frontier (search type).
+ * Performs search on the grid to find
+ * a path from one point to another.
  */
 public class GridSearcher
         extends SearchRunner<GridState, GridNode, GridDirection> {
-    protected Grid grid;
+    private Grid grid;
     private final int startX, startY;
     private final int goalX, goalY;
 
+    /**
+     * Creates a GridSearcher which will search
+     * on the given grid from the given start
+     * point to the given goal point.
+     * 
+     * @param grid the grid to search in
+     * @param startX the start point's x co-ordinate
+     * @param startY the start point's y co-ordinate
+     * @param goalX the goal point's x co-ordinate
+     * @param goalY the goal point's y co-ordinate
+     */
     protected GridSearcher(Grid grid, int startX,
             int startY, int goalX, int goalY) {
         this.grid = grid;

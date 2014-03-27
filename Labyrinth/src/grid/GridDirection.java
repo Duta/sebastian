@@ -1,5 +1,8 @@
 package grid;
 
+/**
+ * Directions you can move in a grid.
+ */
 public enum GridDirection {
     UP(0, 0, -1, 1, 90f),
     DOWN(1, 0, 1, 0, -90f),

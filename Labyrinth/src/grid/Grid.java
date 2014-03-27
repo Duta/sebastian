@@ -2,6 +2,10 @@ package grid;
 
 import rp.robotics.mapping.GridMap;
 
+/**
+ * Represents a rectangular grid.
+ * Some junction pairs may be blocked.
+ */
 public class Grid {
     private final boolean[][][] grid;
     private final double[][][] distances;
@@ -41,6 +45,11 @@ public class Grid {
         }
     }
 
+    /**
+     * Converts the given GridMap to a Grid
+     * 
+     * @param gridMap the GridMap to convert
+     */
     public Grid(GridMap gridMap) {
         this(gridMap.getGridWidth(),
              gridMap.getGridHeight());
@@ -55,18 +64,34 @@ public class Grid {
         }
     }
 
+    /**
+     * Set that the given point is blocked
+     * in the given direction.
+     * 
+     * @param x the x co-ordinate
+     * @param y the y co-ordinate
+     * @param dir the direction
+     */
     public void setBlocked(int x, int y, GridDirection dir) {
     	try {
-        grid[x][y][dir.index] = false;
-    	}
-    	catch(IndexOutOfBoundsException e) {}
+    		grid[x][y][dir.index] = false;
+    	} catch(IndexOutOfBoundsException e) {}
     	
     	try {
-        grid[x + dir.dx][y + dir.dy][dir.opposite] = false;
-    	}
-    	catch(IndexOutOfBoundsException e) {}
+    		grid[x + dir.dx][y + dir.dy][dir.opposite] = false;
+    	} catch(IndexOutOfBoundsException e) {}
     }
     
+    /**
+     * Returns true if there isn't a blockage
+     * in the given direction from the given point.
+     * 
+     * @param x the x co-ordinate
+     * @param y the y co-ordinate
+     * @param dir the direction
+     * @return true iff it is possible to move in
+     *         the given direction from the point
+     */
     public boolean canGo(int x, int y, GridDirection dir) {
         if(x < 0 || x >= width
         || y < 0 || y >= height) {
@@ -76,6 +101,16 @@ public class Grid {
         return grid[x][y][dir.index];
     }
     
+    /**
+     * Returns the distance to the closest blockage
+     * from the given point in the given direction.
+     * 
+     * @param x the x co-ordinate
+     * @param y the y co-ordinate
+     * @param dir the direction
+     * @return the distance in the given direction from
+     *         the given point to the next blockage
+     */
     public double distanceFromPoint(int x, int y, GridDirection dir) {
     	if(x < 0 || x >= width
     	|| y < 0 || y >= height) {
@@ -85,10 +120,20 @@ public class Grid {
     	return distances[x][y][dir.index];
     }
 
+    /**
+     * Returns the width of the grid.
+     * 
+     * @return the width of the grid
+     */
     public int getWidth() {
         return width;
     }
     
+    /**
+     * Returns the height of the grid.
+     * 
+     * @return the height of the grid
+     */
     public int getHeight() {
         return height;
     }
