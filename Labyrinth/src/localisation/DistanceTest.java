@@ -3,6 +3,7 @@ package localisation;
 import util.ButtonUtil;
 import lejos.nxt.SensorPort;
 import lejos.nxt.addon.OpticalDistanceSensor;
+import lejos.util.Delay;
 
 public class DistanceTest {
 	public static void main(String[] args) {
@@ -10,7 +11,8 @@ public class DistanceTest {
 		ButtonUtil.exitOnEscapePress();
 		
 		while(true) {
-			System.out.println(sensor.getDistance() / 10);
+			System.out.println(sensor.getRange());
+			Delay.msDelay(20);
 		}
 	}
 }

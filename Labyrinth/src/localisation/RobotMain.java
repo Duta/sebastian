@@ -18,13 +18,13 @@ public class RobotMain {
 		Util.waitForStart();
 		ButtonUtil.exitOnEscapePress();
 		
-		RobotInfo robot = RobotInfo.SEBASTIAN;
+		RobotInfo robot = RobotInfo.SEB_V2;
 		
 		LocalisationMover lMover = new LocalisationMover(
 			robot.getDifferentialPilot(), 
 			new LightSensor(SensorPort.S4), 
-			new LightSensor(SensorPort.S1), 
-			new TouchSensor(SensorPort.S3),
+			new LightSensor(SensorPort.S3), 
+			new TouchSensor(SensorPort.S1),
 			GridDirection.UP
 		);
 		
@@ -39,8 +39,8 @@ public class RobotMain {
 		try {
 		Coordinate loc = Localiser.localise(
 			g, 
-			new RobotSensorModel(g, sensorReader),
-			//new DummySensorModel(),
+			//new RobotSensorModel(g, sensorReader),
+			new DummySensorModel(),
 			new RobotActionModel(g, lMover), 
 			true
 		);

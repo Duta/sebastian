@@ -6,7 +6,8 @@ import localisation.interfaces.SensorModel;
 
 public class RobotSensorModel implements SensorModel {
 	private final double threshold = 10;
-	private final double MAX_RANGE = 28;
+	private final double MAX_RANGE = 152;
+	private final double MIN_RANGE = 28;
 
 	private Grid grid;
 	private double[] readings;
@@ -32,12 +33,12 @@ public class RobotSensorModel implements SensorModel {
 	public void adjustProbabilities(ProbabilityDistribution probs) {
 		for (int x = 0; x < probs.getWidth(); x++) {
 			for (int y = 0; y < probs.getHeight(); y++) {
-				boolean couldBeHere = true, tooLong = false;
+				boolean couldBeHere = true, outOfRange = false;
 				for (GridDirection dir : GridDirection.values()) {
-					if (Math.abs(readings[dir.index] - grid.distanceFromPoint(x, y, dir)) > threshold) {
-						if (grid.distanceFromPoint(x, y, dir) >= MAX_RANGE + threshold) {
-							tooLong = true;
-						} else {
+					if (Math.abs(readings[dir.index]
+							- grid.distanceFromPoint(x, y, dir)) > threshold) {
+						if (!((grid.distanceFromPoint(x, y, dir) > MAX_RANGE + threshold) 
+								|| (grid.distanceFromPoint(x, y, dir) < MIN_RANGE - threshold))) {
 							couldBeHere = false;
 							break;
 						}
@@ -47,7 +48,7 @@ public class RobotSensorModel implements SensorModel {
 
 				if (couldBeHere) {
 					probs.setProbability(x, y, probs.getProbability(x, y)
-							+ (tooLong ? 0.01 : 0.1));
+							+ (outOfRange ? 0.01 : 0.1));
 				} else {
 					probs.setProbability(x, y, probs.getProbability(x, y) - 0.1);
 				}

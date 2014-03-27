@@ -12,19 +12,19 @@ public enum SensorResult {
     NOTHING;
 
     public static SensorResult checkSensors(LightSensor left,
-            LightSensor right, int threshold) {
+            LightSensor right, int leftThreshold, int rightThreshold) {
         int leftVal = left.getNormalizedLightValue();
         int rightVal = right.getNormalizedLightValue();
 
-        if(leftVal < threshold && rightVal < threshold) {
+        if(leftVal < leftThreshold && rightVal < rightThreshold) {
             return SensorResult.BOTH_BLACK;
         }
 
-        if(leftVal < threshold) {
+        if(leftVal < leftThreshold) {
             return SensorResult.LEFT_BLACK;
         }
 
-        if(rightVal < threshold) {
+        if(rightVal < rightThreshold) {
             return SensorResult.RIGHT_BLACK;
         }
 

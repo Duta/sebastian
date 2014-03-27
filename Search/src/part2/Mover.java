@@ -70,7 +70,7 @@ public class Mover
     }
 
     private SensorResult checkSensors() {
-        return SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD);
+        return SensorResult.checkSensors(leftSensor, rightSensor, THRESHOLD, THRESHOLD);
     }
 
     private boolean junction() {

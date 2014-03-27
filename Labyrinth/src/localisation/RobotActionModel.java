@@ -17,11 +17,17 @@ public class RobotActionModel implements ActionModel {
 	public RobotActionModel(Grid grid, LocalisationMover robot) {
 		this.grid = grid;
 		this.robot = robot;
+		
+		lastAction = GridDirection.UP;
 	}
 	
 	@Override
 	public void takeAction(SensorModel sensorModel) {
-		lastAction = ArrayUtil.randomChoice(GridDirection.values());
+		/*
+		if(robot.bumped() || Util.RGEN.nextDouble() < 0.15) {
+			lastAction = ArrayUtil.randomChoice(GridDirection.values());
+		}
+		*/
 		robot.attemptMove(lastAction);
 	}
 
