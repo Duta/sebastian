@@ -1,0 +1,99 @@
+\documentclass{beamer}
+
+\usecolortheme{seahorse}
+
+\title{Labyrinth}
+\subtitle{Revenge of the Grid}
+\author{Tom Byrne, Sam Sleight, Bertie Wheen}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}
+    \frametitle{The Beginning}
+    Initial thoughts: \pause
+    \begin{itemize}
+        \item Focus on speed \pause
+            \begin{itemize}
+                \item Optimise grid code \pause
+                \item Write localisation from scratch \pause
+            \end{itemize}
+        \item Engineer Sebastian
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Grid}
+    Use an array instead of an object heavy representaton. \\ \pause
+    Write code to convert provided map. \\ \pause
+    Adapt search and movement classes.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Starting Localisation}
+    Look at code given in example project \\ \pause
+    Create localisation classes from scratch using our grid representation: \pause
+    \begin{itemize}
+        \item Probability distribution
+            \begin{itemize}
+                \item Stores probalities as array \pause
+                \item Update in-place instead of creating new each time \pause
+            \end{itemize}
+        \item Basic action model \pause
+        \item (Very) basic sensor model \pause
+    \end{itemize}
+    Tested on computer. Need to get it working on Sebastian.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sebastian}
+    Added rotating vision sensor in advance. \\ \pause
+    Tested action model in grid. \pause
+    \begin{itemize}
+        \item Worked, albeit quite slowly \pause
+        \item But needed babysitting \pause
+            \begin{itemize}
+                \item Too big to rotate in places \pause
+                \item Could not reverse effectively \pause
+            \end{itemize}
+    \end{itemize}
+    Tested sensor model. \pause
+    \begin{itemize}
+        \item Perfect sensor models don't work in practice \pause
+        \item Confusion with cm and mm \pause
+        \item Hampered by sensor range \pause
+    \end{itemize}
+    Time for The Great Rebuild\texttrademark
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sebastian 2.0}
+    Built entirely from scratch \\ \pause
+    Focus on smaller frame and central light sensors \\ \pause
+    Code all designed to easily accomodate new robots \\ \pause
+    BUT: \pause
+    \begin{itemize}
+        \item Broke. Absolutely. Everything. \pause
+        \item Could no longer traverse the grid. \pause
+    \end{itemize}
+    Spent way too long trying new movement code and values. \\ \pause
+    Could either deal with junctions or deal with a line, but never both. \\ \pause
+    Time for a last minute second rebuild. \\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sebastian 2.5}
+    Similar design, but with sensors on front again. \\ \pause
+    Grid now worked again! \\ \pause
+    Unfortunately much too late to get any serious sensor models working
+\end{frame}
+
+\begin{frame}
+    \frametitle{Final Code}
+    While unlikely to get it working on Sebastian, we wrote the final bits of code. \\ \pause
+    Pulling localisation and search together. \\ \pause
+    Works successfully using test models! \\ \pause
+\end{frame}
+
+\end{document}
+
