@@ -1,5 +1,9 @@
 package localisation;
 
+/**
+ * Pair of ints representing a location
+ * (Mostly unused, GridState is better)
+ */
 public class Coordinate {
 	public final int x, y;
 	

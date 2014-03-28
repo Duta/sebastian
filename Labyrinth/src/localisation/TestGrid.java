@@ -5,6 +5,11 @@ import util.Util;
 import grid.Grid;
 import grid.GridDirection;
 
+/**
+ * Grid for testing.
+ * Is basically a simulation of a robot moving and provides sensor readings
+ * at the current actual location.
+ */
 public class TestGrid extends Grid {
 	private int xPos, yPos;
 	
@@ -15,6 +20,9 @@ public class TestGrid extends Grid {
 		yPos = Util.RGEN.nextInt(getHeight());
 	}
 	
+	/**
+	 * Move the 'robot' in a direction.
+	 */
 	public void applyAction(GridDirection dir) {
 		if(canGo(xPos, yPos, dir)) {
 			xPos += dir.dx;
@@ -22,10 +30,16 @@ public class TestGrid extends Grid {
 		}
 	}
 	
+	/**
+	 * Get the current 'robot' location.
+	 */
 	public Coordinate getLocation() {
 		return new Coordinate(xPos, yPos);
 	}
 	
+	/**
+	 * Get the sensor reading from the 'robot' in a specific direction.
+	 */
 	public double sense(GridDirection dir) {
 		return distanceFromPoint(xPos, yPos, dir);
 	}

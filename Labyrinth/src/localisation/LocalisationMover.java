@@ -9,7 +9,8 @@ import lejos.robotics.navigation.DifferentialPilot;
 import util.SebastianInternalException;
 
 /**
- * Makes the robot follow the given path of grid nodes.
+ * Makes the robot follow the given path of grid nodes, specifically
+ * during the localisation process.
  */
 public class LocalisationMover {
 	private static final int 

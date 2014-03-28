@@ -4,6 +4,10 @@ import util.Util;
 import grid.Grid;
 import grid.GridState;
 
+/**
+ * Represents the probabilities of being at each location in a 
+ * grid.
+ */
 public class ProbabilityDistribution {
 	private final double[][] probabilities;
 	private final Grid grid;
@@ -11,6 +15,9 @@ public class ProbabilityDistribution {
 	private static final double THRESHOLD = 0.5;
 	private double maxProb;
 	
+	/**
+	 * Constructs a new distribution on a given grid
+	 */
 	public ProbabilityDistribution(Grid grid) {
 		this.grid = grid;
 		this.probabilities = new double[getWidth()][getHeight()];
@@ -24,6 +31,9 @@ public class ProbabilityDistribution {
 		normalise();
 	}
 
+	/**
+	 * Makes the probabilities sum to 1.0
+	 */
 	public void normalise() {
 		double total = 0;
 		maxProb = 0;
@@ -42,14 +52,24 @@ public class ProbabilityDistribution {
 		}
 	}
 	
+	/**
+	 * @return True if the probable location has been found.
+	 */
 	public boolean locationFound() {
 		return maxProb > THRESHOLD;
 	}
 	
+	/**
+	 * Sets the probability at a specific location
+	 * DOES NOT NORMALISE
+	 */
 	public void setProbability(int x, int y, double prob) {
 		probabilities[x][y] = Math.max(0, prob);
 	}
 
+	/**
+	 * Gets the probability at a specific location
+	 */
 	public double getProbability(int x, int y) {
 		return probabilities[x][y];
 	}
@@ -66,6 +86,10 @@ public class ProbabilityDistribution {
 		return grid;
 	}
 
+	/**
+	 * Returns the current most likely location. If there is more than one,
+	 * then it returns the first found.
+	 */
 	public GridState getProbableLocation() {
 		for(int x = 0; x < getWidth(); x++) {
 			for(int y = 0; y < getHeight(); y++) {

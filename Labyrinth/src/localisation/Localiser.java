@@ -5,7 +5,17 @@ import localisation.interfaces.SensorModel;
 import grid.Grid;
 import grid.GridState;
 
+/**
+ * Performs markov localisation
+ */
 public class Localiser {
+	/**
+	 * @param grid The grid to localise in
+	 * @param sensorModel The sensor model to use
+	 * @param actionModel The action model to use
+	 * @param debug If true, prints output to console (default false)
+	 * @return The GridState containing the probable location.
+	 */
 	public static GridState localise(Grid grid, SensorModel sensorModel, ActionModel actionModel, boolean debug) {
 		ProbabilityDistribution probs = new ProbabilityDistribution(grid);
 		

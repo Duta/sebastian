@@ -14,6 +14,9 @@ import util.ButtonUtil;
 import util.RobotInfo;
 import util.Util;
 
+/**
+ * Program for testing localisation on a robot.
+ */
 public class RobotMain {
 	public static void main(String[] args) {
 		Util.waitForStart();

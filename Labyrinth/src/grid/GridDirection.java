@@ -13,6 +13,13 @@ public enum GridDirection {
     public final int dx, dy;
     public final float degrees;
     
+    /**
+     * @param index The index in the grid array this dir represents
+     * @param dx The x delta this direction travels in
+     * @param dy The y delta this direction travels in
+     * @param opposite The index of the opposite direction
+     * @param degrees The angle to rotate, relative to the world origin
+     */
     private GridDirection(int index, int dx, int dy, int opposite, float degrees) {
         this.index = index;
         this.dx = dx;

@@ -3,6 +3,9 @@ package localisation;
 import grid.GridDirection;
 import localisation.interfaces.SensorModel;
 
+/**
+ * A sensor model that does literally nothing
+ */
 public class DummySensorModel implements SensorModel {
 	@Override
 	public void sense() {

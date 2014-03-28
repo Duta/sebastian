@@ -3,7 +3,8 @@ package grid;
 import rp.robotics.mapping.GridMap;
 
 /**
- * Represents a rectangular grid.
+ * Represents a rectangular grid, using an array of booleans
+ * (width x height x direction)
  * Some junction pairs may be blocked.
  */
 public class Grid {

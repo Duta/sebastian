@@ -4,6 +4,10 @@ import grid.Grid;
 import grid.GridDirection;
 import localisation.interfaces.SensorModel;
 
+/**
+ * Very basic sensor model on a robot
+ * Was for testing purposes only, and not expected to properly work.
+ */
 public class RobotSensorModel implements SensorModel {
 	private final double threshold = 10;
 	private final double MAX_RANGE = 152;

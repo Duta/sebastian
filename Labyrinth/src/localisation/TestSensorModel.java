@@ -3,6 +3,10 @@ package localisation;
 import grid.GridDirection;
 import localisation.interfaces.SensorModel;
 
+/**
+ * A sensor model for testing, uses a TestGrid to get accurate
+ * sensor readings
+ */
 public class TestSensorModel implements SensorModel {
 	private TestGrid grid;
 	private double[] readings;

@@ -9,6 +9,10 @@ import grid.GridDirection;
 import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
 
+/**
+ * The action model for the robot. Makes moves mostly in a straight line,
+ * unless impossible. If so, or with a random chance, picks a random dir.
+ */
 public class RobotActionModel implements ActionModel {
 	private GridDirection lastAction;
 	private Grid grid;

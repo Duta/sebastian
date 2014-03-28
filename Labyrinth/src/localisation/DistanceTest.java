@@ -5,6 +5,9 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.util.Delay;
 
+/**
+ * A program for testing the distance sensor readings
+ */
 public class DistanceTest {
 	public static void main(String[] args) {
 		OpticalDistanceSensor sensor = new OpticalDistanceSensor(SensorPort.S2);

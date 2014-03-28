@@ -6,6 +6,10 @@ import grid.GridDirection;
 import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
 
+/**
+ * An action model that makes entirely random moves
+ * (Not on a robot)
+ */
 public class RandomActionModel implements ActionModel {
 	GridDirection lastAction; 
 	@Override

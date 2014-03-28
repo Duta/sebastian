@@ -4,6 +4,9 @@ import java.util.Stack;
 
 import rp.robotics.mapping.LocalisationUtils;
 
+/**
+ * A simple program to test the new grid implementation.
+ */
 public class TestMain {
     public static void main(String[] args) {
         Grid grid = new Grid(LocalisationUtils.create2014Map1());
@@ -15,7 +18,10 @@ public class TestMain {
 			@Override
 			protected void processPathAction(GridNode start, GridNode goal,
 					Stack<GridNode> path) {
-				// FUCK :>
+				while(!path.empty()) {
+					GridNode node = path.pop();
+					System.out.println(node.getAction());
+				}
 			}
         };
         searcher.search();

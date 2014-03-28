@@ -6,6 +6,9 @@ import lejos.robotics.RegulatedMotor;
 import lejos.util.Delay;
 import grid.GridDirection;
 
+/**
+ * Reads values from a distance sensor
+ */
 public class SensorReader {
 	private static final GridDirection[] dirs = {
 		GridDirection.UP,
@@ -24,6 +27,10 @@ public class SensorReader {
 		this.sensor = sensor;
 	}
 
+	/**
+	 * Reads the sensor values
+	 * @param readings The array to read the values into.
+	 */
 	public void read(double[] readings) {
 		GridDirection robotDir = mover.getCurrentDir();
 		int dirIndex = 0;

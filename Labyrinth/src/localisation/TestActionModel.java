@@ -7,6 +7,10 @@ import grid.GridDirection;
 import localisation.interfaces.ActionModel;
 import localisation.interfaces.SensorModel;
 
+/**
+ * Test action model - functionally identical to RandomActionModel
+ * but uses a TestGrid
+ */
 public class TestActionModel implements ActionModel {
 	private TestGrid grid;
 	private GridDirection lastAction;
